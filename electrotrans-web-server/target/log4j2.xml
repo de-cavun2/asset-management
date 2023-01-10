@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="10">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss} %X{user} %X{PID} %X{MEM} %5p %c{1} %C{1}:%-3L &quot;%m&quot;%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Logger of top level category 'ua.com.fielden.platform'. Additional loggers can be added any time if required. -->
+        <Logger name="ua.com.fielden.platform" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="ua.com.fielden.platform.dao.QueryExecutionModel" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="ua.com.fielden.platform.entity.query.EntityFetcher" level="info" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="ua.com.fielden.platform.entity.query.EntityContainerFetcher" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="ua.com.fielden.platform.web.app.config.WebUiBuilder" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="ua.com.fielden.platform.domaintree.impl.AbstractDomainTree" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="ua.com.fielden.platform.migration.DataMigrator" level="all" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- Vulcanizing. -->
+        <Logger name="ua.com.fielden.platform.web.utils.VulcanizingUtility" level="info" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="fielden.webapp.Vulcanize" level="info" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- Loggers for Hibernate. -->
+        <Logger name="org.hibernate" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.hibernate.SQL" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.hibernate.type" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.hibernate.cache" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.hibernate.transaction" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.hibernate.jdbc" level="error" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
