@@ -5,8 +5,6 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.logging.log4j.core.appender.routing.Route;
-
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.security.Authorise;
 import ua.com.fielden.platform.dao.annotations.SessionRequired;
