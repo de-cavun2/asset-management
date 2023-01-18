@@ -55,7 +55,7 @@ rebel.xml
 *.gz(busy)
 
 # any attachments that may get uploaded as part of interactive testing need to be ignored
-airport/aiport-web-server/src/test/resources/attachments/*
+electrotrans/electrotrans-web-server/src/test/resources/attachments/*
 
 .DS_Store
 *.pgd
