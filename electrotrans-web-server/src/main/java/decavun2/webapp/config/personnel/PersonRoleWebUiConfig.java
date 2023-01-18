@@ -96,7 +96,7 @@ public class PersonRoleWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<PersonRole> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(2, 1);
 
         final IMaster<PersonRole> masterConfig = new SimpleMasterBuilder<PersonRole>().forEntity(PersonRole.class)
                 .addProp(PersonRole_.name()).asSinglelineText().also()
@@ -107,7 +107,7 @@ public class PersonRoleWebUiConfig {
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
-                .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 210, Unit.PX))
+                .withDimensions(mkDim(LayoutComposer.SIMPLE_ONE_COLUMN_MASTER_DIM_WIDTH, 270, Unit.PX))
                 .done();
 
         return new EntityMaster<>(PersonRole.class, masterConfig, injector);
