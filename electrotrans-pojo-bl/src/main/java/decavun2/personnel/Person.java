@@ -2,6 +2,7 @@ package decavun2.personnel;
 
 import static ua.com.fielden.platform.reflection.TitlesDescsGetter.getEntityTitleAndDesc;
 
+import decavun2.personnel.validators.NoSpacesValidator;
 import decavun2.security.tokens.persistent.Person_CanModify_user_Token;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
@@ -58,12 +59,14 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
     @MapTo
     @Required
     @Title(value = "First Name", desc = "Person's first name.")
+    @BeforeChange(@Handler(NoSpacesValidator.class))
     private String name;
     
     @IsProperty
     @MapTo
     @Required
     @Title(value = "Last Name", desc = "Person's last name.")
+    @BeforeChange(@Handler(NoSpacesValidator.class))
     private String surname;
 
     @Observable
