@@ -10,25 +10,16 @@ import ua.com.fielden.platform.utils.IUniversalConstants;
 
 import decavun2.personnel.Person;
 import decavun2.test_config.AbstractDomainTestCase;
-import metamodels.MetaModels;
 
 /**
- * This is an example unit test, which can be used as a starting point for creating application unit tests.
- *
- * @author Generated
+ * This is an unit test for entity Vehicle.
  */
+
 public class VehicleTest extends AbstractDomainTestCase {
 	
-	final String ERROR_MSG_NUM_1 = "Required property [%s] is not specified for entity [%s].".formatted("Model", "Vehicle");
+    final String ERROR_MSG_NUM_1 = "Required property [%s] is not specified for entity [%s].".formatted("Model", "Vehicle");
 
-    /**
-     * The names of the test method should be informative.
-     * It is recommended to make the method name sound like a sentence stating the expected behaviour.
-     * In this case, the test method name indicates that it is expected to find person with initials RDM and that it has an active status.
-     * <p>
-     * Each test method should be related to exactly one concern, which facilitates creation of unit tests that address a single concern.
-     */
-	@Test
+    @Test
     public void licensePlate_model_currentLocation_driver_desc_is_required_for_entity_vehicle() {
         
         final Vehicle vehicleValid = co(Vehicle.class).findByKey("BC1111AH");
@@ -89,16 +80,11 @@ public class VehicleTest extends AbstractDomainTestCase {
      */
     @Override
     protected void populateDomain() {
-        // Need to invoke super to create a test user that is responsible for data population
         super.populateDomain();
 
-        // Here is how the Test Case universal constants can be set.
-        // In this case the notion of now is overridden, which makes it possible to have an invariant system-time.
-        // However, the now value should be after AbstractDomainTestCase.prePopulateNow in order not to introduce any date-related conflicts.
         final UniversalConstantsForTesting constants = (UniversalConstantsForTesting) getInstance(IUniversalConstants.class);
         constants.setNow(dateTime("2019-10-01 11:30:00"));
 
-        // If the use of saved data population script is indicated then there is no need to proceed with any further data population logic.
         if (useSavedDataPopulationScript()) {
             return;
         }
