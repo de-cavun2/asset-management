@@ -2,8 +2,8 @@ package decavun2.objects;
 
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 
-import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
 
+import decavun2.personnel.Person;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
@@ -12,9 +12,11 @@ import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
+import ua.com.fielden.platform.entity.annotation.Required;
 import ua.com.fielden.platform.entity.annotation.Title;
 import ua.com.fielden.platform.entity.annotation.DescTitle;
 import ua.com.fielden.platform.entity.annotation.DisplayDescription;
+import ua.com.fielden.platform.entity.annotation.EntityTitle;
 import ua.com.fielden.platform.entity.annotation.IsProperty;
 import ua.com.fielden.platform.entity.annotation.DescRequired;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
@@ -30,7 +32,8 @@ import ua.com.fielden.platform.utils.Pair;
 @KeyTitle("License plate")
 @CompanionObject(VehicleCo.class)
 @MapEntityTo
-@DescTitle("Vehicle's description")
+@EntityTitle(value = "Vehicle", desc = "Vehicles that are used in Lvivelectrotrans.")
+@DescTitle(value = "Vehicle description", desc = "The extended vehicle's description.")
 @DisplayDescription
 @DescRequired
 public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
@@ -56,37 +59,21 @@ public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Required
     @Title(value = "Current location", desc = "The current location of the vehicle.")
     private String currentLocation;
-    
-    @IsProperty
-    @MapTo
-    @Required
-    @Title(value = "Workable status", desc = "Describes whether the vehicle is workable or not.")
-    private boolean isWorkable;
 
     @IsProperty
     @MapTo
     @Required
     @Title(value = "Driver", desc = "The vehicle's driver.")
-    private String driver;
+    private Person driver;
 
     @Observable
-    public Vehicle setDriver(final String driver) {
+    public Vehicle setDriver(final Person driver) {
        this.driver = driver;
        return this;
     }
 
-    public String getDriver() {
+    public Person getDriver() {
        return driver;
-    }
-    
-    @Observable
-    public Vehicle setIsWorkable(final boolean isWorkable) {
-       this.isWorkable = isWorkable;
-       return this;
-    }
-
-    public boolean getIsWorkable() {       
-       return isWorkable;
     }
 
     @Observable
@@ -117,6 +104,13 @@ public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     public String getLicensePlate() {
        return licensePlate;
+    }
+    
+    @Override
+    @Observable
+    public Vehicle setActive(final boolean active) {
+        super.setActive(active);
+        return this;
     }
 
 }

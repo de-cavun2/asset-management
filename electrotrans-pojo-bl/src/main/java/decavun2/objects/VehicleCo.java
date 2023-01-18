@@ -16,6 +16,6 @@ public interface VehicleCo extends IEntityDao<Vehicle> {
 
     static final IFetchProvider<Vehicle> FETCH_PROVIDER = EntityUtils.fetch(Vehicle.class)
     		.with(Vehicle_.licensePlate(), Vehicle_.model(), Vehicle_.currentLocation(),
-    			  Vehicle_.isWorkable(), Vehicle_.driver(), Vehicle_.desc());
+    			  Vehicle_.driver(), Vehicle_.desc(), Vehicle_.active());
      
 }
