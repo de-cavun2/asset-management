@@ -10,6 +10,7 @@ import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
 
 import decavun2.personnel.Person;
+import decavun2.personnel.PersonRole;
 import decavun2.personnel.validators.NoSpacesValidator;
 import decavun2.test_config.AbstractDomainTestCase;
 import metamodels.MetaModels;
@@ -114,8 +115,9 @@ public class PersonnelTest extends AbstractDomainTestCase {
         }
 
         // Here the three Person entities are persisted using the the inherited from TG testing framework methods.
-        save(new_(Person.class).setEmail("RMD@organisation.com").setName("Ronald").setSurname("McDonald").setActive(true));
-        save(new_(Person.class).setEmail("JC@organisation.com").setName("John").setSurname("Carmack").setActive(false));
+        final PersonRole driver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Car driver."));
+        save(new_(Person.class).setEmail("RMD@organisation.com").setPersonRole(driver).setName("Ronald").setSurname("McDonald").setActive(true));
+        save(new_(Person.class).setEmail("JC@organisation.com").setPersonRole(driver).setName("John").setSurname("Carmack").setActive(false));
     }
 
 }

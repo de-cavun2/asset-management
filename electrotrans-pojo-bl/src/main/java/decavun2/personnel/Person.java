@@ -91,6 +91,7 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     @IsProperty
     @MapTo
+    @Required
     @Title(value = "Role", desc = "Person's role, position or title.")
     private PersonRole personRole;
 

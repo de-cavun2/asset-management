@@ -14,6 +14,7 @@ import org.hibernate.dialect.PostgreSQL82Dialect;
 
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
+import decavun2.personnel.PersonRole;
 import decavun2.utils.PostgresqlDbUtils;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
@@ -77,8 +78,11 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         LOGGER.info("Creating and populating the development database...");
 
         setupUser(User.system_users.SU, "User");
-        setupPerson(User.system_users.SU, "decavun2", "Super", "User");
-        createAndSavePerson("Yuriy@decavun2", "Yuriy", "Sukhorskyy", (User) null);
+        
+        final PersonRole driver = save(new_composite(PersonRole.class, "Driver-T").setDesc("Tram and trolleybus driver."));
+
+        setupPerson(User.system_users.SU, "decavun2", "Super", "User", driver);
+        createAndSavePerson("Yuriy@decavun2", "Yuriy", "Sukhorskyy", (User) null, driver);
 
         LOGGER.info("Completed database creation and population.");
     }
