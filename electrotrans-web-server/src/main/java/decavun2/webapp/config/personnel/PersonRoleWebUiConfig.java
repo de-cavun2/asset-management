@@ -79,10 +79,10 @@ public class PersonRoleWebUiConfig {
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
-                .addProp(PersonRole_).order(1).asc().width(150)
+                .addProp(PersonRole_).order(1).asc().minWidth(90)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", PersonRole.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
-                .addProp(PersonRole_.desc()).minWidth(100)
+                .addProp(PersonRole_.desc()).minWidth(160)
                 .addPrimaryAction(standardEditAction)
                 .build();
 

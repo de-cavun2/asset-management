@@ -79,10 +79,16 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
 
         setupUser(User.system_users.SU, "User");
         
-        final PersonRole driver = save(new_composite(PersonRole.class, "Driver-T").setDesc("Tram and trolleybus driver."));
-
-        setupPerson(User.system_users.SU, "decavun2", "Super", "User", driver);
-        createAndSavePerson("Yuriy@decavun2", "Yuriy", "Sukhorskyy", (User) null, driver);
+        final PersonRole tramDriver = save(new_composite(PersonRole.class, "Driver-T").setDesc("Category T driver (tram and trolleybus)."));
+        final PersonRole carDriver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Category B driver (passenger car)"));
+        final PersonRole fleetManager = save(new_composite(PersonRole.class, "Fleet manager").setDesc("Person resposible for fleet management."));
+        final PersonRole hrManager = save(new_composite(PersonRole.class, "HR manager").setDesc("Person resposible for human resourse management."));
+        
+        setupPerson(User.system_users.SU, "decavun2", "Super", "User", hrManager);
+        createAndSavePerson("Sukhorskyy@let.com", "Yuriy", "Sukhorskyy", (User) null, tramDriver);
+        createAndSavePerson("Veselyy@let.com", "Vasyl", "Veselyy", (User) null, tramDriver);
+        createAndSavePerson("Tsikavyy@let.com", "Bohdan", "Tsikavyy", (User) null, carDriver);
+        createAndSavePerson("Kvitlyva@let.com", "Yulia", "Kvitlyva", (User) null, fleetManager);
 
         LOGGER.info("Completed database creation and population.");
     }
