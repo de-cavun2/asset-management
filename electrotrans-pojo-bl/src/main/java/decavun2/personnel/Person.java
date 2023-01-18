@@ -38,7 +38,6 @@ import ua.com.fielden.platform.utils.Pair;
 @EntityTitle(value = "Person", desc = "People in Lvivelectrotrans")
 @KeyTitle(value = "Email", desc = "Uniquely identifies a person.")
 @DescTitle(value = "Full Name", desc = "Person's full name - e.g. the first name followed by the middle initial followed by the surname.")
-@DescRequired
 @DisplayDescription
 @MapEntityTo
 @CompanionObject(PersonCo.class)

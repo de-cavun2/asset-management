@@ -86,8 +86,8 @@ public class PersonnelTest extends AbstractDomainTestCase {
         }
 
         // Here the three Person entities are persisted using the the inherited from TG testing framework methods.
-        save(new_(Person.class).setEmail("RMD@organisation.com").setDesc("Ronald McDonald").setActive(true));
-        save(new_(Person.class).setEmail("JC@organisation.com").setDesc("John Carmack").setActive(false));
+        save(new_(Person.class).setEmail("RMD@organisation.com").setName("Ronald").setSurname("McDonald").setActive(true));
+        save(new_(Person.class).setEmail("JC@organisation.com").setName("John").setSurname("Carmack").setActive(false));
     }
 
 }

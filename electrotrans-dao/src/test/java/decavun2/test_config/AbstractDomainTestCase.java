@@ -153,7 +153,7 @@ public abstract class AbstractDomainTestCase extends AbstractDomainDrivenTestCas
         }
 
         setupUser(User.system_users.UNIT_TEST_USER, "tg.test");
-        setupPerson(User.system_users.UNIT_TEST_USER, "tg.test");
+        setupPerson(User.system_users.UNIT_TEST_USER, "tg.test", "Unit", "Test");
 
         final String virtualKey = "VIRTUAL_FOR_TESTING";
         if (!co(KeyNumber.class).entityWithKeyExists(virtualKey)) {
@@ -171,9 +171,9 @@ public abstract class AbstractDomainTestCase extends AbstractDomainDrivenTestCas
     }
 
     @Override
-    public Person setupPerson(final User.system_users defaultUser, final String emailDomain) {
+    public Person setupPerson(final User.system_users defaultUser, final String emailDomain, final String name, final String surname) {
         if (!useSavedDataPopulationScript()) {
-            return IDomainData.super.setupPerson(defaultUser, emailDomain);
+            return IDomainData.super.setupPerson(defaultUser, emailDomain, name, surname);
         } else {
             return co$(Person.class).findByKeyAndFetch(PersonCo.FETCH_PROVIDER.fetchModel(), defaultUser.name());
         }
