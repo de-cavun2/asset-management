@@ -91,7 +91,7 @@ public class PersonWebUiConfig {
                 .addCrit(Person_.surname()).asMulti().text().also()
                 // row 3
                 .addCrit(Person_.employeeNo()).asMulti().text().also()
-                .addCrit(Person_.title()).asMulti().text()
+                .addCrit(Person_.personRole()).asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -101,7 +101,7 @@ public class PersonWebUiConfig {
                 .addProp(Person_.desc()).minWidth(200).also()
                 .addProp(Person_.name()).minWidth(200).also()
                 .addProp(Person_.surname()).minWidth(200).also()
-                .addProp(Person_.title()).minWidth(200).also()
+                .addProp(Person_.personRole()).minWidth(200).also()
                 .addProp(Person_.employeeNo()).minWidth(70).also()
                 .addProp(Person_.phone()).minWidth(70).also()
                 .addProp(Person_.mobile()).minWidth(70)
@@ -129,7 +129,7 @@ public class PersonWebUiConfig {
                 .addProp(Person_.surname()).asSinglelineText().also()
                 // row 3
                 .addProp(Person_.employeeNo()).asSinglelineText().also()
-                .addProp(Person_.title()).asSinglelineText().also()
+                .addProp(Person_.personRole()).asSinglelineText().also()
                 // row 4
                 .addProp(Person_.phone()).asSinglelineText().also()
                 .addProp(Person_.mobile()).asSinglelineText().also()
