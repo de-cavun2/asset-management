@@ -20,6 +20,7 @@ import com.google.inject.Injector;
 import decavun2.common.StandardActions;
 import decavun2.main.menu.personnel.MiPerson;
 import decavun2.personnel.Person;
+import decavun2.personnel.PersonRole;
 import ua.com.fielden.platform.web.PrefDim.Unit;
 import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
@@ -91,7 +92,7 @@ public class PersonWebUiConfig {
                 .addCrit(Person_.surname()).asMulti().text().also()
                 // row 3
                 .addCrit(Person_.employeeNo()).asMulti().text().also()
-                .addCrit(Person_.personRole()).asMulti().text()
+                .addCrit(Person_.personRole()).asMulti().autocompleter(PersonRole.class)
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -129,7 +130,7 @@ public class PersonWebUiConfig {
                 .addProp(Person_.surname()).asSinglelineText().also()
                 // row 3
                 .addProp(Person_.employeeNo()).asSinglelineText().also()
-                .addProp(Person_.personRole()).asSinglelineText().also()
+                .addProp(Person_.personRole()).asAutocompleter().also()
                 // row 4
                 .addProp(Person_.phone()).asSinglelineText().also()
                 .addProp(Person_.mobile()).asSinglelineText().also()

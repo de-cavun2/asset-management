@@ -17,5 +17,5 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface PersonRoleCo extends IEntityDao<PersonRole> {
 
     static final IFetchProvider<PersonRole> FETCH_PROVIDER = EntityUtils.fetch(PersonRole.class)
-            .with(PersonRole_.name(), PersonRole_.desc(), PersonRole_.active());
+            .with(PersonRole_.name(), PersonRole_.desc());
 }

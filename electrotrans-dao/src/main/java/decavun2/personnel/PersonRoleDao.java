@@ -27,6 +27,11 @@ public class PersonRoleDao extends CommonEntityDao<PersonRole> implements Person
     public PersonRoleDao(final IFilter filter) {
         super(filter);
     }
+    
+    @Override
+    public PersonRole new_() {
+        return super.new_().setActive(true);
+    }
 
     @Override
     @SessionRequired
