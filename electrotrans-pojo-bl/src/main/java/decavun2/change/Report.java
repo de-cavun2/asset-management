@@ -102,7 +102,7 @@ public class Report extends ActivatableAbstractEntity<DynamicEntityKey> {
 	@MapTo
 	@Required
 	@Readonly
-	@Title(value = "Create at", desc = "Date and time when this property was created at")
+	@Title(value = "Created at", desc = "Date and time when this property was created at")
 	private Date createdAt;
     
     
