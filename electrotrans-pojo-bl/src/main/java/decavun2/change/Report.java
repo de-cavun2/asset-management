@@ -8,6 +8,7 @@ import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.selec
 import java.util.Date;
 
 import decavun2.change.definers.ReportSourceExclusiveDefiner;
+import decavun2.personnel.Person;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
@@ -76,7 +77,13 @@ public class Report extends ActivatableAbstractEntity<DynamicEntityKey> {
 	@Title(value = "Department", desc = "Department this report is relevant to")
 	private String department;
     
-    
+    @IsProperty
+	@MapTo
+	@Title(value = "Created by", desc = "Person who created this report")
+    @Required
+	private Person person;
+	
+
     @IsProperty
 	@MapTo
 	@Title(value = "Change", desc = "Change associated with this report. Mutually exclusive with issue")
@@ -94,8 +101,20 @@ public class Report extends ActivatableAbstractEntity<DynamicEntityKey> {
     @IsProperty
 	@MapTo
 	@DateOnly
+	@Readonly
 	@Title(value = "Create at", desc = "Date and time when this property was created at")
 	private Date createdAt;
+    
+    
+	@Observable
+	public Report setPerson(final Person person) {
+		this.person = person;
+		return this;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
 
 	@Observable
 	public Report setCreatedAt(final Date createdAt) {

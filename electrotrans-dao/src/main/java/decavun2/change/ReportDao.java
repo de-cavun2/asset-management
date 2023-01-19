@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import static metamodels.MetaModels.Report_;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
@@ -37,6 +38,8 @@ public class ReportDao extends CommonEntityDao<Report> implements ReportCo {
     		
     		report.getProperty(Report_.change()).setRequired(true);
     		report.getProperty(Report_.issue()).setRequired(true);
+    		
+    		report.setCreatedAt(new Date());
     		
     		return report;
     	}
