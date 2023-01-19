@@ -88,7 +88,7 @@ public class Report extends ActivatableAbstractEntity<DynamicEntityKey> {
 	@MapTo
 	@Title(value = "Change", desc = "Change associated with this report. Mutually exclusive with issue")
     @AfterChange(ReportSourceExclusiveDefiner.class)
-	private String change;
+	private Change change;
     
     
     @IsProperty
@@ -144,12 +144,12 @@ public class Report extends ActivatableAbstractEntity<DynamicEntityKey> {
 
 
 	@Observable
-	public Report setChange(final String change) {
+	public Report setChange(final Change change) {
 		this.change = change;
 		return this;
 	}
 
-	public String getChange() {
+	public Change getChange() {
 		return change;
 	}
 
