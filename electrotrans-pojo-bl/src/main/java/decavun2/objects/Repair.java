@@ -3,11 +3,11 @@ package decavun2.objects;
 
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-import decavun2.objects.Vehicle;
+
 import decavun2.personnel.Person;
-import decavun2.objects.Issue;
+
 
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.annotation.KeyType;
@@ -55,19 +55,19 @@ public class Repair extends ActivatableAbstractEntity<DynamicEntityKey> {
     @MapTo
     @Required
     @Title(value = "Date", desc = "The date of a particular repair.")
-    private LocalDate date;
+    private Date date;
 
     @IsProperty
     @MapTo
     @Required
     @Title(value = "Vehicle", desc = "The vehicle that has been repaired.")
-    private Vehicle vehicle;
+    private String vehicle;
 
     @IsProperty
     @MapTo
     @Required
     @Title(value = "Issue", desc = "Issue that has been resolved.")
-    private Issue issue;
+    private String issue;
 
     @IsProperty
     @MapTo
@@ -82,42 +82,42 @@ public class Repair extends ActivatableAbstractEntity<DynamicEntityKey> {
     private String desc;
     
     @Observable
-    public Repair setID(final String id) {
+    public Repair setRepairID(final String id) {
        this.repairID = id;
        return this;
     }
 
-    public String getID() {
+    public String getRepairID() {
        return repairID;
     }
 
     @Observable
-    public Repair setDate(final LocalDate date) {
+    public Repair setDate(final Date date) {
        this.date = date;
        return this;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
        return date;
     }
 
     @Observable
-    public Repair setVehicle(final Vehicle vehicle) {
+    public Repair setVehicle(final String vehicle) {
        this.vehicle = vehicle;
        return this;
     }
 
-    public Vehicle getVehicle() {       
+    public String getVehicle() {       
        return vehicle;
     }
 
     @Observable
-    public Repair setIssue(final Issue issue) {
+    public Repair setIssue(final String issue) {
        this.issue = issue;
        return this;
     }
 
-    public Issue getIssue() {
+    public String getIssue() {
        return issue;
     }
 
