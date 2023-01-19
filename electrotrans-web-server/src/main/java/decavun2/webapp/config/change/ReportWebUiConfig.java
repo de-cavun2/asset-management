@@ -57,7 +57,7 @@ public class ReportWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<Report> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkVarGridForCentre(2, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Report.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Report.class);
@@ -74,9 +74,7 @@ public class ReportWebUiConfig {
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
                 .addCrit(Report_).asMulti().autocompleter(Report.class).also()
-                .addCrit(Report_.department()).asMulti().text().also()
-                .addCrit(Report_.issue()).asMulti().text().also()
-                .addCrit(Report_.change()).asMulti().text()
+                .addCrit(Report_.department()).asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -86,8 +84,6 @@ public class ReportWebUiConfig {
                     .withAction(standardEditAction).also()
                 .addProp(Report_.department()).width(100).also()
                 .addProp(Report_.createdAt()).width(100)
-               
-                //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
                 .build();
 
