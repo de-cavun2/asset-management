@@ -16,6 +16,6 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface ChangeCo extends IEntityDao<Change> {
 
     static final IFetchProvider<Change> FETCH_PROVIDER = EntityUtils.fetch(Change.class).with(
-    		Change_.name(), Change_.desc());
+    		Change_.changeId(), Change_.name(), Change_.desc());
 
 }

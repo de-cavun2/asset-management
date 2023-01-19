@@ -151,7 +151,7 @@ public class ChangeWebUiConfig {
      * @return
      */
     private EntityMaster<Change> createChangeMaster() {
-        final String layout = LayoutComposer.mkVarGridForCentre(2, 1);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 1);
 
         final IMaster<Change> masterConfig = new SimpleMasterBuilder<Change>().forEntity(Change.class)
         		.addProp(Change_.changeId()).asSinglelineText().also()
