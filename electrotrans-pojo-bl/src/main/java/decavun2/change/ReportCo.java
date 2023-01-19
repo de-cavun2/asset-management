@@ -2,6 +2,7 @@ package decavun2.change;
 
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.utils.EntityUtils;
+import metamodels.MetaModels;
 import ua.com.fielden.platform.dao.IEntityDao;
 
 /**
@@ -11,10 +12,12 @@ import ua.com.fielden.platform.dao.IEntityDao;
  *
  */
 public interface ReportCo extends IEntityDao<Report> {
+	
+	static final String ERR_ONE_OF_REPORT_SOURCE_FIELDS_SHOULD_NOT_BE_EMPTY = "Enter one of the source properties: change or issue";
 
+	
     static final IFetchProvider<Report> FETCH_PROVIDER = EntityUtils.fetch(Report.class).with(
-        // TODO: uncomment the following line and specify the properties, which are required for the UI. Then remove the line after.
-        // "key", "desc");
-        "Please specify the properties, which are required for the UI");
+        MetaModels.Report_.title(), MetaModels.Report_.desc(), MetaModels.Report_.department(),
+        MetaModels.Report_.issue(), MetaModels.Report_.change());
 
 }
