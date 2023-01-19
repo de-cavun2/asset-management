@@ -11,6 +11,7 @@ import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import decavun2.object.Route;
+import decavun2.object.AssignedVehicle;
 
 /**
  * A class to register domain entities.
@@ -26,6 +27,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
        entityTypes.addAll(PlatformDomainTypes.types);
        add(Person.class);
        add(Route.class);
+       add(AssignedVehicle.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {
