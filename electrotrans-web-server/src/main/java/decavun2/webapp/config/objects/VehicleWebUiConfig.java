@@ -58,7 +58,7 @@ public class VehicleWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<Vehicle> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkVarGridForCentre(2, 2, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 2, 2, 2);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Vehicle.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Vehicle.class);
@@ -82,19 +82,24 @@ public class VehicleWebUiConfig {
                 .addCrit(Vehicle_.currentLocation()).asMulti().text().also()
                 //row3
                 .addCrit(Vehicle_.driver()).asMulti().autocompleter(Person.class).also()
-                .addCrit(Vehicle_.active()).asMulti().bool()
+                .addCrit(Vehicle_.active()).asMulti().bool().also()
+                //row4
+                .addCrit(Vehicle_.transportCondition()).asMulti().text().also()
+                .addCrit(Vehicle_.lastRepair()).asRange().dateTime()
 
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardStandaloneScrollingConfig(0))
-                .addProp(Vehicle_).order(1).asc().minWidth(100)
+                .addProp(Vehicle_).order(1).asc().width(125)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Vehicle.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
-                .addProp(Vehicle_.desc()).minWidth(125).also()
-                .addProp(Vehicle_.model()).width(80).also()
+                .addProp(Vehicle_.model()).width(115).also()
                 .addProp(Vehicle_.driver()).width(120).also()
-                .addProp(Vehicle_.currentLocation()).minWidth(150).also()
+                .addProp(Vehicle_.desc()).minWidth(115).also()
+                .addProp(Vehicle_.currentLocation()).minWidth(115).also()
+                .addProp(Vehicle_.transportCondition()).width(150).also()
+                .addProp(Vehicle_.lastRepair()).width(140).also()
                 .addProp(Vehicle_.active()).width(80)
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
@@ -110,18 +115,21 @@ public class VehicleWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Vehicle> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 2, 1, 1);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 2, 2, 1, 1);
 
         final IMaster<Vehicle> masterConfig = new SimpleMasterBuilder<Vehicle>().forEntity(Vehicle.class)
-        		// row1
+                // row1
                 .addProp(Vehicle_.licensePlate()).asSinglelineText().also()
                 .addProp(Person_.active()).asCheckbox().also()
                 // row2
                 .addProp(Vehicle_.model()).asSinglelineText().also()
                 .addProp(Vehicle_.driver()).asAutocompleter().also()
                 // row3
-                .addProp(Vehicle_.currentLocation()).asMultilineText().also()
+                .addProp(Vehicle_.transportCondition()).asSinglelineText().also()
+                .addProp(Vehicle_.lastRepair()).asDateTimePicker().also()
                 // row4
+                .addProp(Vehicle_.currentLocation()).asMultilineText().also()
+                // row5
                 .addProp(Vehicle_.desc()).asMultilineText().also()
                 
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
