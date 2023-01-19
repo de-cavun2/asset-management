@@ -6,8 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import decavun2.config.Modules;
 import decavun2.config.personnel.PersonWebUiConfig;
+import decavun2.object.Route;
 import decavun2.personnel.Person;
-
+import decavun2.webapp.config.object.RouteWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.utils.Pair;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
@@ -75,6 +76,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
 
         // Users and Personnel Module
         final PersonWebUiConfig personWebUiConfig = PersonWebUiConfig.register(injector(), builder);
+        final RouteWebUiConfig routeWebUiConfig = RouteWebUiConfig.register(injector(), builder);
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
@@ -98,6 +100,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
             .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
             .menu()
                 .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(Route.class)).description(mkMenuItemDesc(Route.class)).centre(routeWebUiConfig.centre).done()
+
                 .addMenuItem("System Users").description("Functionality for managing system users, authorisation, etc.")
                     .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
                     .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()

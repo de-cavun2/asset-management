@@ -10,6 +10,7 @@ import decavun2.personnel.Person;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
+import decavun2.object.Route;
 
 /**
  * A class to register domain entities.
@@ -22,22 +23,23 @@ public class ApplicationDomain implements IApplicationDomainProvider {
     private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
 
     static {
-        entityTypes.addAll(PlatformDomainTypes.types);
-        add(Person.class);
+       entityTypes.addAll(PlatformDomainTypes.types);
+       add(Person.class);
+       add(Route.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {
-        entityTypes.add(domainType);
-        domainTypes.add(domainType);
+       entityTypes.add(domainType);
+       domainTypes.add(domainType);
     }
 
     @Override
     public List<Class<? extends AbstractEntity<?>>> entityTypes() {
-        return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
+       return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
     }
 
     public List<Class<? extends AbstractEntity<?>>> domainTypes() {
-        return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
+       return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
     }
 
 }
