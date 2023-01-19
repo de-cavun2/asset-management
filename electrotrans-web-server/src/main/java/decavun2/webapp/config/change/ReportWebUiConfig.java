@@ -84,8 +84,9 @@ public class ReportWebUiConfig {
                 .addProp(Report_).order(1).asc().minWidth(100)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Report.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
-                .addProp(Report_.desc()).minWidth(100).also()
-                .addProp(Report_.department()).width(100)
+                .addProp(Report_.department()).width(100).also()
+                .addProp(Report_.createdAt()).width(100)
+               
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
                 .build();
@@ -100,7 +101,7 @@ public class ReportWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Report> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(5, 1);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(1,1,1, 2);
 
         final IMaster<Report> masterConfig = new SimpleMasterBuilder<Report>().forEntity(Report.class)
                 .addProp(Report_.title()).asSinglelineText().also()

@@ -100,7 +100,6 @@ public class Report extends ActivatableAbstractEntity<DynamicEntityKey> {
     
     @IsProperty
 	@MapTo
-	@DateOnly
 	@Required
 	@Readonly
 	@Title(value = "Create at", desc = "Date and time when this property was created at")

@@ -89,6 +89,7 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         rp.setDesc("This description should portray pluses and minuses of proposed change");
         rp.setDepartment("Financial Department");
         rp.setPerson(person);
+        rp.setIssue("Find proposed information is sensible for the enterprise to implement");
         
         save(rp);
 
