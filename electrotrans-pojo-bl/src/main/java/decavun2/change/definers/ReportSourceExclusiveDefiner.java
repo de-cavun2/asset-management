@@ -28,7 +28,6 @@ public class ReportSourceExclusiveDefiner extends AbstractAfterChangeEventHandle
 );
             mp.setRequired(true, ReportCo.ERR_ONE_OF_REPORT_SOURCE_FIELDS_SHOULD_NOT_BE_EMPTY);
             for (var mpOtherType : mpOwnershipTypesList) {
-               
                 if (mpOtherType.getName() != mp.getName()) {
                     mpOtherType.setRequired(false);
                     report.set(mpOtherType.getName(), null);

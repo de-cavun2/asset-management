@@ -29,10 +29,10 @@ public class ReportTest extends AbstractDomainTestCase {
 		final var rp = co(Report.class).new_();
 	
 		final MetaProperty<Report> mpTitle = rp.getProperty(Report_.title());
-		final MetaProperty<Report> mpDesc = rp.getProperty(Report_.title());
-		final MetaProperty<Report> mpCreatedAt = rp.getProperty(Report_.title());
-		final MetaProperty<Report> mpChange = rp.getProperty(Report_.title());
-		final MetaProperty<Report> mpIssue = rp.getProperty(Report_.title());
+		final MetaProperty<Report> mpDesc = rp.getProperty(Report_.desc());
+		final MetaProperty<Report> mpCreatedAt = rp.getProperty(Report_.createdAt());
+		final MetaProperty<Report> mpChange = rp.getProperty(Report_.change());
+		final MetaProperty<Report> mpIssue = rp.getProperty(Report_.issue());
 		
 		assertTrue(mpTitle.isRequired());
 		assertTrue(mpDesc.isRequired());
@@ -45,7 +45,7 @@ public class ReportTest extends AbstractDomainTestCase {
 	public void user_cannot_specify_more_characters_for_title_and_desc_than_max_length() {
 		final var rp = co(Report.class).new_();
 		final MetaProperty<Report> mpTitle = rp.getProperty(Report_.title());
-		final MetaProperty<Report> mpDesc = rp.getProperty(Report_.title());
+		final MetaProperty<Report> mpDesc = rp.getProperty(Report_.desc());
 		
 		String invalidTitle = "";
 		for (int i=0; i < Report.TITLE_LENGTH + 1; i++) {
@@ -60,7 +60,7 @@ public class ReportTest extends AbstractDomainTestCase {
 			invalidTitle += "c";
 		}
 		
-		rp.setTitle(invalidDesc);
+		rp.setDesc(invalidDesc);
 		assertFalse(mpDesc.isValid());
 	}
 	
@@ -74,11 +74,10 @@ public class ReportTest extends AbstractDomainTestCase {
 	
 	@Test
 	public void when_one_source_property_is_set_another_becomes_inactive() {
-		final Report rp = co(Report.class).findByKey(rp_title);
-		assertNotNull(rp);
+		final Report rp = co(Report.class).new_();
 		
-		final MetaProperty<Report> mpChange = rp.getProperty(Report_.title());
-		final MetaProperty<Report> mpIssue = rp.getProperty(Report_.title());
+		final MetaProperty<Report> mpChange = rp.getProperty(Report_.change());
+		final MetaProperty<Report> mpIssue = rp.getProperty(Report_.issue());
 		assertTrue(mpChange.isRequired());
 		assertTrue(mpIssue.isRequired());
 		

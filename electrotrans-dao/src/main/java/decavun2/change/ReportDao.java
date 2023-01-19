@@ -33,16 +33,16 @@ public class ReportDao extends CommonEntityDao<Report> implements ReportCo {
     }
     
     @Override
-    	public Report new_() {
-    		Report report =  super.new_();
-    		
-    		report.getProperty(Report_.change()).setRequired(true);
-    		report.getProperty(Report_.issue()).setRequired(true);
-    		
-    		report.setCreatedAt(new Date());
-    		
-    		return report;
-    	}
+	public Report new_() {
+		Report report =  super.new_();
+		
+		report.getProperty(Report_.change()).setRequired(true);
+		report.getProperty(Report_.issue()).setRequired(true);
+		
+		report.setCreatedAt(new Date());
+		
+		return report;
+	}
 
     @Override
     @SessionRequired
