@@ -44,6 +44,12 @@ public class PersonnelTest extends AbstractDomainTestCase {
     }
     
     @Test
+    public void property_person_role_is_required() {
+        final Person person = co$(Person.class).findByKey("RMD@organisation.com");
+        assertTrue(person.getProperty(Person_.personRole()).isRequired());
+    }
+    
+    @Test
     public void name_does_not_permit_spaces() {
         final Person person = new_composite(Person.class, "person@helsinki");
         person.setName("Values with spaces");
