@@ -10,9 +10,11 @@ import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
+import ua.com.fielden.platform.entity.annotation.DateOnly;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
+import ua.com.fielden.platform.entity.annotation.Readonly;
 import ua.com.fielden.platform.entity.annotation.Title;
 import ua.com.fielden.platform.entity.annotation.mutator.BeforeChange;
 import ua.com.fielden.platform.entity.annotation.mutator.Handler;
@@ -74,7 +76,8 @@ public class Change extends ActivatableAbstractEntity<DynamicEntityKey> {
     @IsProperty
 	@MapTo
 	@Title(value = "Created At", desc = "The date at which this change entry was created")
-	private Date createAt;
+    @Readonly
+	private Date createdAt;
     
     @IsProperty
 	@MapTo
@@ -96,12 +99,12 @@ public class Change extends ActivatableAbstractEntity<DynamicEntityKey> {
 
 	@Observable
 	public Change setCreatedAt(final Date createAt) {
-		this.createAt = createAt;
+		this.createdAt = createAt;
 		return this;
 	}
 
 	public Date getCreatedAt() {
-		return createAt;
+		return createdAt;
 	}
 
 	

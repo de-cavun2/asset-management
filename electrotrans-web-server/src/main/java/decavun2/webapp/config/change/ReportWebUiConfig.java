@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import com.google.inject.Injector;
 
+import decavun2.change.Change;
 import decavun2.change.Report;
 import decavun2.common.LayoutComposer;
 import decavun2.common.StandardActions;
@@ -76,7 +77,7 @@ public class ReportWebUiConfig {
                 .addCrit(Report_).asMulti().autocompleter(Report.class).also()
                 .addCrit(Report_.department()).asMulti().text().also()
                 .addCrit(Report_.issue()).asMulti().text().also()
-                .addCrit(Report_.change()).asMulti().text()
+                .addCrit(Report_.change()).asMulti().autocompleter(Change.class)
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)

@@ -26,6 +26,6 @@ public class OpenChangeMasterAction extends AbstractFunctionalEntityToOpenCompou
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
 
     public static final String MAIN = "Main";
-    public static final String ISSUES = Issue.ENTITY_TITLE + "s"; // Please adjust manually if the plural form is not standard
-    public static final String REPORTS = Report.ENTITY_TITLE + "s"; // Please adjust manually if the plural form is not standard
+    public static final String ISSUES = Issue.ENTITY_TITLE + "s";
+    public static final String REPORTS = Report.ENTITY_TITLE + "s";
 }

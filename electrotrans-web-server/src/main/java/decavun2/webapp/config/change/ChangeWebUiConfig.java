@@ -6,7 +6,9 @@ import static decavun2.common.StandardScrollingConfigs.standardStandaloneScrolli
 import static decavun2.common.StandardActions.actionAddDesc;
 import static decavun2.common.StandardActions.actionEditDesc;
 import static java.lang.String.format;
+import static metamodels.MetaModels.Change_;
 import static metamodels.MetaModels.Issue_;
+import static metamodels.MetaModels.Report_;
 import static ua.com.fielden.platform.dao.AbstractOpenCompoundMasterDao.enhanceEmbededCentreQuery;
 import static ua.com.fielden.platform.entity_centre.review.DynamicQueryBuilder.createConditionProperty;
 
@@ -149,11 +151,12 @@ public class ChangeWebUiConfig {
      * @return
      */
     private EntityMaster<Change> createChangeMaster() {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 1);
 
         final IMaster<Change> masterConfig = new SimpleMasterBuilder<Change>().forEntity(Change.class)
-                .addProp("key").asSinglelineText().also()
-                .addProp("desc").asMultilineText().also()
+        		.addProp(Change_.changeId()).asSinglelineText().also()
+                .addProp(Change_.name()).asSinglelineText().also()
+                .addProp(Change_.desc()).asMultilineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())
@@ -206,14 +209,8 @@ public class ChangeWebUiConfig {
         final Class<Report> root = Report.class;
         final String layout = LayoutComposer.mkVarGridForCentre(2, 1);
 
-        //TODO If entity Report has a compound master then check whether ReportWebUiConfig has appropriate edit action such as "editReportAction" exposed, and if it does, use it.
-        // Alternatively, consider un-commenting and using one of the actions below as appropriate.
-        // final EntityActionConfig standardEditAction = StandardActions.EDIT_ACTION.mkAction(Report.class);
-        // final EntityActionConfig standardEditAction = Compound.openEdit(OpenReportMasterAction.class, Report.ENTITY_TITLE, actionEditDesc(Report.ENTITY_TITLE), MASTER_DIMS);
-        //TODO If entity Report has a compound master then check whether ReportWebUiConfig has appropriate new action such as "newReportWithMasterAction" exposed, and if it does, use it.
-        // Alternatively, consider un-commenting and using one of the actions below as appropriate.
-        // final EntityActionConfig standardNewAction = StandardActions.NEW_WITH_MASTER_ACTION.mkAction(Report.class);
-        // final EntityActionConfig standardNewAction = Compound.openNewWithMaster(OpenReportMasterAction.class, "add-circle-outline", Report.ENTITY_TITLE, actionEditDesc(Report.ENTITY_TITLE), MASTER_DIMS);
+        final EntityActionConfig standardEditAction = StandardActions.EDIT_ACTION.mkAction(Report.class);
+        final EntityActionConfig standardNewAction = StandardActions.NEW_WITH_MASTER_ACTION.mkAction(Report.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Report.class);
         final EntityActionConfig standardExportAction = StandardActions.EXPORT_EMBEDDED_CENTRE_ACTION.mkAction(Report.class);
         final EntityActionConfig standardSortAction = CentreConfigActions.CUSTOMISE_COLUMNS_ACTION.mkAction();
@@ -224,17 +221,15 @@ public class ChangeWebUiConfig {
                 .addTopAction(standardDeleteAction).also()
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
-                .addCrit("crit1").asMulti()/*.autocompleter(Crit1.class)*/.text().also()
-                .addCrit("crit2").asMulti()/*.autocompleter(Crit2.class)*/.text().also()
-                .addCrit("crit3").asRange().integer()
+                .addCrit(Report_.title()).asMulti().text().also()
+                .addCrit(Report_.department()).asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
                 .withScrollingConfig(standardEmbeddedScrollingConfig(0))
-                .addProp("prop1").order(1).asc().minWidth(80)
+                .addProp(Report_.title()).order(1).asc().minWidth(80)
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Report.ENTITY_TITLE)).also()
-                .addProp("prop2").minWidth(80).also()
-                .addProp("prop3").minWidth(80)
+                .addProp(Report_.desc()).minWidth(80)
                 .addPrimaryAction(standardEditAction)
                 .setQueryEnhancer(ChangeMaster_ReportCentre_QueryEnhancer.class, context().withMasterEntity().build())
                 .build();

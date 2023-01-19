@@ -22,7 +22,8 @@ import metamodels.MetaModels;
  */
 public class ReportTest extends AbstractDomainTestCase {
 	
-	final static String rp_title = "Profitability calculation of IS for the enterprise";
+	static final String rp_title = "Profitability calculation of IS for the enterprise";
+	static final String changeId = "00001";
 	
 	@Test
 	public void newly_created_instances_have_title_desc_createdAt_chnage_issue_createdBy_reauired() {
@@ -75,6 +76,7 @@ public class ReportTest extends AbstractDomainTestCase {
 	@Test
 	public void when_one_source_property_is_set_another_becomes_inactive() {
 		final Report rp = co(Report.class).new_();
+		final Change change = co(Change.class).findByKey(changeId);
 		
 		final MetaProperty<Report> mpChange = rp.getProperty(Report_.change());
 		final MetaProperty<Report> mpIssue = rp.getProperty(Report_.issue());
@@ -85,7 +87,7 @@ public class ReportTest extends AbstractDomainTestCase {
 		assertNull(rp.getChange());
 		assertNull(rp.getIssue());
 		
-		rp.setChange("Some change");
+		rp.setChange(change);
 		assertFalse(mpIssue.isRequired());
 		
 		rp.setIssue("Some issue");
@@ -115,13 +117,14 @@ public class ReportTest extends AbstractDomainTestCase {
         }
         
         final Person person = save(new_(Person.class).setEmail("RMD@organisation.com").setDesc("Ronald McDonald").setActive(true));
+        final Change change = save(new_(Change.class).setChangeId(changeId).setName("Change example").setDesc("Change Desc"));
 
         final Report rp = new_(Report.class);
         rp.setTitle(rp_title);
         rp.setDesc("This description should portray pluses and minuses of proposed change");
         rp.setDepartment("Financial Department");
         
-        rp.setChange("Some change");
+        rp.setChange(change);
         rp.setIssue("Some Issue");
         rp.setPerson(person);
         

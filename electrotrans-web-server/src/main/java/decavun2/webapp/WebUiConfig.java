@@ -4,10 +4,12 @@ import static ua.com.fielden.platform.reflection.TitlesDescsGetter.getEntityTitl
 
 import org.apache.commons.lang3.StringUtils;
 
+import decavun2.change.Change;
 import decavun2.change.Report;
 import decavun2.config.Modules;
 import decavun2.config.personnel.PersonWebUiConfig;
 import decavun2.personnel.Person;
+import decavun2.webapp.config.change.ChangeWebUiConfig;
 import decavun2.webapp.config.change.ReportWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.utils.Pair;
@@ -80,6 +82,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
         final ReportWebUiConfig reportWebUiConfig = ReportWebUiConfig.register(injector(), configApp());
+        final ChangeWebUiConfig changeWebUiConfig = ChangeWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration
         configApp()
@@ -99,6 +102,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
             .bgColor(Modules.USERS_AND_PERSONNEL.bgColour)
             .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
             .menu()
+            .addMenuItem(mkMenuItemTitle(Change.class)).description(mkMenuItemDesc(Change.class)).centre(changeWebUiConfig.centre).done()
             	.addMenuItem(mkMenuItemTitle(Report.class)).description(mkMenuItemDesc(Report.class)).centre(reportWebUiConfig.centre).done()
                 .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
                 .addMenuItem("System Users").description("Functionality for managing system users, authorisation, etc.")
