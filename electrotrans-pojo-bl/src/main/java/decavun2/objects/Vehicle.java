@@ -2,6 +2,7 @@ package decavun2.objects;
 
 import ua.com.fielden.platform.entity.DynamicEntityKey;
 
+import org.joda.time.DateTime;
 
 import decavun2.personnel.Person;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
@@ -65,6 +66,17 @@ public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Required
     @Title(value = "Driver", desc = "The vehicle's driver.")
     private Person driver;
+    
+    @IsProperty
+    @MapTo
+    @Required
+    @Title(value = "Transport condition", desc = "Describes transport condition in order to determine whether vehicle is workable or not and record statistic")
+    private String transportCondition;
+    
+    @IsProperty
+    @MapTo
+    @Title(value = "Last repair", desc = "Represents last repair date of the vehicle")
+    private DateTime lastRepair;
 
     @Observable
     public Vehicle setDriver(final Person driver) {
@@ -111,6 +123,26 @@ public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
     public Vehicle setActive(final boolean active) {
         super.setActive(active);
         return this;
+    }
+    
+    @Observable
+    public Vehicle setTransportCondition(final String transportCondition) {
+        this.transportCondition = transportCondition;
+        return this;
+    }
+
+    public String getTransportCondition() {
+        return transportCondition;
+    }
+    
+    @Observable
+    public Vehicle setLastRepair(final DateTime lastRepair) {
+        this.lastRepair = lastRepair;
+        return this;
+    }
+
+    public DateTime getLastRepair() {
+        return lastRepair;
     }
 
 }
