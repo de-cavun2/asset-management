@@ -96,8 +96,9 @@ public class VehicleTest extends AbstractDomainTestCase {
         }
         
         final PersonRole driver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Car driver."));
-        final Person driverPerson = save(new_(Person.class).setEmail("RMD@organisation.com").setPersonRole(driver).setName("Ronald").setSurname("McDonald").setActive(true));;
-        save(new_(Vehicle.class).setLicensePlate("BC1111AH").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setTransportCondition("available").setDesc("The tram number two."));
+        final TransportCondition transportCondition = save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
+        final Person driverPerson = save(new_(Person.class).setEmail("RMD@organisation.com").setPersonRole(driver).setName("Ronald").setSurname("McDonald").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC1111AH").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setTransportCondition(transportCondition).setDesc("The tram number two."));
     }
 
 }
