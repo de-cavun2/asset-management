@@ -1,16 +1,15 @@
 package decavun2.config;
 
+import decavun2.security.tokens.AppAdminModuleToken;
+import decavun2.security.tokens.UsersAndPersonnelModuleToken;
+import ua.com.fielden.platform.security.ISecurityToken;
+import ua.com.fielden.platform.utils.StreamUtils;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import decavun2.security.tokens.AnalysisModuleToken;
-import decavun2.security.tokens.AppAdminModuleToken;
-import decavun2.security.tokens.UsersAndPersonnelModuleToken;
-import ua.com.fielden.platform.security.ISecurityToken;
-import ua.com.fielden.platform.utils.StreamUtils;
 
 /**
  * Enumerates application modules and their configurations.
@@ -27,11 +26,7 @@ public enum Modules {
     APP_ADMIN("Administration", "A module to manage application administration.",
             "mainMenu:tablecodes", "#EFDCD5", "#BCAAA4",
            AppAdminModuleToken.class,
-           "ua.com.fielden.platform.attachment"),
-    ANALYSIS("Analysis", "A module to manage analysis related entities.",
-            "mainMenu:analysis", "#EFDCD5", "#BCAAA4",
-           AnalysisModuleToken.class,
-           "ua.com.fielden.platform.attachment");;
+           "ua.com.fielden.platform.attachment");
 
     public final Set<String> packagesAndEntityNames; // this set is immutable
     public final String title;
