@@ -12,6 +12,7 @@ import ua.com.fielden.platform.entity.meta.MetaProperty;
 import ua.com.fielden.platform.error.Result;
 import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
+import decavun2.objects.DriverReport;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import decavun2.test_config.AbstractDomainTestCase;
@@ -25,6 +26,7 @@ import metamodels.MetaModels;
 public class StatisticsTest extends AbstractDomainTestCase {
 	
 	static final String vehiclePlate = "BC1111AH";
+	static final String driverReportID = "someid";
 	
 	@Test
 	public void properties_name_vehicle_startDate_endDate_are_required() {
@@ -79,6 +81,20 @@ public class StatisticsTest extends AbstractDomainTestCase {
 
 	}
 	
+	@Test 
+	public void repairsCount_automatically_fills_in_count_of_repairs() {
+		final var vehicle = co(Vehicle.class).findByKey(vehiclePlate);
+        final Date startDate = dateTime("2022-12-19 00:00:00").toDate();
+        final Date endDate = dateTime("2023-12-19 00:00:00").toDate();
+		final var stat = save(co(Statistics.class).new_()
+				.setName("Some name")
+				.setVehicle(vehicle)
+				.setStartDate(startDate)
+				.setEndDate(endDate));
+		
+		assertEquals(2, stat.getRepairsCount().intValue());
+	}
+	
 
     @Override
     public boolean saveDataPopulationScriptToFile() {
@@ -102,8 +118,9 @@ public class StatisticsTest extends AbstractDomainTestCase {
         }
         
         final Person driverPerson = save(new_(Person.class).setEmail("Ivan@electrotrans.com").setDesc("Ivan Tester").setActive(true));
-        save(new_(Vehicle.class).setTransportCondition("good").setLicensePlate(vehiclePlate).setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setDesc("The tram number two."));
-        
+        final Vehicle veh = save(new_(Vehicle.class).setTransportCondition("good").setLicensePlate(vehiclePlate).setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setDesc("The tram number two."));
+        save(new_(DriverReport.class).setDriverReportID(driverReportID).setVehicle(veh));
+        save(new_(DriverReport.class).setDriverReportID("sdfsdf").setVehicle(veh));
 
     }
 

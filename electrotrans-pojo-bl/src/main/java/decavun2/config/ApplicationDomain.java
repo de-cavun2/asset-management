@@ -12,6 +12,7 @@ import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import decavun2.objects.Vehicle;
 import decavun2.analysis.Statistics;
+import decavun2.objects.DriverReport;
 
 /**
  * A class to register domain entities.
@@ -28,6 +29,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 		add(Person.class);
 		add(Vehicle.class);
 		add(Statistics.class);
+		add(DriverReport.class);
 	}
 
 	private static void add(final Class<? extends AbstractEntity<?>> domainType) {

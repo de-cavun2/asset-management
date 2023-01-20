@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
+import decavun2.objects.DriverReport;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import decavun2.utils.PostgresqlDbUtils;
@@ -84,7 +85,9 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         setupPerson(User.system_users.SU, "decavun2");
         
         final Person driverPerson = save(new_(Person.class).setEmail("Ivan@electrotrans.com").setDesc("Ivan Tester").setActive(true));
-        save(new_(Vehicle.class).setTransportCondition("good").setLicensePlate("BC00EE").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setDesc("The tram number two."));
+        final Vehicle veh = save(new_(Vehicle.class).setTransportCondition("good").setLicensePlate("akjsgnlkjsdn").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setDesc("The tram number two."));
+        save(new_(DriverReport.class).setDriverReportID("sdfsdfsd").setVehicle(veh));
+        save(new_(DriverReport.class).setDriverReportID("sdfsdf").setVehicle(veh));
 
         LOGGER.info("Completed database creation and population.");
     }
