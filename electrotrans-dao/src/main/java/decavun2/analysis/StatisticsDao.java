@@ -34,7 +34,7 @@ public class StatisticsDao extends CommonEntityDao<Statistics> implements Statis
 	public Statistics new_() {
 		final Statistics stat = super.new_();
 		
-		stat.setcreatedAt(new Date());
+		stat.setCreatedAt(new Date());
 		return stat;
 		
 	}
@@ -43,12 +43,7 @@ public class StatisticsDao extends CommonEntityDao<Statistics> implements Statis
     @SessionRequired
     @Authorise(Statistics_CanSave_Token.class)
     public Statistics save(Statistics entity) {
-    	final boolean isPersisted = entity.isPersisted();
-    	if (isPersisted) {
-    		return entity;
-    	}
-    	
-    	
+
 
     	// get repairs count
     	// get issues count

@@ -24,6 +24,7 @@ import ua.com.fielden.platform.entity.annotation.mutator.Handler;
 import ua.com.fielden.platform.entity.validation.MaxLengthValidator;
 import ua.com.fielden.platform.entity.validation.annotation.GeProperty;
 import ua.com.fielden.platform.entity.validation.annotation.LeProperty;
+import ua.com.fielden.platform.error.Result;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 
@@ -54,6 +55,7 @@ public class Statistics extends AbstractPersistentEntity<DynamicEntityKey> {
 	@IsProperty
 	@MapTo
 	@Title(value = "Vehicle", desc = "Vehicle that is related to this statistical report")
+	@Required
 	private Vehicle vehicle;
 
 	@IsProperty
@@ -87,6 +89,19 @@ public class Statistics extends AbstractPersistentEntity<DynamicEntityKey> {
 	@Title(value = "End Date", desc = "The end date of the range")
 	@Required
 	private Date endDate;
+	
+	
+	@Override
+	public Result isEditable() {
+        final var res = super.isEditable();
+        if(!res.isSuccessful()) {
+            return res;
+        }
+        if(isPersisted()) {
+            return Result.failure(StatisticsCo.STATISTICS_IS_NOT_EDITABLE_ERROR);
+        }
+        return res;
+	}
 
 	@Observable
 	@LeProperty(StatisticsMetaModel.endDate_)
@@ -101,12 +116,12 @@ public class Statistics extends AbstractPersistentEntity<DynamicEntityKey> {
 
 	@Observable
 	@GeProperty(StatisticsMetaModel.startDate_)
-	public Statistics setEndaDate(final Date endDate) {
+	public Statistics setEndDate(final Date endDate) {
 		this.endDate = endDate;
 		return this;
 	}
 
-	public Date getEndaDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
@@ -131,12 +146,12 @@ public class Statistics extends AbstractPersistentEntity<DynamicEntityKey> {
 	}
 
 	@Observable
-	public Statistics setcreatedAt(final Date createdAt) {
+	public Statistics setCreatedAt(final Date createdAt) {
 		this.createdAt = createdAt;
 		return this;
 	}
 
-	public Date getcreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
