@@ -57,7 +57,7 @@ public class TransportConditionWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<TransportCondition> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 1);
+        final String layout = LayoutComposer.mkVarGridForCentre(1, 1);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(TransportCondition.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(TransportCondition.class);
