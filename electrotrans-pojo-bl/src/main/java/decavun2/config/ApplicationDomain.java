@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import decavun2.objects.TransportCondition;
 import decavun2.personnel.Person;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
@@ -36,6 +37,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(OpenVehicleMasterAction.class);
         add(VehicleMaster_OpenMain_MenuItem.class);
         add(VehicleMaster_OpenVehicleFinDet_MenuItem.class);
+        add(TransportCondition.class);
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {

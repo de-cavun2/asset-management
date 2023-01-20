@@ -14,7 +14,11 @@ import org.hibernate.dialect.PostgreSQL82Dialect;
 
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
+<<<<<<< HEAD
 import decavun2.personnel.PersonRole;
+=======
+import decavun2.objects.TransportCondition;
+>>>>>>> Issue-#2
 import decavun2.utils.PostgresqlDbUtils;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
@@ -89,6 +93,14 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         createAndSavePerson("Veselyy@let.com", "Vasyl", "Veselyy", (User) null, tramDriver);
         createAndSavePerson("Tsikavyy@let.com", "Bohdan", "Tsikavyy", (User) null, carDriver);
         createAndSavePerson("Kvitlyva@let.com", "Yulia", "Kvitlyva", (User) null, fleetManager);
+        setupUser(User.system_users.SU, "decavun2");
+        setupPerson(User.system_users.SU, "decavun2");
+        
+        save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
+        save(new_(TransportCondition.class).setConditionId("000002").setStage("need further inspection"));
+        save(new_(TransportCondition.class).setConditionId("000003").setStage("minor issues"));
+        save(new_(TransportCondition.class).setConditionId("000004").setStage("significant issues"));
+        save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
 
         LOGGER.info("Completed database creation and population.");
     }
