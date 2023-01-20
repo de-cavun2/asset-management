@@ -57,7 +57,7 @@ public class TransportConditionWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<TransportCondition> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkGridForCentre(1, 2);
+        final String layout = LayoutComposer.mkGridForCentre(1, 1);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(TransportCondition.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(TransportCondition.class);
@@ -97,7 +97,7 @@ public class TransportConditionWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<TransportCondition> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 2);
+        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 1);
 
         final IMaster<TransportCondition> masterConfig = new SimpleMasterBuilder<TransportCondition>().forEntity(TransportCondition.class)
                 .addProp(TransportCondition_.conditionId()).asSinglelineText().also()
