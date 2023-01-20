@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
-import decavun2.change.Issue;
 import decavun2.personnel.Person;
 import decavun2.test_config.AbstractDomainTestCase;
 
@@ -20,7 +19,7 @@ public class IssueTest extends AbstractDomainTestCase {
     final String ERROR_MSG_NUM_1 = "Required property [%s] is not specified for entity [%s].".formatted("Description", "Issue");
 
     @Test
-    public void licensePlate_model_currentLocation_driver_desc_is_required_for_entity_vehicle() {
+    public void desc_date_responsible_person_is_required_for_entity_issue() {
 
         final Issue issueValid = co(Issue.class).findByKey("000001");
         final Issue issueUnvalid = new_(Issue.class).setIssueNumber("000000").setDesc("Issue 0");
