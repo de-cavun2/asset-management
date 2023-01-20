@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
+import decavun2.objects.TransportCondition;
 import decavun2.utils.PostgresqlDbUtils;
 
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
@@ -80,6 +81,12 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
 
         setupUser(User.system_users.SU, "decavun2");
         setupPerson(User.system_users.SU, "decavun2");
+        
+        save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
+        save(new_(TransportCondition.class).setConditionId("000002").setStage("need further inspection"));
+        save(new_(TransportCondition.class).setConditionId("000003").setStage("minor issues"));
+        save(new_(TransportCondition.class).setConditionId("000004").setStage("significant issues"));
+        save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
 
         LOGGER.info("Completed database creation and population.");
     }
