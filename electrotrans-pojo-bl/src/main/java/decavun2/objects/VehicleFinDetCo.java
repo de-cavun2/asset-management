@@ -15,6 +15,6 @@ import ua.com.fielden.platform.utils.EntityUtils;
 public interface VehicleFinDetCo extends IEntityDao<VehicleFinDet> {
 
     static final IFetchProvider<VehicleFinDet> FETCH_PROVIDER = EntityUtils.fetch(VehicleFinDet.class)
-            .with(VehicleFinDet_.key(), VehicleFinDet_.initCost(), VehicleFinDet_.commissionDate(), VehicleFinDet_.disposalDate());
+            .with(VehicleFinDet_.key(), VehicleFinDet_.initCost(), VehicleFinDet_.commissionDate(), VehicleFinDet_.disposalDate(), VehicleFinDet_.tenderId(), VehicleFinDet_.tenderDate());
 
 }

@@ -2,15 +2,13 @@ package decavun2.objects;
 
 import java.util.Date;
 
-import decavun2.objects.Vehicle;
 import decavun2.objects.meta.VehicleFinDetMetaModel;
-import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.entity.AbstractPersistentEntity;
-import ua.com.fielden.platform.entity.annotation.KeyType;
-import ua.com.fielden.platform.entity.annotation.KeyTitle;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.Dependent;
 import ua.com.fielden.platform.entity.annotation.IsProperty;
+import ua.com.fielden.platform.entity.annotation.KeyTitle;
+import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
@@ -39,7 +37,7 @@ public class VehicleFinDet extends AbstractPersistentEntity<Vehicle> {
     
     @IsProperty
     @MapTo
-    @Title(value = "Initial Cost (UAH)", desc = "The initial cost of this vehicle.")
+    @Title(value = "Initial Cost", desc = "The initial cost of this vehicle.")
     private Money initCost;
 
     @IsProperty
@@ -54,6 +52,36 @@ public class VehicleFinDet extends AbstractPersistentEntity<Vehicle> {
     @Title(value = "Disposal Date", desc = "The date when this vehicle was disposed of.")
     private Date disposalDate;
     
+    @IsProperty
+    @MapTo
+    @Title(value = "Tender ID", desc = "ID of the tender at which the vehicle was purchased")
+    private String tenderId;
+    
+    @IsProperty
+    @MapTo
+    @Title(value = "Tender Date", desc = "The date when the procurement tender was held.")
+    private Date tenderDate;
+
+    @Observable
+    public VehicleFinDet setTenderDate(final Date tenderDate) {
+        this.tenderDate = tenderDate;
+        return this;
+    }
+
+    public Date getTenderDate() {
+        return tenderDate;
+    }
+
+    @Observable
+    public VehicleFinDet setTenderId(final String tenderId) {
+        this.tenderId = tenderId;
+        return this;
+    }
+
+    public String getTenderId() {
+        return tenderId;
+    }
+
     @Override
     @Observable
     public VehicleFinDet setKey(final Vehicle key) {
