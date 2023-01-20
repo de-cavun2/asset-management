@@ -44,7 +44,12 @@ public class StatisticsDao extends CommonEntityDao<Statistics> implements Statis
     @Authorise(Statistics_CanSave_Token.class)
     public Statistics save(Statistics entity) {
     	final boolean isPersisted = entity.isPersisted();
+    	if (isPersisted) {
+    		return entity;
+    	}
     	
+    	
+
     	// get repairs count
     	// get issues count
     	

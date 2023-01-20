@@ -5,6 +5,7 @@ import ua.com.fielden.platform.entity.DynamicEntityKey;
 import java.util.Date;
 
 import decavun2.analysis.meta.StatisticsMetaModel;
+import decavun2.objects.Vehicle;
 import ua.com.fielden.platform.entity.AbstractPersistentEntity;
 import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
@@ -53,7 +54,7 @@ public class Statistics extends AbstractPersistentEntity<DynamicEntityKey> {
 	@IsProperty
 	@MapTo
 	@Title(value = "Vehicle", desc = "Vehicle that is related to this statistical report")
-	private String vehicle;
+	private Vehicle vehicle;
 
 	@IsProperty
 	@MapTo
@@ -140,12 +141,12 @@ public class Statistics extends AbstractPersistentEntity<DynamicEntityKey> {
 	}
 
 	@Observable
-	public Statistics setVehicle(final String vehicle) {
+	public Statistics setVehicle(final Vehicle vehicle) {
 		this.vehicle = vehicle;
 		return this;
 	}
 
-	public String getVehicle() {
+	public Vehicle getVehicle() {
 		return vehicle;
 	}
 
