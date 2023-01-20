@@ -21,6 +21,7 @@ import ua.com.fielden.platform.entity.annotation.IsProperty;
 import ua.com.fielden.platform.entity.annotation.DescRequired;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
+import ua.com.fielden.platform.types.Money;
 
 /**
  * Master entity object.
@@ -57,7 +58,7 @@ public class Order extends ActivatableAbstractEntity<DynamicEntityKey> {
     @MapTo
     @Required
     @Title(value = "Price", desc = "The price of a particular order.")
-    private String price;
+    private Money price;
   
     @IsProperty
     @MapTo
@@ -96,12 +97,12 @@ public class Order extends ActivatableAbstractEntity<DynamicEntityKey> {
     }
     
     @Observable
-    public Order setPrice(final String price) {
+    public Order setPrice(final Money price) {
        this.price = price;
        return this;
     }
 
-    public String getPrice() {
+    public Money getPrice() {
        return price;
     }
 

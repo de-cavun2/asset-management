@@ -57,7 +57,7 @@ public class OrderWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<Order> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkVarGridForCentre(2, 3);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 2);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Order.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Order.class);
@@ -78,8 +78,7 @@ public class OrderWebUiConfig {
                 .addCrit(Order_.desc()).asMulti().text().also()
                 //row2
                 .addCrit(Order_.date()).asRange().dateTime().also()
-                .addCrit(Order_.parts()).asMulti().text().also()
-                .addCrit(Order_.price()).asMulti().text()
+                .addCrit(Order_.parts()).asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
