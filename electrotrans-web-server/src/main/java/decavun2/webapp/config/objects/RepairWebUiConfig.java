@@ -95,7 +95,6 @@ public class RepairWebUiConfig {
                 .addProp(Repair_.vehicle()).width(120).also()
                 .addProp(Repair_.issue()).minWidth(150).also()
                 .addProp(Repair_.repairman()).width(80)
-                //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
                 .build();
 
@@ -109,7 +108,7 @@ public class RepairWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Repair> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 2, 1, 1);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 2, 2);
 
         final IMaster<Repair> masterConfig = new SimpleMasterBuilder<Repair>().forEntity(Repair.class)
                 // row1
@@ -119,9 +118,8 @@ public class RepairWebUiConfig {
                 .addProp(Repair_.vehicle()).asSinglelineText().also()
                 .addProp(Repair_.repairman()).asAutocompleter().also()
                 // row3
-                .addProp(Repair_.issue()).asSinglelineText().also()
-                // row4
                 .addProp(Repair_.desc()).asSinglelineText().also()
+                .addProp(Repair_.issue()).asSinglelineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())

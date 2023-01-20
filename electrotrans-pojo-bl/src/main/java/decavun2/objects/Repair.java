@@ -75,12 +75,6 @@ public class Repair extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Title(value = "Repairman", desc = "The repairman responsible for the repair.")
     private Person repairman;
     
-    @IsProperty
-    @MapTo
-    @Required
-    @Title(value = "Description", desc = "The description of the repair.")
-    private String desc;
-    
     @Observable
     public Repair setRepairID(final String id) {
        this.repairID = id;
@@ -129,16 +123,6 @@ public class Repair extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     public Person getRepairman() {
        return repairman;
-    }
-
-    @Observable
-    public Repair setDescription(final String description) {
-       this.desc = description;
-       return this;
-    }
-
-    public String getDescription() {
-       return desc;
     }
 
 }
