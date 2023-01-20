@@ -110,7 +110,7 @@ public class VehicleWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Vehicle> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 2, 1, 1);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 2, 1, 1, 1);
 
         final IMaster<Vehicle> masterConfig = new SimpleMasterBuilder<Vehicle>().forEntity(Vehicle.class)
         		// row1
@@ -121,6 +121,7 @@ public class VehicleWebUiConfig {
                 .addProp(Vehicle_.driver()).asAutocompleter().also()
                 // row3
                 .addProp(Vehicle_.currentLocation()).asMultilineText().also()
+                .addProp(Vehicle_.transportCondition()).asMultilineText().also()
                 // row4
                 .addProp(Vehicle_.desc()).asMultilineText().also()
                 

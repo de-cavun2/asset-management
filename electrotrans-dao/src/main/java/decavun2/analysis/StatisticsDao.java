@@ -35,6 +35,8 @@ public class StatisticsDao extends CommonEntityDao<Statistics> implements Statis
 		final Statistics stat = super.new_();
 		
 		stat.setCreatedAt(new Date());
+		stat.setIssuesCount(0);
+		stat.setRepairsCount(0);
 		return stat;
 		
 	}

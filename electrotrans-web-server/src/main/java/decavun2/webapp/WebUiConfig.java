@@ -4,10 +4,12 @@ import static ua.com.fielden.platform.reflection.TitlesDescsGetter.getEntityTitl
 
 import org.apache.commons.lang3.StringUtils;
 
+import decavun2.analysis.Statistics;
 import decavun2.config.Modules;
 import decavun2.config.personnel.PersonWebUiConfig;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
+import decavun2.webapp.config.analysis.StatisticsWebUiConfig;
 import decavun2.webapp.config.objects.VehicleWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.utils.Pair;
@@ -80,6 +82,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
+        final StatisticsWebUiConfig statisticsWebUiConfig = StatisticsWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration
         configApp()
@@ -115,7 +118,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
             .bgColor(Modules.ANALYSIS.bgColour)
             .captionBgColor(Modules.ANALYSIS.captionBgColour)
             .menu()
-                .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(Statistics.class)).description(mkMenuItemDesc(Statistics.class)).centre(statisticsWebUiConfig.centre).done()
                 .done()
             .done()
         .setLayoutFor(Device.DESKTOP, null, "[[[], []]]")
