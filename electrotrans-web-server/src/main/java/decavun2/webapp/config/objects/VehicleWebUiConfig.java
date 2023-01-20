@@ -16,6 +16,7 @@ import com.google.inject.Injector;
 import decavun2.common.LayoutComposer;
 import decavun2.common.StandardActions;
 import decavun2.main.menu.objects.MiVehicle;
+import decavun2.objects.TransportCondition;
 import decavun2.objects.Vehicle;
 import decavun2.objects.VehicleFinDet;
 import decavun2.objects.master.menu.actions.VehicleMaster_OpenMain_MenuItem;
@@ -122,7 +123,7 @@ public class VehicleWebUiConfig {
                 .addCrit(Vehicle_.driver()).asMulti().autocompleter(Person.class).also()
                 .addCrit(Vehicle_.active()).asMulti().bool().also()
                 //row 4
-                .addCrit(Vehicle_.transportCondition()).asMulti().text().also()
+                .addCrit(Vehicle_.transportCondition()).asMulti().autocompleter(TransportCondition.class).also()
                 .addCrit(Vehicle_.lastRepair()).asRange().dateTime()
                 
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
@@ -161,7 +162,7 @@ public class VehicleWebUiConfig {
                 .addProp(Vehicle_.model()).asSinglelineText().also()
                 .addProp(Vehicle_.driver()).asAutocompleter().also()
                 // row 3
-                .addProp(Vehicle_.transportCondition()).asSinglelineText().also()
+                .addProp(Vehicle_.transportCondition()).asAutocompleter().also()
                 .addProp(Vehicle_.lastRepair()).asDateTimePicker().also()
                 // row 4
                 .addProp(Vehicle_.currentLocation()).asMultilineText().also()

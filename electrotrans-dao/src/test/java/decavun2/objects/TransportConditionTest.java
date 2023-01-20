@@ -15,13 +15,13 @@ import decavun2.test_config.AbstractDomainTestCase;
 
 public class TransportConditionTest extends AbstractDomainTestCase {
 
-    final String ERROR_MSG_NUM_1 = "Required property [%s] is not specified for entity [%s].".formatted("Stage", "TransportCondition");
+    final String ERROR_MSG_NUM_1 = "Required property [%s] is not specified for entity [%s].".formatted("Stage", "Transport condition");
 
     @Test
     public void stage_is_required_for_entity_transport_condition() {
 
-        final TransportCondition issueValid = co(TransportCondition.class).findByKey("01");
-        final TransportCondition issueUnvalid = new_(TransportCondition.class).setConditionId("00");
+        final TransportCondition issueValid = save(new_(TransportCondition.class).setStage("available"));;
+        final TransportCondition issueUnvalid = new_(TransportCondition.class);
 
 
         assertNotNull(issueValid);
@@ -82,8 +82,6 @@ public class TransportConditionTest extends AbstractDomainTestCase {
         if (useSavedDataPopulationScript()) {
             return;
         }
-
-        save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
     }
 
 }
