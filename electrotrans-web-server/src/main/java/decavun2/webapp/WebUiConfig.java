@@ -104,8 +104,19 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
                 .done()
             .done().done()
-        .setLayoutFor(Device.DESKTOP, null, "[[[]]]")
-        .setLayoutFor(Device.TABLET, null, "[[[]]]")
+            
+        .addModule(Modules.ANALYSIS.title)
+            .description(Modules.ANALYSIS.desc)
+            .icon(Modules.ANALYSIS.icon)
+            .detailIcon(Modules.ANALYSIS.icon)
+            .bgColor(Modules.ANALYSIS.bgColour)
+            .captionBgColor(Modules.ANALYSIS.captionBgColour)
+            .menu()
+                .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
+                .done()
+            .done()
+        .setLayoutFor(Device.DESKTOP, null, "[[[], []]]")
+        .setLayoutFor(Device.TABLET, null, "[[[], []]]")
         .setLayoutFor(Device.MOBILE, null, "[[[]]]")
         .minCellWidth(100).minCellHeight(148).done();
     }
