@@ -24,6 +24,6 @@ public class OpenVehicleMasterAction extends AbstractFunctionalEntityToOpenCompo
     public static final String ENTITY_TITLE = entityTitleAndDesc.getKey();
     public static final String ENTITY_DESC = entityTitleAndDesc.getValue();
 
-    public static final String MAIN = "Main";
-    public static final String VEHICLEFINDETS = VehicleFinDet.ENTITY_TITLE + "s"; // Please adjust manually if the plural form is not standard
+    public static final String MAIN = "Main properties";
+    public static final String VEHICLEFINDETS = VehicleFinDet.ENTITY_TITLE; // Please adjust manually if the plural form is not standard
 }

@@ -6,6 +6,7 @@ import decavun2.objects.meta.VehicleFinDetMetaModel;
 import ua.com.fielden.platform.entity.AbstractPersistentEntity;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.Dependent;
+import ua.com.fielden.platform.entity.annotation.EntityTitle;
 import ua.com.fielden.platform.entity.annotation.IsProperty;
 import ua.com.fielden.platform.entity.annotation.KeyTitle;
 import ua.com.fielden.platform.entity.annotation.KeyType;
@@ -27,6 +28,7 @@ import ua.com.fielden.platform.utils.Pair;
  */
 @KeyType(Vehicle.class)
 @KeyTitle("Vehicle")
+@EntityTitle("Financial details")
 @CompanionObject(VehicleFinDetCo.class)
 @MapEntityTo
 public class VehicleFinDet extends AbstractPersistentEntity<Vehicle> {
