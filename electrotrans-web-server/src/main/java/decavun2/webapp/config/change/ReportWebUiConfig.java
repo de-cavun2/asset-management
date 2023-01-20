@@ -107,7 +107,7 @@ public class ReportWebUiConfig {
                 .addProp(Report_.desc()).asMultilineText().also()
                 .addProp(Report_.department()).asSinglelineText().also()
                 .addProp(Report_.issue()).asSinglelineText().also()
-                .addProp(Report_.change()).asSinglelineText().also()
+                .addProp(Report_.change()).asAutocompleter().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())
