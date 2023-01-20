@@ -90,9 +90,9 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         final Person mechanic = save(new_(Person.class).setEmail("Vasyl@electrotrans.com").setDesc("Vasyl Mechanic").setActive(true));
         final Person fleetManager = save(new_(Person.class).setEmail("Oleh@electrotrans.com").setDesc("Oleh Manager").setActive(true));
 
-        save(new_(Issue.class).setIssueNumber("000001").setResponsiblePerson(mechanic).setActive(true).setDescription(issue1).setDate(date("2023-10-01 11:30:00")));
-        save(new_(Issue.class).setIssueNumber("000002").setResponsiblePerson(fleetManager).setActive(true).setDescription(issue2).setDate(date("2023-15-01 09:30:00")));
-        save(new_(Issue.class).setIssueNumber("000003").setResponsiblePerson(driver).setActive(true).setDescription(issue3).setDate(date("2023-10-01 15:20:00")));
+        save(new_(Issue.class).setIssueNumber("000001").setResponsiblePerson(mechanic).setActive(true).setDescription(issue1).setDate(date("2023-10-10 11:30:00")));
+        save(new_(Issue.class).setIssueNumber("000002").setResponsiblePerson(fleetManager).setActive(true).setDescription(issue2).setDate(date("2023-10-15 09:30:00")));
+        save(new_(Issue.class).setIssueNumber("000003").setResponsiblePerson(driver).setActive(true).setDescription(issue3).setDate(date("2023-10-19 15:20:00")));
         
         LOGGER.info("Completed database creation and population.");
     }
