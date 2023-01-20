@@ -1,24 +1,26 @@
 package decavun2.dev_mod.util;
 
 import static java.lang.String.format;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.logging.log4j.Logger;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.PostgreSQL82Dialect;
 
-import static org.apache.logging.log4j.LogManager.getLogger;
-import org.apache.logging.log4j.Logger;
-
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
+import decavun2.personnel.Person;
+import decavun2.personnel.PersonRole;
+import decavun2.objects.TransportCondition;
+import decavun2.objects.Vehicle;
 import decavun2.object.AssignedVehicle;
 import decavun2.object.Route;
 import decavun2.utils.PostgresqlDbUtils;
-
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.persistence.HibernateUtil;
@@ -80,8 +82,46 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
     protected void populateDomain() {
         LOGGER.info("Creating and populating the development database...");
 
-        setupUser(User.system_users.SU, "decavun2");
-        setupPerson(User.system_users.SU, "decavun2");
+        setupUser(User.system_users.SU, "User");
+        
+        final PersonRole tramDriver = save(new_composite(PersonRole.class, "Driver-T").setDesc("Category T driver (tram and trolleybus)."));
+        final PersonRole carDriver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Category B driver (passenger car)"));
+        final PersonRole fleetManager = save(new_composite(PersonRole.class, "Fleet manager").setDesc("Person resposible for fleet management."));
+        final PersonRole hrManager = save(new_composite(PersonRole.class, "HR manager").setDesc("Person resposible for human resourse management."));
+        
+        setupPerson(User.system_users.SU, "decavun2", "Super", "User", hrManager);
+        createAndSavePerson("Sukhorskyy@let.com", "Yuriy", "Sukhorskyy", (User) null, tramDriver);
+        createAndSavePerson("Veselyy@let.com", "Vasyl", "Veselyy", (User) null, tramDriver);
+        createAndSavePerson("Tsikavyy@let.com", "Bohdan", "Tsikavyy", (User) null, carDriver);
+        createAndSavePerson("Kvitlyva@let.com", "Yulia", "Kvitlyva", (User) null, fleetManager);
+        
+        save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
+        save(new_(TransportCondition.class).setConditionId("000002").setStage("need further inspection"));
+        save(new_(TransportCondition.class).setConditionId("000003").setStage("minor issues"));
+        save(new_(TransportCondition.class).setConditionId("000004").setStage("significant issues"));
+        save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
+        
+        final PersonRole driver1 = save(new_composite(PersonRole.class, "Driver-C").setDesc("Bus driver."));
+        final TransportCondition available = save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
+        final Person driverPerson1 = save(new_(Person.class).setEmail("Ron@let.com").setPersonRole(driver1).setName("Ronald").setSurname("McDonald").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC1111AH").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson1).setActive(true).setTransportCondition(available).setDesc("Bus number 46."));
+        
+        final PersonRole driver2 = save(new_composite(PersonRole.class, "Driver-P").setDesc("Tram driver."));
+        final Person driverPerson2 = save(new_(Person.class).setEmail("Tomas@let.com").setPersonRole(driver2).setName("Tom").setSurname("Sunshine").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC1010KL").setModel("T 900").setCurrentLocation("Depot").setDriver(driverPerson2).setActive(true).setTransportCondition(available).setDesc("Tram number 2."));
+
+        final PersonRole driver3 = save(new_composite(PersonRole.class, "Driver-L").setDesc("Bus driver."));
+        final Person driverPerson3 = save(new_(Person.class).setEmail("Vasyl@let.com").setPersonRole(driver3).setName("Vasyl").setSurname("Petrenko").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC1212MN").setModel("B 100").setCurrentLocation("Depot").setDriver(driverPerson3).setActive(true).setTransportCondition(available).setDesc("Bus number 61."));
+        
+        final PersonRole driver4 = save(new_composite(PersonRole.class, "Driver-K").setDesc("Tram driver."));
+        final TransportCondition unavailable = save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
+        final Person driverPerson4 = save(new_(Person.class).setEmail("Bruce@let.com").setPersonRole(driver4).setName("Bruce").setSurname("Smidth").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC4030AH").setModel("T 900").setCurrentLocation("Depot").setDriver(driverPerson4).setActive(true).setTransportCondition(unavailable).setDesc("Tram number 8."));
+        
+        final PersonRole driver5 = save(new_composite(PersonRole.class, "Driver-X").setDesc("Tram driver."));
+        final Person driverPerson5 = save(new_(Person.class).setEmail("Ivan@let.com").setPersonRole(driver5).setName("Ivan").setSurname("Rudyy").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC2015MK").setModel("T 800").setCurrentLocation("Depot").setDriver(driverPerson5).setActive(true).setTransportCondition(unavailable).setDesc("Tram number 1."));
         
         final Route tramRouteNum1 = save(new_composite(Route.class, 1).setName("Railway Station — Pasichna st.")
         		.setStationOrder("Railway station — Lviv Polytechnic — Doroshenko st. — Rynok Square — Lychakivska st. — Pasichna st.")

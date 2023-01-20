@@ -1,14 +1,21 @@
 package decavun2.example;
 
-import static org.junit.Assert.*;
+import static metamodels.MetaModels.Person_;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import decavun2.personnel.Person;
+import decavun2.personnel.PersonRole;
+import decavun2.personnel.validators.NoSpacesValidator;
+import decavun2.test_config.AbstractDomainTestCase;
+import ua.com.fielden.platform.entity.meta.MetaProperty;
 import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
-
-import decavun2.personnel.Person;
-import decavun2.test_config.AbstractDomainTestCase;
 
 /**
  * This is an example unit test, which can be used as a starting point for creating application unit tests.
@@ -25,17 +32,47 @@ public class PersonnelTest extends AbstractDomainTestCase {
      * Each test method should be related to exactly one concern, which facilitates creation of unit tests that address a single concern.
      */
     @Test
-    public void user_RMD_is_present_and_active() {
+    public void person_RMD_is_present_and_active() {
         final Person person = co(Person.class).findByKey("RMD@organisation.com");
         assertNotNull(person);
         assertTrue(person.isActive());
     }
 
     @Test
-    public void user_JC_is_present_but_not_active() {
+    public void person_JC_is_present_but_not_active() {
         final Person person = co(Person.class).findByKey("JC@organisation.com");
         assertNotNull(person);
         assertFalse(person.isActive());
+    }
+    
+    @Test
+    public void property_person_role_is_required() {
+        final Person person = co$(Person.class).findByKey("RMD@organisation.com");
+        assertTrue(person.getProperty(Person_.personRole()).isRequired());
+    }
+    
+    @Test
+    public void name_does_not_permit_spaces() {
+        final Person person = new_composite(Person.class, "person@helsinki");
+        person.setName("Values with spaces");
+        assertNull(person.getName());
+
+        final MetaProperty<String> mpName = person.getProperty(Person_.name());
+        assertFalse(mpName.isValid());
+        assertEquals(NoSpacesValidator.ERR_SPACES.formatted(mpName.getTitle(), Person.ENTITY_TITLE), mpName.getFirstFailure().getMessage());
+        assertEquals("Values with spaces", mpName.getLastInvalidValue());
+    }
+
+    @Test
+    public void surname_does_not_permit_spaces() {
+        final Person person = new_composite(Person.class, "person@helsinki");
+        person.setSurname("Values with spaces");
+        assertNull(person.getSurname());
+
+        final MetaProperty<String> mpSurname = person.getProperty(Person_.surname());
+        assertFalse(mpSurname.isValid());
+        assertEquals(NoSpacesValidator.ERR_SPACES.formatted(mpSurname.getTitle(), Person.ENTITY_TITLE), mpSurname.getFirstFailure().getMessage());
+        assertEquals("Values with spaces", mpSurname.getLastInvalidValue());
     }
 
     /**
@@ -86,8 +123,9 @@ public class PersonnelTest extends AbstractDomainTestCase {
         }
 
         // Here the three Person entities are persisted using the the inherited from TG testing framework methods.
-        save(new_(Person.class).setEmail("RMD@organisation.com").setDesc("Ronald McDonald").setActive(true));
-        save(new_(Person.class).setEmail("JC@organisation.com").setDesc("John Carmack").setActive(false));
+        final PersonRole driver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Car driver."));
+        save(new_(Person.class).setEmail("RMD@organisation.com").setPersonRole(driver).setName("Ronald").setSurname("McDonald").setActive(true));
+        save(new_(Person.class).setEmail("JC@organisation.com").setPersonRole(driver).setName("John").setSurname("Carmack").setActive(false));
     }
 
 }
