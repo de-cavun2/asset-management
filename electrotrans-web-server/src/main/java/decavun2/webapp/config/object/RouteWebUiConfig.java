@@ -21,7 +21,6 @@ import decavun2.main.menu.object.MiRouteMaster_AssignedVehicle;
 import decavun2.object.master.menu.actions.RouteMaster_OpenAssignedVehicle_MenuItem;
 import decavun2.object.ui_actions.OpenRouteMasterAction;
 import decavun2.object.ui_actions.producers.OpenRouteMasterActionProducer;
-import metamodels.MetaModels;
 import decavun2.object.master.menu.actions.RouteMaster_OpenMain_MenuItem;
 import decavun2.object.producers.AssignedVehicleProducer;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
@@ -159,7 +158,7 @@ public class RouteWebUiConfig {
         final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 2, 1, 1);
 
         final IMaster<Route> masterConfig = new SimpleMasterBuilder<Route>().forEntity(Route.class)
-        		.addProp(Route_.routeNum()).asInteger().also()
+                .addProp(Route_.routeNum()).asInteger().also()
                 .addProp(Route_.inUse()).asCheckbox().also()
                 .addProp(Route_.name()).asSinglelineText().also()
                 .addProp(Route_.desc()).asMultilineText().also()

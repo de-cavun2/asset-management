@@ -23,31 +23,31 @@ import decavun2.object.master.menu.actions.RouteMaster_OpenAssignedVehicle_MenuI
  */
 public class ApplicationDomain implements IApplicationDomainProvider {
 
-	private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
-	private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
+    private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
+    private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
 
-	static {
-		entityTypes.addAll(PlatformDomainTypes.types);
-		add(Person.class);
-		add(Route.class);
-		add(AssignedVehicle.class);
-		add(OpenRouteMasterAction.class);
-		add(RouteMaster_OpenMain_MenuItem.class);
-		add(RouteMaster_OpenAssignedVehicle_MenuItem.class);
-	}
+    static {
+       entityTypes.addAll(PlatformDomainTypes.types);
+       add(Person.class);
+       add(Route.class);
+       add(AssignedVehicle.class);
+       add(OpenRouteMasterAction.class);
+       add(RouteMaster_OpenMain_MenuItem.class);
+       add(RouteMaster_OpenAssignedVehicle_MenuItem.class);
+    }
 
-	private static void add(final Class<? extends AbstractEntity<?>> domainType) {
-		entityTypes.add(domainType);
-		domainTypes.add(domainType);
-	}
+    private static void add(final Class<? extends AbstractEntity<?>> domainType) {
+       entityTypes.add(domainType);
+       domainTypes.add(domainType);
+    }
 
-	@Override
-	public List<Class<? extends AbstractEntity<?>>> entityTypes() {
-		return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
-	}
+    @Override
+    public List<Class<? extends AbstractEntity<?>>> entityTypes() {
+       return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
+    }
 
-	public List<Class<? extends AbstractEntity<?>>> domainTypes() {
-		return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
-	}
+    public List<Class<? extends AbstractEntity<?>>> domainTypes() {
+       return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
+    }
 
 }

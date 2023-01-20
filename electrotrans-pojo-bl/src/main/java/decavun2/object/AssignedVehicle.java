@@ -62,23 +62,20 @@ public class AssignedVehicle extends ActivatableAbstractEntity<DynamicEntityKey>
     private String stationSchedule;
     
     @IsProperty
-	@MapTo
-	@Required
-	@Title(value = "Interval", desc = "Describes the interval between two consecutive stations.")
-	private Integer interval;
+    @MapTo
+    @Required
+    @Title(value = "Interval", desc = "Describes the interval between two consecutive stations.")
+    private Integer interval;
 
-	@Observable
-	public AssignedVehicle setInterval(final Integer interval) {
-		this.interval = interval;
-		return this;
-	}
+    @Observable
+    public AssignedVehicle setInterval(final Integer interval) {
+       this.interval = interval;
+       return this;
+    }
 
 	public Integer getInterval() {
-		return interval;
-	}
-
-	
-
+       return interval;
+    }
 
     @Observable
     public AssignedVehicle setStationSchedule(final String stationSchedule) {
