@@ -1,19 +1,21 @@
 package decavun2.example;
 
 import static metamodels.MetaModels.Person_;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-
-import ua.com.fielden.platform.entity.meta.MetaProperty;
-import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
-import ua.com.fielden.platform.utils.IUniversalConstants;
 
 import decavun2.personnel.Person;
 import decavun2.personnel.PersonRole;
 import decavun2.personnel.validators.NoSpacesValidator;
 import decavun2.test_config.AbstractDomainTestCase;
-import metamodels.MetaModels;
+import ua.com.fielden.platform.entity.meta.MetaProperty;
+import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
+import ua.com.fielden.platform.utils.IUniversalConstants;
 
 /**
  * This is an example unit test, which can be used as a starting point for creating application unit tests.

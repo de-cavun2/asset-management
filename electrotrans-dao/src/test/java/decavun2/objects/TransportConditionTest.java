@@ -1,54 +1,42 @@
 package decavun2.objects;
 
-import static metamodels.MetaModels.Vehicle_;
+import static metamodels.MetaModels.TransportCondition_;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
-
-import decavun2.personnel.Person;
-import decavun2.personnel.PersonRole;
 import decavun2.test_config.AbstractDomainTestCase;
 
 /**
  * This is an unit test for entity Vehicle.
  */
 
-public class VehicleTest extends AbstractDomainTestCase {
-	
-    final String ERROR_MSG_NUM_1 = "Required property [%s] is not specified for entity [%s].".formatted("Model", "Vehicle");
+public class TransportConditionTest extends AbstractDomainTestCase {
+
+    final String ERROR_MSG_NUM_1 = "Required property [%s] is not specified for entity [%s].".formatted("Stage", "TransportCondition");
 
     @Test
-    public void transportCondition_licensePlate_model_currentLocation_driver_desc_is_required_for_entity_vehicle() {
-        
-        final Vehicle vehicleValid = co(Vehicle.class).findByKey("BC1111AH");
-        final Vehicle vehicleUnvalid = new_(Vehicle.class).setLicensePlate("BC2103AH").setDesc("Trolleybus nomer ten.");
-        
-        
-        assertNotNull(vehicleValid);
-        assertTrue(vehicleValid.isPersisted());
-        
-        assertNotNull(vehicleUnvalid);
-        assertFalse(vehicleUnvalid.isPersisted());
-        assertFalse(vehicleUnvalid.isValid().isSuccessful());
+    public void stage_is_required_for_entity_transport_condition() {
 
-        assertTrue(vehicleUnvalid.getProperty(Vehicle_.licensePlate()).isRequired());        
-        assertTrue(vehicleUnvalid.getProperty(Vehicle_.model()).isRequired());
-        assertTrue(vehicleUnvalid.getProperty(Vehicle_.currentLocation()).isRequired());
-        assertTrue(vehicleUnvalid.getProperty(Vehicle_.driver()).isRequired());
-        assertTrue(vehicleUnvalid.getProperty(Vehicle_.desc()).isRequired());
-        assertTrue(vehicleUnvalid.getProperty(Vehicle_.transportCondition()).isRequired());
-        
-        assertFalse(vehicleUnvalid.getProperty(Vehicle_.lastRepair()).isRequired());
+        final TransportCondition issueValid = co(TransportCondition.class).findByKey("01");
+        final TransportCondition issueUnvalid = new_(TransportCondition.class).setConditionId("00");
 
 
-        
+        assertNotNull(issueValid);
+        assertTrue(issueValid.isPersisted());
+
+        assertNotNull(issueUnvalid);
+        assertFalse(issueUnvalid.isPersisted());
+        assertFalse(issueUnvalid.isValid().isSuccessful());
+
+        assertTrue(issueUnvalid.getProperty(TransportCondition_.stage()).isRequired());        
+
         try {
-            save(vehicleUnvalid);
+            save(issueUnvalid);
             } catch (final Exception ex) {
-                
+
                 assertEquals(ERROR_MSG_NUM_1, ex.getMessage());
             }
     }
@@ -89,16 +77,13 @@ public class VehicleTest extends AbstractDomainTestCase {
         super.populateDomain();
 
         final UniversalConstantsForTesting constants = (UniversalConstantsForTesting) getInstance(IUniversalConstants.class);
-        constants.setNow(dateTime("2019-10-01 11:30:00"));
+        constants.setNow(dateTime("2023-10-01 11:30:00"));
 
         if (useSavedDataPopulationScript()) {
             return;
         }
-        
-        final PersonRole driver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Car driver."));
-        final TransportCondition transportCondition = save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
-        final Person driverPerson = save(new_(Person.class).setEmail("RMD@organisation.com").setPersonRole(driver).setName("Ronald").setSurname("McDonald").setActive(true));
-        save(new_(Vehicle.class).setLicensePlate("BC1111AH").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setTransportCondition(transportCondition).setDesc("The tram number two."));
+
+        save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
     }
 
 }

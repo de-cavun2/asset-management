@@ -9,9 +9,11 @@ import decavun2.config.personnel.PersonWebUiConfig;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import decavun2.personnel.PersonRole;
-import decavun2.webapp.config.personnel.PersonRoleWebUiConfig;
 import decavun2.webapp.config.objects.VehicleWebUiConfig;
-
+import decavun2.webapp.config.personnel.PersonRoleWebUiConfig;
+import decavun2.objects.TransportCondition;
+import decavun2.personnel.Person;
+import decavun2.webapp.config.objects.TransportConditionWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
@@ -77,9 +79,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
 
         // Users and Personnel Module
         final PersonWebUiConfig personWebUiConfig = PersonWebUiConfig.register(injector(), builder);
-        final VehicleWebUiConfig vehicleWebUiConfig = VehicleWebUiConfig.register(injector(), builder);
         final PersonRoleWebUiConfig personRoleWebUiConfig = PersonRoleWebUiConfig.register(injector(), builder);
-
+        final VehicleWebUiConfig vehicleWebUiConfig = VehicleWebUiConfig.register(injector(), builder);
+        final TransportConditionWebUiConfig transportConditionWebUiConfig = TransportConditionWebUiConfig.register(injector(), builder);
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
@@ -103,9 +105,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
             .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
             .menu()
                 .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
-                .addMenuItem(mkMenuItemTitle(Vehicle.class)).description(mkMenuItemDesc(Vehicle.class)).centre(vehicleWebUiConfig.centre).done()
                 .addMenuItem(mkMenuItemTitle(PersonRole.class)).description(mkMenuItemDesc(PersonRole.class)).centre(personRoleWebUiConfig.centre).done()
-
+                .addMenuItem(mkMenuItemTitle(Vehicle.class)).description(mkMenuItemDesc(Vehicle.class)).centre(vehicleWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(TransportCondition.class)).description(mkMenuItemDesc(TransportCondition.class)).centre(transportConditionWebUiConfig.centre).done()
                 .addMenuItem("System Users").description("Functionality for managing system users, authorisation, etc.")
                     .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
                     .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
