@@ -17,6 +17,6 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface IssueCo extends IEntityDao<Issue> {
 
     static final IFetchProvider<Issue> FETCH_PROVIDER = EntityUtils.fetch(Issue.class)
-    		.with(Issue_.issueNumber(), Issue_.active(), Issue_.description(), Issue_.responsiblePerson());
+    		.with(Issue_.issueNumber(), Issue_.active(), Issue_.date(), Issue_.description(), Issue_.responsiblePerson());
         
 }
