@@ -97,7 +97,7 @@ public class TransportConditionWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<TransportCondition> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkGridForMasterFitWidth(1, 1);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(1, 1);
 
         final IMaster<TransportCondition> masterConfig = new SimpleMasterBuilder<TransportCondition>().forEntity(TransportCondition.class)
                 .addProp(TransportCondition_.conditionId()).asSinglelineText().also()
