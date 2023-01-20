@@ -36,13 +36,13 @@ public interface IDomainData extends IDomainDrivenData {
         return co(entityClass).findByKeyAndFetch(eFetch, keyValues);
     }
 
-    default Person setupPerson(final User.system_users systemUser, final String emailDomain) {
+    default Person setupPerson(final User.system_users systemUser, final String emailDomain, final String name, final String surname) {
         final User user = fetchEntityForPropOf("user", Person.class, systemUser.name());
-        return createAndSavePerson(systemUser.name() + "@" + emailDomain, "Person who is a user", user);
+        return createAndSavePerson(systemUser.name() + "@" + emailDomain, name, surname, user);
     }
 
-    default Person createAndSavePerson(final String email, final String fullName, final User user) {
-        return save(new_composite(Person.class, email).setDesc(fullName).setActive(true).setUser(user));
+    default Person createAndSavePerson(final String email, final String name, final String surname, final User user) {
+        return save(new_composite(Person.class, email).setName(name).setSurname(surname).setActive(true).setUser(user));
     }
 
     default void ensureAdminBaseUserExists(final IUser co$User) {
@@ -56,7 +56,7 @@ public interface IDomainData extends IDomainDrivenData {
         }
     }
 
-    default void mkUserAndPerson(final String userName, final String fullName, final String email, final String title) {
+    default void mkUserAndPerson(final String userName, final String name, final String surname, final String email, final String title) {
         final IUser co$User = co$(User.class);
         ensureAdminBaseUserExists(co$User);
 
@@ -69,7 +69,7 @@ public interface IDomainData extends IDomainDrivenData {
 
         save(new_composite(UserAndRoleAssociation.class, user, admin));
 
-        createAndSavePerson(email, fullName, user);
+        createAndSavePerson(email, name, surname, user);
     }
 
     @EnsureData({})

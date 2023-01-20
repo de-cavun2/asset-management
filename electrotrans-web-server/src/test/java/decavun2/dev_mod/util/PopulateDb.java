@@ -1,22 +1,20 @@
 package decavun2.dev_mod.util;
 
 import static java.lang.String.format;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.logging.log4j.Logger;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.PostgreSQL82Dialect;
 
-import static org.apache.logging.log4j.LogManager.getLogger;
-import org.apache.logging.log4j.Logger;
-
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
 import decavun2.utils.PostgresqlDbUtils;
-
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.persistence.HibernateUtil;
@@ -78,8 +76,9 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
     protected void populateDomain() {
         LOGGER.info("Creating and populating the development database...");
 
-        setupUser(User.system_users.SU, "decavun2");
-        setupPerson(User.system_users.SU, "decavun2");
+        setupUser(User.system_users.SU, "User");
+        setupPerson(User.system_users.SU, "decavun2", "Super", "User");
+        createAndSavePerson("Yuriy@decavun2", "Yuriy", "Sukhorskyy", (User) null);
 
         LOGGER.info("Completed database creation and population.");
     }
