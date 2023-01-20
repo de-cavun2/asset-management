@@ -18,6 +18,6 @@ public interface RouteCo extends IEntityDao<Route> {
     final String ERROR_MSG_INUSE_REQUIRES_TRAFFICDATA = "Required property [%s] is not specified for entity [%s].".formatted("Traffic data", "Route");
 
     static final IFetchProvider<Route> FETCH_PROVIDER = EntityUtils.fetch(Route.class)
-    		.with(Route_.routeNum(), Route_.name(), Route_.stationOrder(), Route_.inUse(), Route_.trafficData());
+    		.with(Route_.routeNum(), Route_.name(), Route_.stationOrder(), Route_.inUse(), Route_.trafficData(), Route_.desc());
      
 }

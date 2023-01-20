@@ -27,6 +27,11 @@ public class AssignedVehicleDao extends CommonEntityDao<AssignedVehicle> impleme
     public AssignedVehicleDao(final IFilter filter) {
         super(filter);
     }
+    
+    @Override
+    public AssignedVehicle new_() {
+        return super.new_().setActive(true);
+    }
 
     @Override
     @SessionRequired

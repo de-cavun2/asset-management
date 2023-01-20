@@ -60,6 +60,25 @@ public class AssignedVehicle extends ActivatableAbstractEntity<DynamicEntityKey>
     @Required
     @Title(value = "Station schedule", desc = "The schedule of vehicle's stations.")
     private String stationSchedule;
+    
+    @IsProperty
+	@MapTo
+	@Required
+	@Title(value = "Interval", desc = "Describes the interval between two consecutive stations.")
+	private Integer interval;
+
+	@Observable
+	public AssignedVehicle setInterval(final Integer interval) {
+		this.interval = interval;
+		return this;
+	}
+
+	public Integer getInterval() {
+		return interval;
+	}
+
+	
+
 
     @Observable
     public AssignedVehicle setStationSchedule(final String stationSchedule) {
@@ -99,6 +118,13 @@ public class AssignedVehicle extends ActivatableAbstractEntity<DynamicEntityKey>
 
     public Route getRoute() {
        return route;
+    }
+    
+    @Override
+    @Observable
+    public AssignedVehicle setActive(final boolean active) {
+        super.setActive(active);
+        return this;
     }
 
 }

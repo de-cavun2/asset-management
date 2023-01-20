@@ -31,7 +31,7 @@ import ua.com.fielden.platform.utils.Pair;
 @CompanionObject(RouteCo.class)
 @MapEntityTo
 @EntityTitle(value = "Route", desc = "Routes that are used by the Lvivelectrotrans.")
-@DescTitle(value = "Route description", desc = "The extended route's description.")
+@DescTitle(value = "Route description", desc = "The extended description.")
 @DisplayDescription
 @DescRequired
 public class Route extends AbstractPersistentEntity<DynamicEntityKey> {

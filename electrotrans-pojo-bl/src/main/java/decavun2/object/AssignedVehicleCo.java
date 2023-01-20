@@ -15,7 +15,7 @@ public interface AssignedVehicleCo extends IEntityDao<AssignedVehicle> {
 
     static final IFetchProvider<AssignedVehicle> FETCH_PROVIDER = EntityUtils.fetch(AssignedVehicle.class)
     		.with(AssignedVehicle_.route(), AssignedVehicle_.assignedDate(), AssignedVehicle_.vehicle(),
-    				AssignedVehicle_.stationSchedule(), AssignedVehicle_.active());
+    				AssignedVehicle_.stationSchedule(), AssignedVehicle_.interval(), AssignedVehicle_.active());
        
 
 }
