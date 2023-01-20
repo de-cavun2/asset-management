@@ -29,8 +29,8 @@ import ua.com.fielden.platform.utils.Pair;
 @KeyType(DynamicEntityKey.class)
 @KeyTitle("Assigned vehicle")
 @CompanionObject(AssignedVehicleCo.class)
-@EntityTitle(value = "Asigned vehicle", desc = "Vehicle, that is assigned to a conrete route.")
-@DescTitle(value = "Asigned vehicle's description", desc = "The extended description for the entity AssignedVehicle.")
+@EntityTitle(value = "Assigned vehicle", desc = "Vehicle, that is assigned to a conrete route.")
+@DescTitle(value = "Assigned vehicle's description", desc = "The extended description for the entity AssignedVehicle.")
 @MapEntityTo
 public class AssignedVehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
 
@@ -73,7 +73,7 @@ public class AssignedVehicle extends ActivatableAbstractEntity<DynamicEntityKey>
        return this;
     }
 
-	public Integer getInterval() {
+    public Integer getInterval() {
        return interval;
     }
 

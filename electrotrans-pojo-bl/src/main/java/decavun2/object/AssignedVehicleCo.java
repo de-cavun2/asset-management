@@ -12,6 +12,9 @@ import ua.com.fielden.platform.dao.IEntityDao;
  * @author Developers
  */
 public interface AssignedVehicleCo extends IEntityDao<AssignedVehicle> {
+	
+    final String ERROR_MSG_REQUIRED_PROPERTIES = "Required property [%s] is not specified for entity [%s].".formatted("Station schedule", "Assigned vehicle");
+
 
     static final IFetchProvider<AssignedVehicle> FETCH_PROVIDER = EntityUtils.fetch(AssignedVehicle.class)
     		.with(AssignedVehicle_.route(), AssignedVehicle_.assignedDate(), AssignedVehicle_.vehicle(),
