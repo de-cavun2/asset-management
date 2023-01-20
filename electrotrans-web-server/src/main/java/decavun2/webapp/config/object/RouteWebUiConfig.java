@@ -21,6 +21,7 @@ import decavun2.main.menu.object.MiRouteMaster_AssignedVehicle;
 import decavun2.object.master.menu.actions.RouteMaster_OpenAssignedVehicle_MenuItem;
 import decavun2.object.ui_actions.OpenRouteMasterAction;
 import decavun2.object.ui_actions.producers.OpenRouteMasterActionProducer;
+import decavun2.objects.Vehicle;
 import decavun2.object.master.menu.actions.RouteMaster_OpenMain_MenuItem;
 import decavun2.object.producers.AssignedVehicleProducer;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
@@ -188,7 +189,7 @@ public class RouteWebUiConfig {
         final IMaster<AssignedVehicle> masterConfig = new SimpleMasterBuilder<AssignedVehicle>().forEntity(AssignedVehicle.class)
                 .addProp(AssignedVehicle_.route()).asAutocompleter().also()
                 .addProp(AssignedVehicle_.active()).asCheckbox().also()
-                .addProp(AssignedVehicle_.vehicle()).asSinglelineText().also()
+                .addProp(AssignedVehicle_.vehicle()).asAutocompleter().also()
                 .addProp(AssignedVehicle_.assignedDate()).asDateTimePicker().also()
                 .addProp(AssignedVehicle_.stationSchedule()).asMultilineText().also()
                 .addProp(AssignedVehicle_.interval()).asInteger().also()
@@ -221,7 +222,7 @@ public class RouteWebUiConfig {
                 .addTopAction(standardDeleteAction).also()
                 .addTopAction(standardSortAction).also()
                 .addTopAction(standardExportAction)
-                .addCrit(AssignedVehicle_.vehicle()).asMulti().text().also()
+                .addCrit(AssignedVehicle_.vehicle()).asMulti().autocompleter(Vehicle.class).also()
                 .addCrit(AssignedVehicle_.assignedDate()).asRange().dateTime().also()
                 .addCrit(AssignedVehicle_.interval()).asRange().integer().also()
                 .addCrit(AssignedVehicle_.active()).asMulti().bool().also()

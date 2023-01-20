@@ -95,33 +95,40 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         createAndSavePerson("Tsikavyy@let.com", "Bohdan", "Tsikavyy", (User) null, carDriver);
         createAndSavePerson("Kvitlyva@let.com", "Yulia", "Kvitlyva", (User) null, fleetManager);
         
-        save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
+        final TransportCondition available = save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
         save(new_(TransportCondition.class).setConditionId("000002").setStage("need further inspection"));
         save(new_(TransportCondition.class).setConditionId("000003").setStage("minor issues"));
         save(new_(TransportCondition.class).setConditionId("000004").setStage("significant issues"));
-        save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
+        final TransportCondition unavailable = save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
         
-        final PersonRole driver1 = save(new_composite(PersonRole.class, "Driver-C").setDesc("Bus driver."));
-        final TransportCondition available = save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
+        final PersonRole driver1 = save(new_composite(PersonRole.class, "Driver-C").setDesc("Tram driver."));
         final Person driverPerson1 = save(new_(Person.class).setEmail("Ron@let.com").setPersonRole(driver1).setName("Ronald").setSurname("McDonald").setActive(true));
-        save(new_(Vehicle.class).setLicensePlate("BC1111AH").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson1).setActive(true).setTransportCondition(available).setDesc("Bus number 46."));
+        final Vehicle vehicle1 = save(new_(Vehicle.class).setLicensePlate("BC1111AH").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson1).setActive(true).setTransportCondition(available).setDesc("Tram number 1."));
         
         final PersonRole driver2 = save(new_composite(PersonRole.class, "Driver-P").setDesc("Tram driver."));
         final Person driverPerson2 = save(new_(Person.class).setEmail("Tomas@let.com").setPersonRole(driver2).setName("Tom").setSurname("Sunshine").setActive(true));
-        save(new_(Vehicle.class).setLicensePlate("BC1010KL").setModel("T 900").setCurrentLocation("Depot").setDriver(driverPerson2).setActive(true).setTransportCondition(available).setDesc("Tram number 2."));
+        final Vehicle vehicle2 = save(new_(Vehicle.class).setLicensePlate("BC1010KL").setModel("T 900").setCurrentLocation("Depot").setDriver(driverPerson2).setActive(true).setTransportCondition(available).setDesc("Tram number 1."));
 
-        final PersonRole driver3 = save(new_composite(PersonRole.class, "Driver-L").setDesc("Bus driver."));
+        final PersonRole driver3 = save(new_composite(PersonRole.class, "Driver-L").setDesc("Tram driver.."));
         final Person driverPerson3 = save(new_(Person.class).setEmail("Vasyl@let.com").setPersonRole(driver3).setName("Vasyl").setSurname("Petrenko").setActive(true));
-        save(new_(Vehicle.class).setLicensePlate("BC1212MN").setModel("B 100").setCurrentLocation("Depot").setDriver(driverPerson3).setActive(true).setTransportCondition(available).setDesc("Bus number 61."));
+        final Vehicle vehicle3 = save(new_(Vehicle.class).setLicensePlate("BC1212MN").setModel("B 100").setCurrentLocation("Depot").setDriver(driverPerson3).setActive(true).setTransportCondition(available).setDesc("Tram number 8."));
         
-        final PersonRole driver4 = save(new_composite(PersonRole.class, "Driver-K").setDesc("Tram driver."));
-        final TransportCondition unavailable = save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
+        final PersonRole driver4 = save(new_composite(PersonRole.class, "Driver-K").setDesc("Trolley driver."));
         final Person driverPerson4 = save(new_(Person.class).setEmail("Bruce@let.com").setPersonRole(driver4).setName("Bruce").setSurname("Smidth").setActive(true));
-        save(new_(Vehicle.class).setLicensePlate("BC4030AH").setModel("T 900").setCurrentLocation("Depot").setDriver(driverPerson4).setActive(true).setTransportCondition(unavailable).setDesc("Tram number 8."));
+        final Vehicle vehicle4 = save(new_(Vehicle.class).setLicensePlate("BC4030AH").setModel("T 900").setCurrentLocation("Depot").setDriver(driverPerson4).setActive(true).setTransportCondition(available).setDesc("Trolley number 25."));
         
-        final PersonRole driver5 = save(new_composite(PersonRole.class, "Driver-X").setDesc("Tram driver."));
+        final PersonRole driver5 = save(new_composite(PersonRole.class, "Driver-X").setDesc("Trolley driver."));
         final Person driverPerson5 = save(new_(Person.class).setEmail("Ivan@let.com").setPersonRole(driver5).setName("Ivan").setSurname("Rudyy").setActive(true));
-        save(new_(Vehicle.class).setLicensePlate("BC2015MK").setModel("T 800").setCurrentLocation("Depot").setDriver(driverPerson5).setActive(true).setTransportCondition(unavailable).setDesc("Tram number 1."));
+        final Vehicle vehicle5 = save(new_(Vehicle.class).setLicensePlate("BC2015MK").setModel("T 800").setCurrentLocation("Depot").setDriver(driverPerson5).setActive(true).setTransportCondition(available).setDesc("Trolley number 33."));
+        
+        final PersonRole driver6 = save(new_composite(PersonRole.class, "Driver-H").setDesc("Tram driver."));
+        final Person driverPerson6 = save(new_(Person.class).setEmail("Igor@let.com").setPersonRole(driver6).setName("Igor").setSurname("Tester").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("AB1586BH").setModel("T 767").setCurrentLocation("Depot").setDriver(driverPerson6).setActive(true).setTransportCondition(unavailable).setDesc("Tram number 6."));
+        
+        final PersonRole driver7 = save(new_composite(PersonRole.class, "Driver-F").setDesc("Trolley driver."));
+        final Person driverPerson7 = save(new_(Person.class).setEmail("Oleg@let.com").setPersonRole(driver7).setName("Oleg").setSurname("Petrovuch").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("AB9478BH").setModel("T 850").setCurrentLocation("Depot").setDriver(driverPerson7).setActive(true).setTransportCondition(unavailable).setDesc("Trolley number 8."));
+
         
         final Route tramRouteNum1 = save(new_composite(Route.class, 1).setName("Railway Station — Pasichna st.")
         		.setStationOrder("Railway station — Lviv Polytechnic — Doroshenko st. — Rynok Square — Lychakivska st. — Pasichna st.")
@@ -143,30 +150,21 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         		.setTrafficData("Currently, there are no traffic jams or accidents on the route.")
         		.setInUse(true).setDesc("Trolleybus route №25"));
          
-        save(new_composite(AssignedVehicle.class, tramRouteNum1, date("2022-05-10 00:00:00"), "Tram_1")
+        save(new_composite(AssignedVehicle.class, tramRouteNum1, date("2022-05-10 00:00:00"), vehicle1)
         		.setStationSchedule("Starts work: 06:40; Ends work: 20:40.").setInterval(20).setActive(true));
         
-        save(new_composite(AssignedVehicle.class, tramRouteNum1, date("2022-05-13 00:00:00"), "Tram_2")
+        save(new_composite(AssignedVehicle.class, tramRouteNum1, date("2022-05-13 00:00:00"), vehicle2)
         		.setStationSchedule("Starts work: 07:20; Ends work: 21:20.").setInterval(15).setActive(true));
         
-        save(new_composite(AssignedVehicle.class, tramRouteNum8, date("2021-11-01 00:00:00"), "Tram_3")
+        save(new_composite(AssignedVehicle.class, tramRouteNum8, date("2021-11-01 00:00:00"), vehicle3)
         		.setStationSchedule("Starts work: 07:00; Ends work: 21:00.").setInterval(10).setActive(true));
         
-        save(new_composite(AssignedVehicle.class, trolleyRouteNum25, date("2021-06-22 00:00:00"), "Tram_4")
+        save(new_composite(AssignedVehicle.class, trolleyRouteNum25, date("2021-06-22 00:00:00"), vehicle4)
         		.setStationSchedule("Starts work: 07:40; Ends work: 21:50.").setInterval(13).setActive(true));
         
-        save(new_composite(AssignedVehicle.class, trolleyRouteNum33, date("2020-11-01 00:00:00"), "Tram_5")
+        save(new_composite(AssignedVehicle.class, trolleyRouteNum33, date("2020-11-01 00:00:00"), vehicle5)
         		.setStationSchedule("Starts work: 07:00; Ends work: 21:00.").setInterval(20).setActive(true));
         
-        save(new_composite(AssignedVehicle.class, trolleyRouteNum25, date("2023-01-10 00:00:00"), "Tram_6")
-        		.setStationSchedule("Starts work: 06:30; Ends work: 20:30.").setInterval(20).setActive(true));
-//        save(new_composite(AssetType.class, "Hovercraft").setAssetClass(acVehicle).setDesc("Hovercraft equipment"));
-//
-//        final AssetCo coAsset = co(Asset.class);
-//        final var generator = save(coAsset.new_().setAssetType(generators).setDesc("Some description"));
-//        save(new_composite(AssetOwnership.class, generator, date("2020-10-11 00:00:00")).setRole("Role 1"));
-//        save(new_composite(AssetOwnership.class, generator, date("2021-10-11 00:00:00")).setBusinessUnit("Business unit 1"));
-//        save(new_composite(AssetOwnership.class, generator, date("2022-10-11 00:00:00")).setBusinessUnit("Business unit 2"));
 
         LOGGER.info("Completed database creation and population.");
     }

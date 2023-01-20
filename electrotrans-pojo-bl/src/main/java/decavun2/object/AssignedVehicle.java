@@ -5,6 +5,7 @@ import ua.com.fielden.platform.entity.DynamicEntityKey;
 
 import java.util.Date;
 
+import decavun2.objects.Vehicle;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
 import ua.com.fielden.platform.entity.annotation.DescTitle;
@@ -53,7 +54,7 @@ public class AssignedVehicle extends ActivatableAbstractEntity<DynamicEntityKey>
     @MapTo
     @Title(value = "Vehcile", desc = "The vehicle, that is assigned to this route.")
     @CompositeKeyMember(3)
-    private String vehicle;
+    private Vehicle vehicle;
     
     @IsProperty
     @MapTo
@@ -88,12 +89,12 @@ public class AssignedVehicle extends ActivatableAbstractEntity<DynamicEntityKey>
     }
 
     @Observable
-    public AssignedVehicle setVehicle(final String vehicle) {
+    public AssignedVehicle setVehicle(final Vehicle vehicle) {
        this.vehicle = vehicle;
        return this;
     }
 
-    public String getVehicle() {
+    public Vehicle getVehicle() {
        return vehicle;
     }
 
