@@ -52,6 +52,12 @@ public class Order extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Required
     @Title(value = "Date", desc = "The date of a particular order.")
     private Date date;
+    
+    @IsProperty
+    @MapTo
+    @Required
+    @Title(value = "Price", desc = "The price of a particular order.")
+    private String price;
   
     @IsProperty
     @MapTo
@@ -87,6 +93,16 @@ public class Order extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     public String getParts() {
        return parts;
+    }
+    
+    @Observable
+    public Order setPrice(final String price) {
+       this.price = price;
+       return this;
+    }
+
+    public String getPrice() {
+       return price;
     }
 
 }

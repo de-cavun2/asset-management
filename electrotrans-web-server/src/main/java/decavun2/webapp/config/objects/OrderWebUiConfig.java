@@ -57,7 +57,7 @@ public class OrderWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<Order> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkVarGridForCentre(2, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 3);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Order.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Order.class);
@@ -78,7 +78,8 @@ public class OrderWebUiConfig {
                 .addCrit(Order_.desc()).asMulti().text().also()
                 //row2
                 .addCrit(Order_.date()).asRange().dateTime().also()
-                .addCrit(Order_.parts()).asMulti().text()
+                .addCrit(Order_.parts()).asMulti().text().also()
+                .addCrit(Order_.price()).asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -88,7 +89,8 @@ public class OrderWebUiConfig {
                     .withAction(standardEditAction).also()
                 .addProp(Order_.desc()).minWidth(125).also()
                 .addProp(Order_.date()).width(80).also()
-                .addProp(Order_.parts()).width(120)
+                .addProp(Order_.parts()).width(120).also()
+                .addProp(Order_.price()).width(80)
                 //.addProp("prop").minWidth(100).withActionSupplier(builder.getOpenMasterAction(Entity.class)).also()
                 .addPrimaryAction(standardEditAction)
                 .build();
@@ -103,7 +105,7 @@ public class OrderWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Order> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 2);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(2, 3);
 
         final IMaster<Order> masterConfig = new SimpleMasterBuilder<Order>().forEntity(Order.class)
                 // row1
@@ -112,6 +114,7 @@ public class OrderWebUiConfig {
                 // row2
                 .addProp(Order_.parts()).asSinglelineText().also()
                 .addProp(Order_.desc()).asSinglelineText().also()
+                .addProp(Order_.price()).asMoney().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
                 .setActionBarLayoutFor(Device.DESKTOP, Optional.empty(), LayoutComposer.mkActionLayoutForMaster())

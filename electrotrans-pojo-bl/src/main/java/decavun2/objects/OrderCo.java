@@ -15,6 +15,6 @@ import ua.com.fielden.platform.dao.IEntityDao;
 public interface OrderCo extends IEntityDao<Order> {
 
     static final IFetchProvider<Order> FETCH_PROVIDER = EntityUtils.fetch(Order.class)
-            .with(Order_.orderID(), Order_.date(), Order_.parts());
+            .with(Order_.orderID(), Order_.date(), Order_.parts(), Order_.price());
 
 }
