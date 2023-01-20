@@ -110,7 +110,7 @@ public class OrderWebUiConfig {
                 .addProp(Order_.orderID()).asSinglelineText().also()
                 .addProp(Order_.date()).asDateTimePicker().also()
                 // row2
-                .addProp(Order_.parts()).asMultilineText().also()
+                .addProp(Order_.parts()).asSinglelineText().also()
                 .addProp(Order_.desc()).asSinglelineText().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")
                 .addAction(MasterActions.SAVE)
