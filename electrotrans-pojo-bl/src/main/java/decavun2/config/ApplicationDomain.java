@@ -17,6 +17,11 @@ import decavun2.objects.VehicleFinDet;
 import decavun2.objects.ui_actions.OpenVehicleMasterAction;
 import decavun2.objects.master.menu.actions.VehicleMaster_OpenMain_MenuItem;
 import decavun2.objects.master.menu.actions.VehicleMaster_OpenVehicleFinDet_MenuItem;
+import decavun2.object.Route;
+import decavun2.object.AssignedVehicle;
+import decavun2.object.ui_actions.OpenRouteMasterAction;
+import decavun2.object.master.menu.actions.RouteMaster_OpenMain_MenuItem;
+import decavun2.object.master.menu.actions.RouteMaster_OpenAssignedVehicle_MenuItem;
 
 /**
  * A class to register domain entities.
@@ -38,20 +43,26 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(VehicleMaster_OpenMain_MenuItem.class);
         add(VehicleMaster_OpenVehicleFinDet_MenuItem.class);
         add(TransportCondition.class);
+        add(Route.class);
+        add(AssignedVehicle.class);
+        add(OpenRouteMasterAction.class);
+        add(RouteMaster_OpenMain_MenuItem.class);
+        add(RouteMaster_OpenAssignedVehicle_MenuItem.class);
+
     }
 
     private static void add(final Class<? extends AbstractEntity<?>> domainType) {
-        entityTypes.add(domainType);
-        domainTypes.add(domainType);
+       entityTypes.add(domainType);
+       domainTypes.add(domainType);
     }
 
     @Override
     public List<Class<? extends AbstractEntity<?>>> entityTypes() {
-        return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
+       return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
     }
 
     public List<Class<? extends AbstractEntity<?>>> domainTypes() {
-        return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
+       return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
     }
 
 }

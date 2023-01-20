@@ -18,6 +18,8 @@ import decavun2.personnel.Person;
 import decavun2.personnel.PersonRole;
 import decavun2.objects.TransportCondition;
 import decavun2.objects.Vehicle;
+import decavun2.object.AssignedVehicle;
+import decavun2.object.Route;
 import decavun2.utils.PostgresqlDbUtils;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
@@ -120,6 +122,51 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         final PersonRole driver5 = save(new_composite(PersonRole.class, "Driver-X").setDesc("Tram driver."));
         final Person driverPerson5 = save(new_(Person.class).setEmail("Ivan@let.com").setPersonRole(driver5).setName("Ivan").setSurname("Rudyy").setActive(true));
         save(new_(Vehicle.class).setLicensePlate("BC2015MK").setModel("T 800").setCurrentLocation("Depot").setDriver(driverPerson5).setActive(true).setTransportCondition(unavailable).setDesc("Tram number 1."));
+        
+        final Route tramRouteNum1 = save(new_composite(Route.class, 1).setName("Railway Station — Pasichna st.")
+        		.setStationOrder("Railway station — Lviv Polytechnic — Doroshenko st. — Rynok Square — Lychakivska st. — Pasichna st.")
+        		.setTrafficData("At the moment, there exists a big traffic jam at the beginning of the Lychakivska str. Unfortunately there is no possibility to bypass it.")
+        		.setInUse(true).setDesc("Tram route №1"));
+        
+        final Route tramRouteNum8 = save(new_composite(Route.class, 8).setName("Soborna sq. — Vernadskyi st.")
+        		.setStationOrder("Soborna sq. — Stryiskyi Park — Academy of Arts — Stadium Ukraine — Dovzhenko Center — Polyclinic No. 4 — Vernadskyi str.")
+        		.setTrafficData("Unfortunately, near the Dovzhenko Center occured an road accident, to bypass it, follow the route №3(to aquapark) .")
+        		.setInUse(true).setDesc("Tram route №8"));
+        
+        final Route trolleyRouteNum33 = save(new_composite(Route.class, 33).setName("Ivana Pidkovy sq. — Grinchenko st.")
+        		.setStationOrder("Ivana Pidkovy sq. — Chornovola st. — Chemical st. — Varshavska st. — Emergency Hospital — Pluhova st. — Grinchenko st.")
+        		.setTrafficData("Currently, there are no traffic jams or accidents on the route.")
+        		.setInUse(true).setDesc("Trolleybus route №33"));
+        
+        final Route trolleyRouteNum25 = save(new_composite(Route.class, 25).setName("Shota Rustaveli st. — Bus station.")
+        		.setStationOrder("Shote Rustaveli st. — Ground Forces Academy — Tax Office — Bus Plant — Naukova st. — Maksymovicha st. — Bus Station.")
+        		.setTrafficData("Currently, there are no traffic jams or accidents on the route.")
+        		.setInUse(true).setDesc("Trolleybus route №25"));
+         
+        save(new_composite(AssignedVehicle.class, tramRouteNum1, date("2022-05-10 00:00:00"), "Tram_1")
+        		.setStationSchedule("Starts work: 06:40; Ends work: 20:40.").setInterval(20).setActive(true));
+        
+        save(new_composite(AssignedVehicle.class, tramRouteNum1, date("2022-05-13 00:00:00"), "Tram_2")
+        		.setStationSchedule("Starts work: 07:20; Ends work: 21:20.").setInterval(15).setActive(true));
+        
+        save(new_composite(AssignedVehicle.class, tramRouteNum8, date("2021-11-01 00:00:00"), "Tram_3")
+        		.setStationSchedule("Starts work: 07:00; Ends work: 21:00.").setInterval(10).setActive(true));
+        
+        save(new_composite(AssignedVehicle.class, trolleyRouteNum25, date("2021-06-22 00:00:00"), "Tram_4")
+        		.setStationSchedule("Starts work: 07:40; Ends work: 21:50.").setInterval(13).setActive(true));
+        
+        save(new_composite(AssignedVehicle.class, trolleyRouteNum33, date("2020-11-01 00:00:00"), "Tram_5")
+        		.setStationSchedule("Starts work: 07:00; Ends work: 21:00.").setInterval(20).setActive(true));
+        
+        save(new_composite(AssignedVehicle.class, trolleyRouteNum25, date("2023-01-10 00:00:00"), "Tram_6")
+        		.setStationSchedule("Starts work: 06:30; Ends work: 20:30.").setInterval(20).setActive(true));
+//        save(new_composite(AssetType.class, "Hovercraft").setAssetClass(acVehicle).setDesc("Hovercraft equipment"));
+//
+//        final AssetCo coAsset = co(Asset.class);
+//        final var generator = save(coAsset.new_().setAssetType(generators).setDesc("Some description"));
+//        save(new_composite(AssetOwnership.class, generator, date("2020-10-11 00:00:00")).setRole("Role 1"));
+//        save(new_composite(AssetOwnership.class, generator, date("2021-10-11 00:00:00")).setBusinessUnit("Business unit 1"));
+//        save(new_composite(AssetOwnership.class, generator, date("2022-10-11 00:00:00")).setBusinessUnit("Business unit 2"));
 
         LOGGER.info("Completed database creation and population.");
     }
