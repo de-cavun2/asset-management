@@ -11,6 +11,12 @@ import decavun2.personnel.Person;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
+import decavun2.objects.Vehicle;
+import decavun2.personnel.PersonRole;
+import decavun2.objects.VehicleFinDet;
+import decavun2.objects.ui_actions.OpenVehicleMasterAction;
+import decavun2.objects.master.menu.actions.VehicleMaster_OpenMain_MenuItem;
+import decavun2.objects.master.menu.actions.VehicleMaster_OpenVehicleFinDet_MenuItem;
 
 /**
  * A class to register domain entities.
@@ -25,6 +31,12 @@ public class ApplicationDomain implements IApplicationDomainProvider {
     static {
         entityTypes.addAll(PlatformDomainTypes.types);
         add(Person.class);
+        add(PersonRole.class);
+        add(Vehicle.class);
+        add(VehicleFinDet.class);
+        add(OpenVehicleMasterAction.class);
+        add(VehicleMaster_OpenMain_MenuItem.class);
+        add(VehicleMaster_OpenVehicleFinDet_MenuItem.class);
         add(TransportCondition.class);
     }
 

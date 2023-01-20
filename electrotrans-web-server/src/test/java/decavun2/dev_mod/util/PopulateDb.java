@@ -1,23 +1,25 @@
 package decavun2.dev_mod.util;
 
 import static java.lang.String.format;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 import java.io.FileInputStream;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.logging.log4j.Logger;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.PostgreSQL82Dialect;
 
-import static org.apache.logging.log4j.LogManager.getLogger;
-import org.apache.logging.log4j.Logger;
-
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
+<<<<<<< HEAD
+import decavun2.personnel.PersonRole;
+=======
 import decavun2.objects.TransportCondition;
+>>>>>>> Issue-#2
 import decavun2.utils.PostgresqlDbUtils;
-
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.persistence.HibernateUtil;
@@ -79,6 +81,18 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
     protected void populateDomain() {
         LOGGER.info("Creating and populating the development database...");
 
+        setupUser(User.system_users.SU, "User");
+        
+        final PersonRole tramDriver = save(new_composite(PersonRole.class, "Driver-T").setDesc("Category T driver (tram and trolleybus)."));
+        final PersonRole carDriver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Category B driver (passenger car)"));
+        final PersonRole fleetManager = save(new_composite(PersonRole.class, "Fleet manager").setDesc("Person resposible for fleet management."));
+        final PersonRole hrManager = save(new_composite(PersonRole.class, "HR manager").setDesc("Person resposible for human resourse management."));
+        
+        setupPerson(User.system_users.SU, "decavun2", "Super", "User", hrManager);
+        createAndSavePerson("Sukhorskyy@let.com", "Yuriy", "Sukhorskyy", (User) null, tramDriver);
+        createAndSavePerson("Veselyy@let.com", "Vasyl", "Veselyy", (User) null, tramDriver);
+        createAndSavePerson("Tsikavyy@let.com", "Bohdan", "Tsikavyy", (User) null, carDriver);
+        createAndSavePerson("Kvitlyva@let.com", "Yulia", "Kvitlyva", (User) null, fleetManager);
         setupUser(User.system_users.SU, "decavun2");
         setupPerson(User.system_users.SU, "decavun2");
         
