@@ -14,11 +14,10 @@ import org.hibernate.dialect.PostgreSQL82Dialect;
 
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
-<<<<<<< HEAD
+import decavun2.personnel.Person;
 import decavun2.personnel.PersonRole;
-=======
 import decavun2.objects.TransportCondition;
->>>>>>> Issue-#2
+import decavun2.objects.Vehicle;
 import decavun2.utils.PostgresqlDbUtils;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
@@ -94,13 +93,34 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         createAndSavePerson("Tsikavyy@let.com", "Bohdan", "Tsikavyy", (User) null, carDriver);
         createAndSavePerson("Kvitlyva@let.com", "Yulia", "Kvitlyva", (User) null, fleetManager);
         setupUser(User.system_users.SU, "decavun2");
-        setupPerson(User.system_users.SU, "decavun2");
         
         save(new_(TransportCondition.class).setConditionId("000001").setStage("available"));
         save(new_(TransportCondition.class).setConditionId("000002").setStage("need further inspection"));
         save(new_(TransportCondition.class).setConditionId("000003").setStage("minor issues"));
         save(new_(TransportCondition.class).setConditionId("000004").setStage("significant issues"));
         save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
+        
+        final PersonRole driver1 = save(new_composite(PersonRole.class, "Driver-C").setDesc("Bus driver."));
+        final TransportCondition available = new_(TransportCondition.class).setConditionId("000001").setStage("available");
+        final Person driverPerson1 = save(new_(Person.class).setEmail("Ron@let.com").setPersonRole(driver1).setName("Ronald").setSurname("McDonald").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC1111AH").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson1).setActive(true).setTransportCondition(available).setDesc("Bus number 46."));
+        
+        final PersonRole driver2 = save(new_composite(PersonRole.class, "Driver-B").setDesc("Tram driver."));
+        final Person driverPerson2 = save(new_(Person.class).setEmail("Tomas@let.com").setPersonRole(driver2).setName("Tom").setSurname("Sunshine").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC1010KL").setModel("T 900").setCurrentLocation("Depot").setDriver(driverPerson2).setActive(true).setTransportCondition(available).setDesc("Tram number 2."));
+
+        final PersonRole driver3 = save(new_composite(PersonRole.class, "Driver-C").setDesc("Bus driver."));
+        final Person driverPerson3 = save(new_(Person.class).setEmail("Vasyl@let.com").setPersonRole(driver3).setName("Vasyl").setSurname("Petrenko").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC1212MN").setModel("B 100").setCurrentLocation("Depot").setDriver(driverPerson3).setActive(true).setTransportCondition(available).setDesc("Bus number 61."));
+        
+        final PersonRole driver4 = save(new_composite(PersonRole.class, "Driver-B").setDesc("Tram driver."));
+        final TransportCondition unavailable = new_(TransportCondition.class).setConditionId("000005").setStage("unavailable");
+        final Person driverPerson4 = save(new_(Person.class).setEmail("Bruce@let.com").setPersonRole(driver4).setName("Bruce").setSurname("Smidth").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC4030AH").setModel("T 900").setCurrentLocation("Depot").setDriver(driverPerson4).setActive(true).setTransportCondition(unavailable).setDesc("Tram number 8."));
+        
+        final PersonRole driver5 = save(new_composite(PersonRole.class, "Driver-B").setDesc("Tram driver."));
+        final Person driverPerson5 = save(new_(Person.class).setEmail("Ivan@let.com").setPersonRole(driver5).setName("Ivan").setSurname("Rudyy").setActive(true));
+        save(new_(Vehicle.class).setLicensePlate("BC2015MK").setModel("T 800").setCurrentLocation("Depot").setDriver(driverPerson5).setActive(true).setTransportCondition(unavailable).setDesc("Tram number 1."));
 
         LOGGER.info("Completed database creation and population.");
     }
