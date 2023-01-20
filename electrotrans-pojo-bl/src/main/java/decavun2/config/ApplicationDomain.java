@@ -10,6 +10,7 @@ import decavun2.personnel.Person;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
+import decavun2.objects.Vehicle;
 import decavun2.change.Report;
 import decavun2.change.Issue;
 import decavun2.change.Change;
@@ -32,6 +33,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 	static {
 		entityTypes.addAll(PlatformDomainTypes.types);
 		add(Person.class);
+		add(Vehicle.class);
 		add(Report.class);
 		add(Issue.class);
 		add(Change.class);
