@@ -14,6 +14,7 @@ import org.hibernate.dialect.PostgreSQL82Dialect;
 
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
+import decavun2.personnel.PersonRole;
 import decavun2.utils.PostgresqlDbUtils;
 import ua.com.fielden.platform.devdb_support.DomainDrivenDataPopulation;
 import ua.com.fielden.platform.entity.AbstractEntity;
@@ -77,8 +78,17 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         LOGGER.info("Creating and populating the development database...");
 
         setupUser(User.system_users.SU, "User");
-        setupPerson(User.system_users.SU, "decavun2", "Super", "User");
-        createAndSavePerson("Yuriy@decavun2", "Yuriy", "Sukhorskyy", (User) null);
+        
+        final PersonRole tramDriver = save(new_composite(PersonRole.class, "Driver-T").setDesc("Category T driver (tram and trolleybus)."));
+        final PersonRole carDriver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Category B driver (passenger car)"));
+        final PersonRole fleetManager = save(new_composite(PersonRole.class, "Fleet manager").setDesc("Person resposible for fleet management."));
+        final PersonRole hrManager = save(new_composite(PersonRole.class, "HR manager").setDesc("Person resposible for human resourse management."));
+        
+        setupPerson(User.system_users.SU, "decavun2", "Super", "User", hrManager);
+        createAndSavePerson("Sukhorskyy@let.com", "Yuriy", "Sukhorskyy", (User) null, tramDriver);
+        createAndSavePerson("Veselyy@let.com", "Vasyl", "Veselyy", (User) null, tramDriver);
+        createAndSavePerson("Tsikavyy@let.com", "Bohdan", "Tsikavyy", (User) null, carDriver);
+        createAndSavePerson("Kvitlyva@let.com", "Yulia", "Kvitlyva", (User) null, fleetManager);
 
         LOGGER.info("Completed database creation and population.");
     }
