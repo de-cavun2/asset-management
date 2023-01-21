@@ -23,6 +23,7 @@ import ua.com.fielden.platform.web.view.master.api.impl.SimpleMasterBuilder;
 import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
 import decavun2.main.menu.change.MiReport;
+import decavun2.personnel.Person;
 import metamodels.MetaModels;
 import ua.com.fielden.platform.web.centre.EntityCentre;
 import ua.com.fielden.platform.web.view.master.EntityMaster;
@@ -58,7 +59,7 @@ public class ReportWebUiConfig {
      * @return created entity centre
      */
     private EntityCentre<Report> createCentre(final Injector injector, final IWebUiBuilder builder) {
-        final String layout = LayoutComposer.mkVarGridForCentre(2, 2);
+        final String layout = LayoutComposer.mkVarGridForCentre(2, 3);
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Report.class);
         final EntityActionConfig standardDeleteAction = StandardActions.DELETE_ACTION.mkAction(Report.class);
@@ -77,7 +78,8 @@ public class ReportWebUiConfig {
                 .addCrit(Report_).asMulti().autocompleter(Report.class).also()
                 .addCrit(Report_.department()).asMulti().text().also()
                 .addCrit(Report_.issue()).asMulti().text().also()
-                .addCrit(Report_.change()).asMulti().autocompleter(Change.class)
+                .addCrit(Report_.change()).asMulti().autocompleter(Change.class).also()
+                .addCrit(Report_.person()).asMulti().autocompleter(Person.class)
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
@@ -86,7 +88,8 @@ public class ReportWebUiConfig {
                     .withSummary("total_count_", "COUNT(SELF)", format("Count:The total number of matching %ss.", Report.ENTITY_TITLE))
                     .withAction(standardEditAction).also()
                 .addProp(Report_.department()).width(200).also()
-                .addProp(Report_.createdAt()).width(200)
+                .addProp(Report_.createdAt()).width(200).also()
+                .addProp(Report_.person()).width(200)
                 .addPrimaryAction(standardEditAction)
                 .build();
 
@@ -100,12 +103,13 @@ public class ReportWebUiConfig {
      * @return created entity master
      */
     private EntityMaster<Report> createMaster(final Injector injector) {
-        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(1,1,1, 2);
+        final String layout = LayoutComposer.mkVarGridForMasterFitWidth(1,1,2, 2);
 
         final IMaster<Report> masterConfig = new SimpleMasterBuilder<Report>().forEntity(Report.class)
                 .addProp(Report_.title()).asSinglelineText().also()
                 .addProp(Report_.desc()).asMultilineText().also()
                 .addProp(Report_.department()).asSinglelineText().also()
+                .addProp(Report_.person()).asAutocompleter().also()
                 .addProp(Report_.issue()).asSinglelineText().also()
                 .addProp(Report_.change()).asAutocompleter().also()
                 .addAction(MasterActions.REFRESH).shortDesc("Cancel").longDesc("Cancel action")

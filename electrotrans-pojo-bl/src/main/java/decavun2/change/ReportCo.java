@@ -1,9 +1,10 @@
 package decavun2.change;
 
+import static metamodels.MetaModels.Report_;
+
+import ua.com.fielden.platform.dao.IEntityDao;
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.utils.EntityUtils;
-import metamodels.MetaModels;
-import ua.com.fielden.platform.dao.IEntityDao;
 
 /**
  * Companion object for entity {@link Report}.
@@ -17,7 +18,7 @@ public interface ReportCo extends IEntityDao<Report> {
 
 	
     static final IFetchProvider<Report> FETCH_PROVIDER = EntityUtils.fetch(Report.class).with(
-        MetaModels.Report_.title(), MetaModels.Report_.desc(), MetaModels.Report_.department(),
-        MetaModels.Report_.issue(), MetaModels.Report_.change());
+        Report_.title(), Report_.desc(), Report_.department(),
+        Report_.issue(), Report_.change(), Report_.person());
 
 }

@@ -83,13 +83,12 @@ public class Report extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Required
 	private Person person;
 	
-
     @IsProperty
 	@MapTo
 	@Title(value = "Change", desc = "Change associated with this report. Mutually exclusive with issue")
-    @AfterChange(ReportSourceExclusiveDefiner.class)
 	private Change change;
-    
+
+
     
     @IsProperty
 	@MapTo
@@ -100,7 +99,6 @@ public class Report extends ActivatableAbstractEntity<DynamicEntityKey> {
     
     @IsProperty
 	@MapTo
-	@Required
 	@Readonly
 	@Title(value = "Created at", desc = "Date and time when this property was created at")
 	private Date createdAt;
