@@ -15,6 +15,13 @@ import decavun2.personnel.Person;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
+import decavun2.change.Report;
+import decavun2.change.Issue;
+import decavun2.change.Change;
+import decavun2.change.ui_actions.OpenChangeMasterAction;
+import decavun2.change.master.menu.actions.ChangeMaster_OpenMain_MenuItem;
+import decavun2.change.master.menu.actions.ChangeMaster_OpenIssue_MenuItem;
+import decavun2.change.master.menu.actions.ChangeMaster_OpenReport_MenuItem;
 
 /**
  * A class to register domain entities.
@@ -35,6 +42,13 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 		add(Repair.class);
         add(Order.class);
         add(DriverReport.class);
+		add(Report.class);
+		add(Issue.class);
+		add(Change.class);
+		add(OpenChangeMasterAction.class);
+		add(ChangeMaster_OpenMain_MenuItem.class);
+		add(ChangeMaster_OpenIssue_MenuItem.class);
+		add(ChangeMaster_OpenReport_MenuItem.class);
 	}
 
 	private static void add(final Class<? extends AbstractEntity<?>> domainType) {

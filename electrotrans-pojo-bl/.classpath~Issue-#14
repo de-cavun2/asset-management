@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+  <classpathentry kind="src" path="src/test/resources" output="target/test-classes" excluding="**/*.java"/>
   <classpathentry kind="src" path="src/main/java"/>
-  <classpathentry kind="src" path="src/main/web" excluding="**/*.java"/>
-  <classpathentry kind="src" path="src/main/resources" excluding="**/log4j2-test.xml|**/*.java"/>
+  <classpathentry kind="src" path="target/generated-sources" including="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="src" path="/electrotrans-pojo-bl"/>
   <classpathentry kind="var" path="M2_REPO/fielden/platform-pojo-bl/1.4.6-SNAPSHOT/platform-pojo-bl-1.4.6-SNAPSHOT.jar" sourcepath="M2_REPO/fielden/platform-pojo-bl/1.4.6-SNAPSHOT/platform-pojo-bl-1.4.6-SNAPSHOT-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/fielden/platform-annotations/1.4.6-SNAPSHOT/platform-annotations-1.4.6-SNAPSHOT.jar" sourcepath="M2_REPO/fielden/platform-annotations/1.4.6-SNAPSHOT/platform-annotations-1.4.6-SNAPSHOT-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.13.1/junit-4.13.1.jar" sourcepath="M2_REPO/junit/junit/4.13.1/junit-4.13.1-sources.jar"/>
@@ -64,5 +63,4 @@
   <classpathentry kind="var" path="M2_REPO/commons-jexl/commons-jexl/1.1/commons-jexl-1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" sourcepath="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/fielden/platform-annotation-processors/1.4.6-SNAPSHOT/platform-annotation-processors-1.4.6-SNAPSHOT.jar" sourcepath="M2_REPO/fielden/platform-annotation-processors/1.4.6-SNAPSHOT/platform-annotation-processors-1.4.6-SNAPSHOT-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/fielden/platform-web-ui/1.4.6-SNAPSHOT/platform-web-ui-1.4.6-SNAPSHOT.jar" sourcepath="M2_REPO/fielden/platform-web-ui/1.4.6-SNAPSHOT/platform-web-ui-1.4.6-SNAPSHOT-sources.jar"/>
 </classpath>

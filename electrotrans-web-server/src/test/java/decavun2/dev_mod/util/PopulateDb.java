@@ -13,6 +13,7 @@ import org.hibernate.dialect.PostgreSQL82Dialect;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import org.apache.logging.log4j.Logger;
 
+import decavun2.change.Report;
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
 import decavun2.objects.DriverReport;
@@ -82,12 +83,21 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         LOGGER.info("Creating and populating the development database...");
 
         setupUser(User.system_users.SU, "decavun2");
-        setupPerson(User.system_users.SU, "decavun2");
+        final Person person = setupPerson(User.system_users.SU, "decavun2");
         
         final Person driverPerson = save(new_(Person.class).setEmail("Ivan@electrotrans.com").setDesc("Ivan Tester").setActive(true));
         final Vehicle veh = save(new_(Vehicle.class).setTransportCondition("good").setLicensePlate("akjsgnlkjsdn").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setDesc("The tram number two."));
         save(new_(DriverReport.class).setDriverReportID("sdfsdfsd").setVehicle(veh).setState("good").setDesc("desc"));
         save(new_(DriverReport.class).setDriverReportID("sdfsdf").setVehicle(veh).setState("good").setDesc("Desc"));
+        
+        final Report rp = new_(Report.class);
+        rp.setTitle("Profitability calculation of IS for the enterprise");
+        rp.setDesc("This description should portray pluses and minuses of proposed change");
+        rp.setDepartment("Financial Department");
+        rp.setPerson(person);
+        rp.setIssue("Find proposed information is sensible for the enterprise to implement");
+        
+        save(rp);
 
         LOGGER.info("Completed database creation and population.");
     }

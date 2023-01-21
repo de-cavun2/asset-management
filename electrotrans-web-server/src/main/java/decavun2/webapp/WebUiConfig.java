@@ -5,6 +5,8 @@ import static ua.com.fielden.platform.reflection.TitlesDescsGetter.getEntityTitl
 import org.apache.commons.lang3.StringUtils;
 
 import decavun2.analysis.Statistics;
+import decavun2.change.Change;
+import decavun2.change.Report;
 import decavun2.config.Modules;
 import decavun2.config.personnel.PersonWebUiConfig;
 import decavun2.objects.DriverReport;
@@ -13,6 +15,8 @@ import decavun2.objects.Repair;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import decavun2.webapp.config.analysis.StatisticsWebUiConfig;
+import decavun2.webapp.config.change.ChangeWebUiConfig;
+import decavun2.webapp.config.change.ReportWebUiConfig;
 import decavun2.webapp.config.objects.DriverReportWebUiConfig;
 import decavun2.webapp.config.objects.OrderWebUiConfig;
 import decavun2.webapp.config.objects.RepairWebUiConfig;
@@ -91,6 +95,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final OrderWebUiConfig orderWebUiConfig = OrderWebUiConfig.register(injector(), builder);
         final DriverReportWebUiConfig driverReportWebUiConfig = DriverReportWebUiConfig.register(injector(), builder);
 
+        final ReportWebUiConfig reportWebUiConfig = ReportWebUiConfig.register(injector(), configApp());
+        final ChangeWebUiConfig changeWebUiConfig = ChangeWebUiConfig.register(injector(), builder);
+
         // Add user-rated masters and centres to the configuration
         configApp()
         .addMaster(userWebUiConfig.master)
@@ -109,6 +116,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
             .bgColor(Modules.USERS_AND_PERSONNEL.bgColour)
             .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
             .menu()
+            .addMenuItem(mkMenuItemTitle(Change.class)).description(mkMenuItemDesc(Change.class)).centre(changeWebUiConfig.centre).done()
+            	.addMenuItem(mkMenuItemTitle(Report.class)).description(mkMenuItemDesc(Report.class)).centre(reportWebUiConfig.centre).done()
                 .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
 
                 .addMenuItem(mkMenuItemTitle(Vehicle.class)).description(mkMenuItemDesc(Vehicle.class)).centre(vehicleWebUiConfig.centre).done()
@@ -119,7 +128,18 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
                     .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
                     .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
-                .done()
+                .done()  
+            .done().done()
+            
+        .addModule(Modules.CHANGE.title)
+            .description(Modules.CHANGE.desc)
+            .icon(Modules.CHANGE.icon)
+            .detailIcon(Modules.CHANGE.icon)
+            .bgColor(Modules.CHANGE.bgColour)
+            .captionBgColor(Modules.CHANGE.captionBgColour)
+            .menu()
+            .addMenuItem(mkMenuItemTitle(Change.class)).description(mkMenuItemDesc(Change.class)).centre(changeWebUiConfig.centre).done()
+            	.addMenuItem(mkMenuItemTitle(Report.class)).description(mkMenuItemDesc(Report.class)).centre(reportWebUiConfig.centre).done()
             .done().done()
             
         .addModule(Modules.ANALYSIS.title)
