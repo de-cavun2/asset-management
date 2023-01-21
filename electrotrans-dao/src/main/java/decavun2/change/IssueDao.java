@@ -2,6 +2,8 @@ package decavun2.change;
 
 import com.google.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -12,6 +14,9 @@ import decavun2.security.tokens.persistent.Issue_CanSave_Token;
 import decavun2.security.tokens.persistent.Issue_CanDelete_Token;
 import ua.com.fielden.platform.dao.CommonEntityDao;
 import ua.com.fielden.platform.entity.query.IFilter;
+import ua.com.fielden.platform.error.Result;
+import ua.com.fielden.platform.keygen.IKeyNumber;
+import ua.com.fielden.platform.keygen.KeyNumber;
 import ua.com.fielden.platform.entity.annotation.EntityType;
 
 /**
@@ -22,6 +27,9 @@ import ua.com.fielden.platform.entity.annotation.EntityType;
  */
 @EntityType(Issue.class)
 public class IssueDao extends CommonEntityDao<Issue> implements IssueCo {
+	
+	public static final String ISSUE_NO = "ISSUE";
+    public static final String DEFAULT_ISSUE_NO = "TBD";
 
     @Inject
     public IssueDao(final IFilter filter) {
@@ -29,10 +37,34 @@ public class IssueDao extends CommonEntityDao<Issue> implements IssueCo {
     }
 
     @Override
+    public Issue new_() {
+        return super.new_().setIssueNumber(DEFAULT_ISSUE_NO).setActive(true);
+    }
+
+    @Override
     @SessionRequired
     @Authorise(Issue_CanSave_Token.class)
-    public Issue save(Issue entity) {
-        return super.save(entity);
+    public Issue save(Issue issue) {
+        issue.isValid().ifFailure(Result::throwRuntime);
+
+        final boolean wasPersisted = issue.isPersisted();
+        try {
+            if (!wasPersisted) {
+                final IKeyNumber coKeyNumber = co(KeyNumber.class);
+                final var nextAssetNo = StringUtils.leftPad(coKeyNumber.nextNumber(ISSUE_NO).toString(), 6, "0"); 
+                issue.setIssueNumber((String) nextAssetNo);
+            }
+
+            final var savedAsset = super.save(issue);
+
+            return savedAsset;
+
+        } catch (final Exception ex) {
+            if (!wasPersisted) {
+                issue.setIssueNumber(DEFAULT_ISSUE_NO);
+            }
+            throw ex;
+        } 
     }
 
     @Override

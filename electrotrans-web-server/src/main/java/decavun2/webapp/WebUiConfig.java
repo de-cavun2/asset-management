@@ -116,8 +116,6 @@ public class WebUiConfig extends AbstractWebUiConfig {
             .bgColor(Modules.USERS_AND_PERSONNEL.bgColour)
             .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
             .menu()
-            .addMenuItem(mkMenuItemTitle(Change.class)).description(mkMenuItemDesc(Change.class)).centre(changeWebUiConfig.centre).done()
-            	.addMenuItem(mkMenuItemTitle(Report.class)).description(mkMenuItemDesc(Report.class)).centre(reportWebUiConfig.centre).done()
                 .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
 
                 .addMenuItem(mkMenuItemTitle(Vehicle.class)).description(mkMenuItemDesc(Vehicle.class)).centre(vehicleWebUiConfig.centre).done()
@@ -152,8 +150,8 @@ public class WebUiConfig extends AbstractWebUiConfig {
                 .addMenuItem(mkMenuItemTitle(Statistics.class)).description(mkMenuItemDesc(Statistics.class)).centre(statisticsWebUiConfig.centre).done()
                 .done()
             .done()
-        .setLayoutFor(Device.DESKTOP, null, "[[[], []]]")
-        .setLayoutFor(Device.TABLET, null, "[[[], []]]")
+        .setLayoutFor(Device.DESKTOP, null, "[[[], [], []]]")
+        .setLayoutFor(Device.TABLET, null, "[[[], []], [[]]]")
         .setLayoutFor(Device.MOBILE, null, "[[[]]]")
         .minCellWidth(100).minCellHeight(148).done();
     }

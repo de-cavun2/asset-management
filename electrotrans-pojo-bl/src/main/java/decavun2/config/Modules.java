@@ -38,7 +38,7 @@ public enum Modules {
             "mainMenu:analysis", "#EFDCD5", "#BCAAA4",
            AnalysisModuleToken.class,
            "ua.com.fielden.platform.attachment"),
-    CHANGE("Chnage Managment", "A module to manage enterprise changes",
+    CHANGE("Change Managment", "A module to manage enterprise changes",
             "mainMenu:pm", "#EFDCD5", "#BCAAA4",
            ChangeModuleToken.class,
            "ua.com.fielden.platform.attachment");

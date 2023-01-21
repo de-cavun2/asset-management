@@ -5,10 +5,13 @@ import static java.lang.String.format;
 import decavun2.change.Issue;
 import decavun2.change.Report;
 import decavun2.security.tokens.ChangeModuleToken;
+import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.security.tokens.Template;
+import decavun2.change.Issue;
+import decavun2.security.tokens.UsersAndPersonnelModuleToken;
 
 /**
- * A security token for entity {@link Report} to guard Open.
+ * A security token for entity {@link Issue} to guard Open.
  *
  * @author Developers
  *

@@ -4,6 +4,7 @@ import static java.lang.String.format;
 
 import decavun2.change.Issue;
 import decavun2.security.tokens.ChangeModuleToken;
+import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.security.tokens.Template;
 
 /**
