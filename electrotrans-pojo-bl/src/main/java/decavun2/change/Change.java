@@ -36,7 +36,7 @@ import ua.com.fielden.platform.utils.Pair;
 @KeyTitle("Change")
 @CompanionObject(ChangeCo.class)
 @MapEntityTo
-@DescTitle("Change - a change that is to be implemented on the enterprise")
+@DescTitle("Description of what is being implemented in this change")
 @DisplayDescription
 @DescRequired
 public class Change extends ActivatableAbstractEntity<DynamicEntityKey> {
