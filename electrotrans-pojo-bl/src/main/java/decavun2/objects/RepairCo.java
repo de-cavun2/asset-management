@@ -2,6 +2,9 @@ package decavun2.objects;
 
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.utils.EntityUtils;
+
+
+import static metamodels.MetaModels.Repair_;
 import ua.com.fielden.platform.dao.IEntityDao;
 
 /**
@@ -12,9 +15,9 @@ import ua.com.fielden.platform.dao.IEntityDao;
  */
 public interface RepairCo extends IEntityDao<Repair> {
 
-    static final IFetchProvider<Repair> FETCH_PROVIDER = EntityUtils.fetch(Repair.class).with(
-        // TODO: uncomment the following line and specify the properties, which are required for the UI. Then remove the line after.
-        // "key", "desc");
-        "Please specify the properties, which are required for the UI");
+
+    static final IFetchProvider<Repair> FETCH_PROVIDER = EntityUtils.fetch(Repair.class)
+            .with(Repair_.repairID(), Repair_.createdAt(), Repair_.vehicle(),
+                  Repair_.issue(), Repair_.repairman(), Repair_.desc());
 
 }

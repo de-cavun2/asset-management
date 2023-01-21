@@ -7,22 +7,26 @@ import org.apache.commons.lang3.StringUtils;
 import decavun2.analysis.Statistics;
 import decavun2.config.Modules;
 import decavun2.config.personnel.PersonWebUiConfig;
+import decavun2.objects.DriverReport;
+import decavun2.objects.Order;
+import decavun2.objects.Repair;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import decavun2.webapp.config.analysis.StatisticsWebUiConfig;
+import decavun2.webapp.config.objects.DriverReportWebUiConfig;
+import decavun2.webapp.config.objects.OrderWebUiConfig;
+import decavun2.webapp.config.objects.RepairWebUiConfig;
 import decavun2.webapp.config.objects.VehicleWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
+import ua.com.fielden.platform.entity.AbstractEntity;
+import ua.com.fielden.platform.reflection.TitlesDescsGetter;
 import ua.com.fielden.platform.utils.Pair;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
-
-import ua.com.fielden.platform.entity.AbstractEntity;
-import ua.com.fielden.platform.reflection.TitlesDescsGetter;
-
 import ua.com.fielden.platform.web.resources.webui.AbstractWebUiConfig;
+import ua.com.fielden.platform.web.resources.webui.SecurityMatrixWebUiConfig;
 import ua.com.fielden.platform.web.resources.webui.UserRoleWebUiConfig;
 import ua.com.fielden.platform.web.resources.webui.UserWebUiConfig;
-import ua.com.fielden.platform.web.resources.webui.SecurityMatrixWebUiConfig;
 
 /**
  * App-specific {@link IWebApp} implementation.
@@ -83,6 +87,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
         final StatisticsWebUiConfig statisticsWebUiConfig = StatisticsWebUiConfig.register(injector(), builder);
+        final RepairWebUiConfig repairWebUiConfig = RepairWebUiConfig.register(injector(), builder);
+        final OrderWebUiConfig orderWebUiConfig = OrderWebUiConfig.register(injector(), builder);
+        final DriverReportWebUiConfig driverReportWebUiConfig = DriverReportWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration
         configApp()
@@ -103,7 +110,11 @@ public class WebUiConfig extends AbstractWebUiConfig {
             .captionBgColor(Modules.USERS_AND_PERSONNEL.captionBgColour)
             .menu()
                 .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
+
                 .addMenuItem(mkMenuItemTitle(Vehicle.class)).description(mkMenuItemDesc(Vehicle.class)).centre(vehicleWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(Repair.class)).description(mkMenuItemDesc(Repair.class)).centre(repairWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(Order.class)).description(mkMenuItemDesc(Order.class)).centre(orderWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(DriverReport.class)).description(mkMenuItemDesc(DriverReport.class)).centre(driverReportWebUiConfig.centre).done()
                 .addMenuItem("System Users").description("Functionality for managing system users, authorisation, etc.")
                     .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
                     .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()

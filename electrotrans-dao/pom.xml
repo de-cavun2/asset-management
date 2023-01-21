@@ -113,7 +113,7 @@
                         -server -Xms512m
                         -Xmx1024m
                         -XX:+UseG1GC
-                        -Djava.system.class.loader=ua.com.fielden.platform.classloader.TgSystemClassLoader</argLine>
+                    </argLine>
                     <systemPropertyVariables>
                         <databaseUri>${databaseUri.prefix}${surefire.forkNumber}</databaseUri>
                         <saveScriptsToFile>true</saveScriptsToFile>
@@ -147,7 +147,7 @@
                         -server -Xms265m
                         -Xmx768m
                         -XX:+UseG1GC
-                        -Djava.system.class.loader=ua.com.fielden.platform.classloader.TgSystemClassLoader</argLine>
+                    </argLine>
                     <systemPropertyVariables>
                         <databaseUri>${databaseUri.prefix}${surefire.forkNumber}</databaseUri>
                         <saveScriptsToFile>false</saveScriptsToFile>

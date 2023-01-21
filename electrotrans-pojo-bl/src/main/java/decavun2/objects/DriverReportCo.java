@@ -2,6 +2,9 @@ package decavun2.objects;
 
 import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.utils.EntityUtils;
+
+
+import static metamodels.MetaModels.DriverReport_;
 import ua.com.fielden.platform.dao.IEntityDao;
 
 /**
@@ -12,9 +15,7 @@ import ua.com.fielden.platform.dao.IEntityDao;
  */
 public interface DriverReportCo extends IEntityDao<DriverReport> {
 
-    static final IFetchProvider<DriverReport> FETCH_PROVIDER = EntityUtils.fetch(DriverReport.class).with(
-        // TODO: uncomment the following line and specify the properties, which are required for the UI. Then remove the line after.
-        // "key", "desc");
-        "Please specify the properties, which are required for the UI");
 
+    static final IFetchProvider<DriverReport> FETCH_PROVIDER = EntityUtils.fetch(DriverReport.class)
+            .with(DriverReport_.driverReportID(), DriverReport_.createdAt(), DriverReport_.vehicle(), DriverReport_.state());
 }

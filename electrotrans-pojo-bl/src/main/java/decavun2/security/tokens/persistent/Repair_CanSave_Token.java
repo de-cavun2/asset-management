@@ -3,6 +3,7 @@ package decavun2.security.tokens.persistent;
 import static java.lang.String.format;
 
 import ua.com.fielden.platform.reflection.TitlesDescsGetter;
+
 import ua.com.fielden.platform.security.tokens.Template;
 import decavun2.objects.Repair;
 import decavun2.security.tokens.UsersAndPersonnelModuleToken;

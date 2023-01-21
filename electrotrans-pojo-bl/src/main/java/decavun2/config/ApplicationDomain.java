@@ -6,14 +6,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import decavun2.analysis.Statistics;
+import decavun2.objects.DriverReport;
+import decavun2.objects.Order;
+import decavun2.objects.Repair;
+import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
-import decavun2.objects.Vehicle;
-import decavun2.analysis.Statistics;
-import decavun2.objects.DriverReport;
-import decavun2.objects.Repair;
 
 /**
  * A class to register domain entities.
@@ -32,6 +33,8 @@ public class ApplicationDomain implements IApplicationDomainProvider {
 		add(Statistics.class);
 		add(DriverReport.class);
 		add(Repair.class);
+        add(Order.class);
+        add(DriverReport.class);
 	}
 
 	private static void add(final Class<? extends AbstractEntity<?>> domainType) {
