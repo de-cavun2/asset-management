@@ -51,12 +51,12 @@ public class Repair extends ActivatableAbstractEntity<DynamicEntityKey> {
 	private Date createdAt;
 
 	@Observable
-	public Repair setName(final Date createdAt) {
+	public Repair setCreatedAt(final Date createdAt) {
 		this.createdAt = createdAt;
 		return this;
 	}
 
-	public Date getName() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 

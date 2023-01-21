@@ -19,7 +19,8 @@ import ua.com.fielden.platform.dao.CommonEntityDao;
 import ua.com.fielden.platform.entity.query.IFilter;
 import ua.com.fielden.platform.entity.annotation.EntityType;
 
-
+import static metamodels.MetaModels.DriverReport_;
+import static metamodels.MetaModels.Repair_;
 import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.cond;
 import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.expr;
 import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.fetchAggregates;
@@ -75,10 +76,29 @@ public class StatisticsDao extends CommonEntityDao<Statistics> implements Statis
     	
     	final Vehicle vehicle = entity.getVehicle();
     	
-    	final var repairQuery = select(Repair.class).where().prop(MetaModels.Repair_.vehicle()).in().values(vehicle).model();
+    	final var repairQuery = select(Repair.class)
+    			.where()
+    				.prop(Repair_.vehicle())
+    				.eq().val(vehicle)
+    			.and()
+    				.prop(Repair_.createdAt())
+    				.ge().val(entity.getStartDate())
+    			.and()
+    				.prop(Repair_.createdAt())
+    				.le().val(entity.getEndDate())
+    			.model();
     	final int repairsCount = co$(Repair.class).count(repairQuery);
     	
-    	final var issueQuery = select(DriverReport.class).where().prop(MetaModels.DriverReport_.vehicle()).in().values(vehicle).model();
+    	final var issueQuery = select(DriverReport.class)
+    			.where()
+    				.prop(DriverReport_.vehicle()).eq().val(vehicle)
+	    		.and()
+					.prop(DriverReport_.createdAt())
+					.ge().val(entity.getStartDate())
+				.and()
+					.prop(DriverReport_.createdAt())
+					.le().val(entity.getEndDate())
+				.model();
     	final int issueCount = co$(DriverReport.class).count(issueQuery);
     	
     	entity.setIssuesCount(issueCount);
