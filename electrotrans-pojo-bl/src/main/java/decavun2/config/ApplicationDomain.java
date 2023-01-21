@@ -6,24 +6,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import decavun2.objects.TransportCondition;
 import decavun2.personnel.Person;
 import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import decavun2.objects.Vehicle;
-import decavun2.personnel.PersonRole;
-import decavun2.objects.VehicleFinDet;
-import decavun2.objects.ui_actions.OpenVehicleMasterAction;
-import decavun2.objects.master.menu.actions.VehicleMaster_OpenMain_MenuItem;
-import decavun2.objects.master.menu.actions.VehicleMaster_OpenVehicleFinDet_MenuItem;
-import decavun2.object.Route;
-import decavun2.object.AssignedVehicle;
-import decavun2.object.ui_actions.OpenRouteMasterAction;
+import decavun2.analysis.Statistics;
 import decavun2.objects.DriverReport;
 import decavun2.objects.Repair;
-import decavun2.object.master.menu.actions.RouteMaster_OpenMain_MenuItem;
-import decavun2.object.master.menu.actions.RouteMaster_OpenAssignedVehicle_MenuItem;
 
 /**
  * A class to register domain entities.
@@ -32,41 +22,30 @@ import decavun2.object.master.menu.actions.RouteMaster_OpenAssignedVehicle_MenuI
  */
 public class ApplicationDomain implements IApplicationDomainProvider {
 
-    private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
-    private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
+	private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
+	private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
 
-    static {
-        entityTypes.addAll(PlatformDomainTypes.types);
-        add(Person.class);
-        add(PersonRole.class);
-        add(Vehicle.class);
-        add(VehicleFinDet.class);
-        add(OpenVehicleMasterAction.class);
-        add(VehicleMaster_OpenMain_MenuItem.class);
-        add(VehicleMaster_OpenVehicleFinDet_MenuItem.class);
-        add(TransportCondition.class);
-        add(Route.class);
-        add(AssignedVehicle.class);
-        add(OpenRouteMasterAction.class);
+	static {
+		entityTypes.addAll(PlatformDomainTypes.types);
+		add(Person.class);
+		add(Vehicle.class);
+		add(Statistics.class);
 		add(DriverReport.class);
 		add(Repair.class);
-        add(RouteMaster_OpenMain_MenuItem.class);
-        add(RouteMaster_OpenAssignedVehicle_MenuItem.class);
+	}
 
-    }
+	private static void add(final Class<? extends AbstractEntity<?>> domainType) {
+		entityTypes.add(domainType);
+		domainTypes.add(domainType);
+	}
 
-    private static void add(final Class<? extends AbstractEntity<?>> domainType) {
-       entityTypes.add(domainType);
-       domainTypes.add(domainType);
-    }
+	@Override
+	public List<Class<? extends AbstractEntity<?>>> entityTypes() {
+		return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
+	}
 
-    @Override
-    public List<Class<? extends AbstractEntity<?>>> entityTypes() {
-       return Collections.unmodifiableList(entityTypes.stream().collect(Collectors.toList()));
-    }
-
-    public List<Class<? extends AbstractEntity<?>>> domainTypes() {
-       return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
-    }
+	public List<Class<? extends AbstractEntity<?>>> domainTypes() {
+		return Collections.unmodifiableList(domainTypes.stream().collect(Collectors.toList()));
+	}
 
 }

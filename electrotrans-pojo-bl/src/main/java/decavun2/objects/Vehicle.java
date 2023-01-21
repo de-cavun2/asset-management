@@ -4,6 +4,7 @@ import ua.com.fielden.platform.entity.DynamicEntityKey;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
 
 import decavun2.personnel.Person;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
@@ -72,7 +73,7 @@ public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
     @MapTo
     @Required
     @Title(value = "Transport condition", desc = "Describes transport condition in order to determine whether vehicle is workable or not and record statistic")
-    private TransportCondition transportCondition;
+    private String transportCondition;
     
     @IsProperty
     @MapTo
@@ -127,12 +128,12 @@ public class Vehicle extends ActivatableAbstractEntity<DynamicEntityKey> {
     }
     
     @Observable
-    public Vehicle setTransportCondition(final TransportCondition transportCondition) {
+    public Vehicle setTransportCondition(final String transportCondition) {
         this.transportCondition = transportCondition;
         return this;
     }
 
-    public TransportCondition getTransportCondition() {
+    public String getTransportCondition() {
         return transportCondition;
     }
     

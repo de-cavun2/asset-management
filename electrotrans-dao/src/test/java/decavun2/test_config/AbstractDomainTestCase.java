@@ -19,7 +19,6 @@ import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
 import decavun2.personnel.Person;
 import decavun2.personnel.PersonCo;
-import decavun2.personnel.PersonRole;
 import ua.com.fielden.platform.dao.annotations.SessionRequired;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import ua.com.fielden.platform.keygen.KeyNumber;
@@ -154,9 +153,7 @@ public abstract class AbstractDomainTestCase extends AbstractDomainDrivenTestCas
         }
 
         setupUser(User.system_users.UNIT_TEST_USER, "tg.test");
-        
-        final PersonRole driver = save(new_composite(PersonRole.class, "Driver-T").setDesc("Tram and trolleybus driver."));
-        setupPerson(User.system_users.UNIT_TEST_USER, "tg.test", "Unit", "Test", driver);
+        setupPerson(User.system_users.UNIT_TEST_USER, "tg.test");
 
         final String virtualKey = "VIRTUAL_FOR_TESTING";
         if (!co(KeyNumber.class).entityWithKeyExists(virtualKey)) {
@@ -174,9 +171,9 @@ public abstract class AbstractDomainTestCase extends AbstractDomainDrivenTestCas
     }
 
     @Override
-    public Person setupPerson(final User.system_users defaultUser, final String emailDomain, final String name, final String surname, final PersonRole personRole) {
+    public Person setupPerson(final User.system_users defaultUser, final String emailDomain) {
         if (!useSavedDataPopulationScript()) {
-            return IDomainData.super.setupPerson(defaultUser, emailDomain, name, surname, personRole);
+            return IDomainData.super.setupPerson(defaultUser, emailDomain);
         } else {
             return co$(Person.class).findByKeyAndFetch(PersonCo.FETCH_PROVIDER.fetchModel(), defaultUser.name());
         }
