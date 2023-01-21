@@ -5,3 +5,4 @@
 /Users/elem/dev/uni/s5/system-analysis/projects/electrotrans/electrotrans-web-server/src/main/java/decavun2/webapp/StartOverHttp.java
 /Users/elem/dev/uni/s5/system-analysis/projects/electrotrans/electrotrans-web-server/src/main/java/decavun2/ioc/WebApplicationServerModule.java
 /Users/elem/dev/uni/s5/system-analysis/projects/electrotrans/electrotrans-web-server/src/main/java/decavun2/webapp/ApplicationConfiguration.java
+/Users/elem/dev/uni/s5/system-analysis/projects/electrotrans/electrotrans-web-server/src/main/java/decavun2/webapp/config/objects/VehicleWebUiConfig.java

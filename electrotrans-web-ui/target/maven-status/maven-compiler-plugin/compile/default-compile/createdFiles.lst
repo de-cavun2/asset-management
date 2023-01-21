@@ -8,6 +8,7 @@ decavun2/common/LayoutComposer.class
 decavun2/webui/master/locator/LocatorFactory.class
 decavun2/common/StandardActions$1.class
 decavun2/common/StandardMessages.class
+decavun2/main/menu/objects/MiVehicle.class
 decavun2/common/StandardScrollingConfigs.class
 decavun2/common/StandardActions$3.class
 decavun2/config/personnel/PersonWebUiConfig.class

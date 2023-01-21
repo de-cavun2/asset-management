@@ -4,8 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.Optional;
 
+import ua.com.fielden.platform.test_data.EnsureData;
 import decavun2.personnel.Person;
-import decavun2.personnel.PersonRole;
 import ua.com.fielden.platform.dao.annotations.SessionRequired;
 import ua.com.fielden.platform.data.IDomainDrivenData;
 import ua.com.fielden.platform.entity.AbstractEntity;
@@ -18,7 +18,6 @@ import ua.com.fielden.platform.security.user.User;
 import ua.com.fielden.platform.security.user.UserAndRoleAssociation;
 import ua.com.fielden.platform.security.user.UserRole;
 import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
-import ua.com.fielden.platform.test_data.EnsureData;
 import ua.com.fielden.platform.utils.IUniversalConstants;
 
 /**
@@ -37,13 +36,13 @@ public interface IDomainData extends IDomainDrivenData {
         return co(entityClass).findByKeyAndFetch(eFetch, keyValues);
     }
 
-    default Person setupPerson(final User.system_users systemUser, final String emailDomain, final String name, final String surname, final PersonRole personRole) {
+    default Person setupPerson(final User.system_users systemUser, final String emailDomain) {
         final User user = fetchEntityForPropOf("user", Person.class, systemUser.name());
-        return createAndSavePerson(systemUser.name() + "@" + emailDomain, name, surname, user, personRole);
+        return createAndSavePerson(systemUser.name() + "@" + emailDomain, "Person who is a user", user);
     }
 
-    default Person createAndSavePerson(final String email, final String name, final String surname, final User user, final PersonRole personRole) {
-        return save(new_composite(Person.class, email).setName(name).setSurname(surname).setActive(true).setUser(user).setPersonRole(personRole));
+    default Person createAndSavePerson(final String email, final String fullName, final User user) {
+        return save(new_composite(Person.class, email).setDesc(fullName).setActive(true).setUser(user));
     }
 
     default void ensureAdminBaseUserExists(final IUser co$User) {
@@ -57,7 +56,7 @@ public interface IDomainData extends IDomainDrivenData {
         }
     }
 
-    default void mkUserAndPerson(final String userName, final String name, final String surname, final String email, final String title, final PersonRole personRole) {
+    default void mkUserAndPerson(final String userName, final String fullName, final String email, final String title) {
         final IUser co$User = co$(User.class);
         ensureAdminBaseUserExists(co$User);
 
@@ -70,7 +69,7 @@ public interface IDomainData extends IDomainDrivenData {
 
         save(new_composite(UserAndRoleAssociation.class, user, admin));
 
-        createAndSavePerson(email, name, surname, user, personRole);
+        createAndSavePerson(email, fullName, user);
     }
 
     @EnsureData({})

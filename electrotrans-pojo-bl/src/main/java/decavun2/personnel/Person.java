@@ -1,17 +1,13 @@
 package decavun2.personnel;
 
-import static metamodels.MetaModels.Person_;
-import static ua.com.fielden.platform.entity.query.fluent.EntityQueryUtils.expr;
 import static ua.com.fielden.platform.reflection.TitlesDescsGetter.getEntityTitleAndDesc;
 
-import decavun2.personnel.validators.NoSpacesValidator;
 import decavun2.security.tokens.persistent.Person_CanModify_user_Token;
 import ua.com.fielden.platform.entity.ActivatableAbstractEntity;
 import ua.com.fielden.platform.entity.DynamicEntityKey;
-import ua.com.fielden.platform.entity.annotation.Calculated;
 import ua.com.fielden.platform.entity.annotation.CompanionObject;
 import ua.com.fielden.platform.entity.annotation.CompositeKeyMember;
-import ua.com.fielden.platform.entity.annotation.DescReadonly;
+import ua.com.fielden.platform.entity.annotation.DescRequired;
 import ua.com.fielden.platform.entity.annotation.DescTitle;
 import ua.com.fielden.platform.entity.annotation.DisplayDescription;
 import ua.com.fielden.platform.entity.annotation.EntityTitle;
@@ -21,16 +17,13 @@ import ua.com.fielden.platform.entity.annotation.KeyType;
 import ua.com.fielden.platform.entity.annotation.MapEntityTo;
 import ua.com.fielden.platform.entity.annotation.MapTo;
 import ua.com.fielden.platform.entity.annotation.Observable;
-import ua.com.fielden.platform.entity.annotation.Readonly;
-import ua.com.fielden.platform.entity.annotation.Required;
 import ua.com.fielden.platform.entity.annotation.SkipEntityExistsValidation;
 import ua.com.fielden.platform.entity.annotation.Title;
 import ua.com.fielden.platform.entity.annotation.Unique;
 import ua.com.fielden.platform.entity.annotation.mutator.BeforeChange;
 import ua.com.fielden.platform.entity.annotation.mutator.Handler;
-import ua.com.fielden.platform.entity.query.model.ExpressionModel;
-import ua.com.fielden.platform.entity.validation.MaxLengthValidator;
 import ua.com.fielden.platform.property.validator.EmailValidator;
+import ua.com.fielden.platform.entity.validation.MaxLengthValidator;
 import ua.com.fielden.platform.security.Authorise;
 import ua.com.fielden.platform.security.user.User;
 import ua.com.fielden.platform.utils.Pair;
@@ -41,13 +34,13 @@ import ua.com.fielden.platform.utils.Pair;
  * @author Generated
  */
 @KeyType(DynamicEntityKey.class)
-@EntityTitle(value = "Person", desc = "People in Lvivelectrotrans")
+@EntityTitle("Person")
 @KeyTitle(value = "Email", desc = "Uniquely identifies a person.")
 @DescTitle(value = "Full Name", desc = "Person's full name - e.g. the first name followed by the middle initial followed by the surname.")
-@DisplayDescription
-@DescReadonly
 @MapEntityTo
 @CompanionObject(PersonCo.class)
+@DescRequired
+@DisplayDescription
 public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
 
     private static final Pair<String, String> entityTitleAndDesc = getEntityTitleAndDesc(Person.class);
@@ -60,27 +53,6 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Title(value = "Email", desc = "Uniquely identifies a person.")
     @BeforeChange({ @Handler(MaxLengthValidator.class), @Handler(EmailValidator.class) })
     private String email;
-    
-    @IsProperty
-    @MapTo
-    @Required
-    @Title(value = "First Name", desc = "Person's first name.")
-    @BeforeChange(@Handler(NoSpacesValidator.class))
-    private String name;
-    
-    @IsProperty
-    @MapTo
-    @Required
-    @Title(value = "Last Name", desc = "Person's last name.")
-    @BeforeChange(@Handler(NoSpacesValidator.class))
-    private String surname;
-    
-    @IsProperty
-    @Readonly
-    @Calculated
-    @Title(value = "Full name", desc = "Person's full name - e.g. the first name followed by the middle initial followed by the surname.")
-    private String desc;
-    protected static final ExpressionModel desc_ = expr().concat().prop(Person_.name()).with().val(" ").with().prop(Person_.surname()).end().model();
 
     @IsProperty
     @Unique
@@ -89,11 +61,11 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
     @SkipEntityExistsValidation(skipActiveOnly = true)
     private User user;
 
-    @IsProperty
+    @IsProperty(length = 255)
     @MapTo
-    @Required
-    @Title(value = "Role", desc = "Person's role, position or title.")
-    private PersonRole personRole;
+    @Title(value = "Title", desc = "Person's role, position or title.")
+    @BeforeChange(@Handler(MaxLengthValidator.class))
+    private String title;
 
     @IsProperty(length = 255)
     @MapTo
@@ -116,12 +88,7 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
     @Override
     @Observable
     public Person setDesc(final String desc) {
-        this.desc = desc;
-        return this;
-    }
-    
-    public String getDesc() {
-        return desc;
+        return (Person) super.setDesc(desc);
     }
 
     @Observable
@@ -165,13 +132,13 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
     }
 
     @Observable
-    public Person setPersonRole(final PersonRole personRole) {
-        this.personRole = personRole;
+    public Person setTitle(final String title) {
+        this.title = title;
         return this;
     }
 
-    public PersonRole getPersonRole() {
-        return personRole;
+    public String getTitle() {
+        return title;
     }
 
     @Override
@@ -195,26 +162,6 @@ public class Person extends ActivatableAbstractEntity<DynamicEntityKey> {
     /** A convenient method to identify whether the current person instance is an application user. */
     public boolean isAUser() {
         return getUser() != null;
-    }
-    
-    @Observable
-    public Person setSurname(final String surname) {
-        this.surname = surname;
-        return this;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    @Observable
-    public Person setName(final String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getName() {
-        return name;
     }
 
 }
