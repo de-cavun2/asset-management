@@ -148,6 +148,7 @@
                         -Xmx768m
                         -XX:+UseG1GC
                     </argLine>
+
                     <systemPropertyVariables>
                         <databaseUri>${databaseUri.prefix}${surefire.forkNumber}</databaseUri>
                         <saveScriptsToFile>false</saveScriptsToFile>

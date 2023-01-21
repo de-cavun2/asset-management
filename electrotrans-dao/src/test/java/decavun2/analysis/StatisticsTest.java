@@ -13,6 +13,7 @@ import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
 import decavun2.objects.DriverReport;
 import decavun2.objects.Repair;
+import decavun2.objects.TransportCondition;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import decavun2.test_config.AbstractDomainTestCase;
@@ -124,10 +125,12 @@ public class StatisticsTest extends AbstractDomainTestCase {
 		if (useSavedDataPopulationScript()) {
 			return;
 		}
+		
+		final TransportCondition cond = save(new_(TransportCondition.class).setConditionId("sdfdsf").setStage("some stage"));
 
 		final Person driverPerson = save(
 				new_(Person.class).setEmail("Ivan@electrotrans.com").setDesc("Ivan Tester").setActive(true));
-		final Vehicle veh = save(new_(Vehicle.class).setTransportCondition("good").setLicensePlate(vehiclePlate)
+		final Vehicle veh = save(new_(Vehicle.class).setTransportCondition(cond).setLicensePlate(vehiclePlate)
 				.setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true)
 				.setDesc("The tram number two."));
 		save(new_(DriverReport.class).setDriverReportID(driverReportID).setVehicle(veh));

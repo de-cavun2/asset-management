@@ -9,6 +9,8 @@ import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.security.Authorise;
 import ua.com.fielden.platform.dao.annotations.SessionRequired;
 import decavun2.security.tokens.persistent.DriverReport_CanSave_Token;
+import decavun2.objects.DriverReport;
+import decavun2.objects.DriverReportCo;
 import decavun2.security.tokens.persistent.DriverReport_CanDelete_Token;
 import ua.com.fielden.platform.dao.CommonEntityDao;
 import ua.com.fielden.platform.entity.query.IFilter;
