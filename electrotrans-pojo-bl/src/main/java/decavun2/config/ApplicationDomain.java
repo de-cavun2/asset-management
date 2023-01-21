@@ -12,6 +12,7 @@ import ua.com.fielden.platform.basic.config.IApplicationDomainProvider;
 import ua.com.fielden.platform.domain.PlatformDomainTypes;
 import ua.com.fielden.platform.entity.AbstractEntity;
 import decavun2.objects.Vehicle;
+<<<<<<< HEAD
 import decavun2.personnel.PersonRole;
 import decavun2.objects.VehicleFinDet;
 import decavun2.objects.ui_actions.OpenVehicleMasterAction;
@@ -22,6 +23,16 @@ import decavun2.object.AssignedVehicle;
 import decavun2.object.ui_actions.OpenRouteMasterAction;
 import decavun2.object.master.menu.actions.RouteMaster_OpenMain_MenuItem;
 import decavun2.object.master.menu.actions.RouteMaster_OpenAssignedVehicle_MenuItem;
+=======
+import decavun2.change.Report;
+import decavun2.change.Issue;
+import decavun2.change.Change;
+import decavun2.change.ui_actions.OpenChangeMasterAction;
+import decavun2.change.master.menu.actions.ChangeMaster_OpenMain_MenuItem;
+import decavun2.change.master.menu.actions.ChangeMaster_OpenIssue_MenuItem;
+import decavun2.change.master.menu.actions.ChangeMaster_OpenReport_MenuItem;
+import decavun2.analysis.Statistics;
+>>>>>>> 2c2e87e126651c335bebc6f60ce5c59d20f5c5ce
 
 /**
  * A class to register domain entities.
@@ -33,6 +44,7 @@ public class ApplicationDomain implements IApplicationDomainProvider {
     private static final Set<Class<? extends AbstractEntity<?>>> entityTypes = new LinkedHashSet<>();
     private static final Set<Class<? extends AbstractEntity<?>>> domainTypes = new LinkedHashSet<>();
 
+<<<<<<< HEAD
     static {
         entityTypes.addAll(PlatformDomainTypes.types);
         add(Person.class);
@@ -48,6 +60,21 @@ public class ApplicationDomain implements IApplicationDomainProvider {
         add(OpenRouteMasterAction.class);
         add(RouteMaster_OpenMain_MenuItem.class);
         add(RouteMaster_OpenAssignedVehicle_MenuItem.class);
+=======
+	static {
+		entityTypes.addAll(PlatformDomainTypes.types);
+		add(Person.class);
+		add(Vehicle.class);
+		add(Report.class);
+		add(Issue.class);
+		add(Change.class);
+		add(OpenChangeMasterAction.class);
+		add(ChangeMaster_OpenMain_MenuItem.class);
+		add(ChangeMaster_OpenIssue_MenuItem.class);
+		add(ChangeMaster_OpenReport_MenuItem.class);
+		add(Statistics.class);
+	}
+>>>>>>> 2c2e87e126651c335bebc6f60ce5c59d20f5c5ce
 
     }
 
