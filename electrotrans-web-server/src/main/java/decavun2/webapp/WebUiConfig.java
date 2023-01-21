@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import decavun2.analysis.Statistics;
 import decavun2.change.Change;
+import decavun2.change.Issue;
 import decavun2.change.Report;
 import decavun2.config.Modules;
 import decavun2.config.personnel.PersonWebUiConfig;
@@ -16,6 +17,7 @@ import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import decavun2.webapp.config.analysis.StatisticsWebUiConfig;
 import decavun2.webapp.config.change.ChangeWebUiConfig;
+import decavun2.webapp.config.change.IssueWebUiConfig;
 import decavun2.webapp.config.change.ReportWebUiConfig;
 import decavun2.webapp.config.objects.DriverReportWebUiConfig;
 import decavun2.webapp.config.objects.OrderWebUiConfig;
@@ -94,7 +96,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final RepairWebUiConfig repairWebUiConfig = RepairWebUiConfig.register(injector(), builder);
         final OrderWebUiConfig orderWebUiConfig = OrderWebUiConfig.register(injector(), builder);
         final DriverReportWebUiConfig driverReportWebUiConfig = DriverReportWebUiConfig.register(injector(), builder);
-
+        final IssueWebUiConfig issueWebUiConfig = IssueWebUiConfig.register(injector(), builder);
         final ReportWebUiConfig reportWebUiConfig = ReportWebUiConfig.register(injector(), configApp());
         final ChangeWebUiConfig changeWebUiConfig = ChangeWebUiConfig.register(injector(), builder);
 
@@ -138,6 +140,7 @@ public class WebUiConfig extends AbstractWebUiConfig {
             .menu()
             .addMenuItem(mkMenuItemTitle(Change.class)).description(mkMenuItemDesc(Change.class)).centre(changeWebUiConfig.centre).done()
             	.addMenuItem(mkMenuItemTitle(Report.class)).description(mkMenuItemDesc(Report.class)).centre(reportWebUiConfig.centre).done()
+            	.addMenuItem(mkMenuItemTitle(Issue.class)).description(mkMenuItemDesc(Issue.class)).centre(issueWebUiConfig.centre).done()
             .done().done()
             
         .addModule(Modules.ANALYSIS.title)
