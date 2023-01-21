@@ -1,13 +1,16 @@
 package decavun2.config.personnel;
 
-import static metamodels.MetaModels.Person_;
-import static decavun2.common.LayoutComposer.*;
+import static decavun2.common.LayoutComposer.CELL_LAYOUT;
+import static decavun2.common.LayoutComposer.MARGIN;
+import static decavun2.common.LayoutComposer.PADDING_LAYOUT;
+import static decavun2.common.LayoutComposer.SIMPLE_TWO_COLUMN_MASTER_DIM_WIDTH;
+import static decavun2.common.LayoutComposer.mkActionLayoutForMaster;
 import static decavun2.common.StandardActionsStyles.MASTER_CANCEL_ACTION_LONG_DESC;
 import static decavun2.common.StandardActionsStyles.MASTER_CANCEL_ACTION_SHORT_DESC;
 import static decavun2.common.StandardActionsStyles.MASTER_SAVE_ACTION_LONG_DESC;
 import static decavun2.common.StandardActionsStyles.MASTER_SAVE_ACTION_SHORT_DESC;
+import static metamodels.MetaModels.Person_;
 import static ua.com.fielden.platform.web.PrefDim.mkDim;
-
 import static ua.com.fielden.platform.web.layout.api.impl.LayoutBuilder.cell;
 
 import java.util.Optional;
@@ -17,14 +20,15 @@ import com.google.inject.Injector;
 import decavun2.common.StandardActions;
 import decavun2.main.menu.personnel.MiPerson;
 import decavun2.personnel.Person;
+import decavun2.personnel.PersonRole;
+import ua.com.fielden.platform.web.PrefDim.Unit;
+import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
 import ua.com.fielden.platform.web.app.config.IWebUiBuilder;
 import ua.com.fielden.platform.web.centre.EntityCentre;
 import ua.com.fielden.platform.web.centre.api.EntityCentreConfig;
 import ua.com.fielden.platform.web.centre.api.actions.EntityActionConfig;
 import ua.com.fielden.platform.web.centre.api.impl.EntityCentreBuilder;
 import ua.com.fielden.platform.web.interfaces.ILayout.Device;
-import ua.com.fielden.platform.web.PrefDim.Unit;
-import ua.com.fielden.platform.web.action.CentreConfigurationWebUiConfig.CentreConfigActions;
 import ua.com.fielden.platform.web.view.master.EntityMaster;
 import ua.com.fielden.platform.web.view.master.api.IMaster;
 import ua.com.fielden.platform.web.view.master.api.actions.MasterActions;
@@ -64,7 +68,8 @@ public class PersonWebUiConfig {
     private EntityCentre<Person> createCentre(final IWebUiBuilder builder) {
         final String layout = cell(
                 cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN))  // row 1 -> 1, 2
-               .cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN)), // row 2 -> 3, 4
+                .cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN))  // row 2 -> 3, 4
+                .cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN)), // row 3 -> 5, 6
                PADDING_LAYOUT).toString();
 
         final EntityActionConfig standardNewAction = StandardActions.NEW_ACTION.mkAction(Person.class);
@@ -83,16 +88,21 @@ public class PersonWebUiConfig {
                 .addCrit(Person_).asMulti().autocompleter(Person.class).also()
                 .addCrit(Person_.desc()).asMulti().text().also()
                 // row 2
-                .addCrit(Person_.employeeNo()).asMulti().text().also()
-                .addCrit(Person_.title()).asMulti().text()
+                .addCrit(Person_.name()).asMulti().text().also()
+                .addCrit(Person_.surname()).asMulti().text().also()
+                // row 3
+                .addCrit(Person_.personRole()).asMulti().autocompleter(PersonRole.class).also()
+                .addCrit(Person_.employeeNo()).asMulti().text()
                 .setLayoutFor(Device.DESKTOP, Optional.empty(), layout)
                 .setLayoutFor(Device.TABLET, Optional.empty(), layout)
                 .setLayoutFor(Device.MOBILE, Optional.empty(), layout)
-                .addProp(Person_).order(1).asc().minWidth(70)
+                .addProp(Person_).order(1).asc().minWidth(100)
                     .withSummary("total_count_", "COUNT(SELF)", "Count:The total number of matching Person.")
                     .withAction(standardEditAction).also()
                 .addProp(Person_.desc()).minWidth(200).also()
-                .addProp(Person_.title()).minWidth(200).also()
+                //.addProp(Person_.name()).minWidth(200).also()
+                //.addProp(Person_.surname()).minWidth(200).also()
+                .addProp(Person_.personRole()).minWidth(200).also()
                 .addProp(Person_.employeeNo()).minWidth(70).also()
                 .addProp(Person_.phone()).minWidth(70).also()
                 .addProp(Person_.mobile()).minWidth(70)
@@ -105,7 +115,7 @@ public class PersonWebUiConfig {
     private EntityMaster<Person> createMaster() {
         final String layout = cell(
                 cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN))
-               .cell(cell().layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN))
+               .cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN))
                .cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN))
                .cell(cell().repeat(2).layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN))
                .cell(cell(CELL_LAYOUT).skip().layoutForEach(CELL_LAYOUT).withGapBetweenCells(MARGIN)),
@@ -116,10 +126,11 @@ public class PersonWebUiConfig {
                 .addProp(Person_.email()).asSinglelineText().also()
                 .addProp(Person_.active()).asCheckbox().also()
                 // row 2
-                .addProp(Person_.desc()).asMultilineText().also()
+                .addProp(Person_.name()).asSinglelineText().also()
+                .addProp(Person_.surname()).asSinglelineText().also()
                 // row 3
+                .addProp(Person_.personRole()).asAutocompleter().also()
                 .addProp(Person_.employeeNo()).asSinglelineText().also()
-                .addProp(Person_.title()).asSinglelineText().also()
                 // row 4
                 .addProp(Person_.phone()).asSinglelineText().also()
                 .addProp(Person_.mobile()).asSinglelineText().also()
