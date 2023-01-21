@@ -13,6 +13,7 @@ import ua.com.fielden.platform.error.Result;
 import ua.com.fielden.platform.test.ioc.UniversalConstantsForTesting;
 import ua.com.fielden.platform.utils.IUniversalConstants;
 import decavun2.objects.DriverReport;
+import decavun2.objects.Repair;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
 import decavun2.test_config.AbstractDomainTestCase;
@@ -92,7 +93,8 @@ public class StatisticsTest extends AbstractDomainTestCase {
 				.setStartDate(startDate)
 				.setEndDate(endDate));
 		
-		assertEquals(2, stat.getRepairsCount().intValue());
+		assertEquals(1, stat.getRepairsCount().intValue());
+		assertEquals(2, stat.getIssuesCount().intValue());
 	}
 	
 
@@ -121,6 +123,8 @@ public class StatisticsTest extends AbstractDomainTestCase {
         final Vehicle veh = save(new_(Vehicle.class).setTransportCondition("good").setLicensePlate(vehiclePlate).setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setDesc("The tram number two."));
         save(new_(DriverReport.class).setDriverReportID(driverReportID).setVehicle(veh));
         save(new_(DriverReport.class).setDriverReportID("sdfsdf").setVehicle(veh));
+        
+        save(new_(Repair.class).setRepairID("1234").setVehicle(veh));
 
     }
 

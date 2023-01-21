@@ -12,6 +12,7 @@ import ua.com.fielden.platform.dao.annotations.SessionRequired;
 import decavun2.security.tokens.persistent.Statistics_CanSave_Token;
 import metamodels.MetaModels;
 import decavun2.objects.DriverReport;
+import decavun2.objects.Repair;
 import decavun2.objects.Vehicle;
 import decavun2.security.tokens.persistent.Statistics_CanDelete_Token;
 import ua.com.fielden.platform.dao.CommonEntityDao;
@@ -73,12 +74,16 @@ public class StatisticsDao extends CommonEntityDao<Statistics> implements Statis
     	}
     	
     	final Vehicle vehicle = entity.getVehicle();
-    	final var query = select(DriverReport.class).where().prop(MetaModels.DriverReport_.vehicle()).in().values(vehicle).model();
-    	int counter = 0;
-    	for (var at: co$(DriverReport.class).getAllEntities(from(query).model())) {
-    		counter += 1;
-    	}
-    	entity.setRepairsCount(counter);
+    	
+    	final var repairQuery = select(Repair.class).where().prop(MetaModels.Repair_.vehicle()).in().values(vehicle).model();
+    	final int repairsCount = co$(Repair.class).count(repairQuery);
+    	
+    	final var issueQuery = select(DriverReport.class).where().prop(MetaModels.DriverReport_.vehicle()).in().values(vehicle).model();
+    	final int issueCount = co$(DriverReport.class).count(issueQuery);
+    	
+    	entity.setIssuesCount(issueCount);
+    	entity.setRepairsCount(repairsCount);
+    	
         return super.save(entity);
     }
 
