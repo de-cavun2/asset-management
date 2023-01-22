@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 
 import ua.com.fielden.platform.security.Authorise;
 import ua.com.fielden.platform.dao.annotations.SessionRequired;
+import decavun2.objects.master.menu.actions.VehicleMaster_OpenVehicleFinDet_MenuItem;
+import decavun2.objects.master.menu.actions.VehicleMaster_OpenVehicleFinDet_MenuItemCo;
 import decavun2.security.tokens.compound_master_menu.VehicleMaster_OpenVehicleFinDet_MenuItem_CanAccess_Token;
 import ua.com.fielden.platform.dao.CommonEntityDao;
 import ua.com.fielden.platform.entity.query.IFilter;

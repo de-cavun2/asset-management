@@ -12,8 +12,12 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.H2Dialect;
 import org.hibernate.dialect.PostgreSQL82Dialect;
 
+import decavun2.change.Report;
 import decavun2.config.ApplicationDomain;
 import decavun2.data.IDomainData;
+import decavun2.objects.DriverReport;
+import decavun2.objects.Vehicle;
+import decavun2.personnel.Person;
 import decavun2.personnel.Person;
 import decavun2.personnel.PersonRole;
 import decavun2.objects.TransportCondition;
@@ -83,6 +87,24 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         LOGGER.info("Creating and populating the development database...");
 
         setupUser(User.system_users.SU, "User");
+        final PersonRole driver1 = save(new_composite(PersonRole.class, "Driver-C").setDesc("Tram driver."));
+        final Person driverPerson1 = save(new_(Person.class).setEmail("Ron@let.com").setPersonRole(driver1).setName("Ronald").setSurname("McDonald").setActive(true));
+
+        
+        final TransportCondition cond = save(new_(TransportCondition.class).setConditionId("sdfdsf").setStage("some stage"));
+        final Person driverPerson = save(new_(Person.class).setEmail("Ivan@electrotrans.com").setDesc("Ivan Tester").setActive(true).setName("Igor").setSurname("Igor").setPersonRole(driver1));
+        final Vehicle veh = save(new_(Vehicle.class).setTransportCondition(cond).setLicensePlate("akjsgnlkjsdn").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson).setActive(true).setDesc("The tram number two."));
+        save(new_(DriverReport.class).setDriverReportID("sdfsdfsd").setVehicle(veh).setState("good").setDesc("desc"));
+        save(new_(DriverReport.class).setDriverReportID("sdfsdf").setVehicle(veh).setState("good").setDesc("Desc"));
+        
+        final Report rp = new_(Report.class);
+        rp.setTitle("Profitability calculation of IS for the enterprise");
+        rp.setDesc("This description should portray pluses and minuses of proposed change");
+        rp.setDepartment("Financial Department");
+        rp.setPerson(driverPerson1);
+        rp.setIssue("Find proposed information is sensible for the enterprise to implement");
+        
+        save(rp);
         
         final PersonRole tramDriver = save(new_composite(PersonRole.class, "Driver-T").setDesc("Category T driver (tram and trolleybus)."));
         final PersonRole carDriver = save(new_composite(PersonRole.class, "Driver-B").setDesc("Category B driver (passenger car)"));
@@ -101,8 +123,8 @@ public class PopulateDb extends DomainDrivenDataPopulation implements IDomainDat
         save(new_(TransportCondition.class).setConditionId("000004").setStage("significant issues"));
         final TransportCondition unavailable = save(new_(TransportCondition.class).setConditionId("000005").setStage("unavailable"));
         
-        final PersonRole driver1 = save(new_composite(PersonRole.class, "Driver-C").setDesc("Tram driver."));
-        final Person driverPerson1 = save(new_(Person.class).setEmail("Ron@let.com").setPersonRole(driver1).setName("Ronald").setSurname("McDonald").setActive(true));
+        
+       
         final Vehicle vehicle1 = save(new_(Vehicle.class).setLicensePlate("BC1111AH").setModel("T 802").setCurrentLocation("Depot").setDriver(driverPerson1).setActive(true).setTransportCondition(available).setDesc("Tram number 1."));
         
         final PersonRole driver2 = save(new_composite(PersonRole.class, "Driver-P").setDesc("Tram driver."));

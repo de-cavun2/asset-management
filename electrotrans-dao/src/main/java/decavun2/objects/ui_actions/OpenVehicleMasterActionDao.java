@@ -6,6 +6,8 @@ import ua.com.fielden.platform.entity.fetch.IFetchProvider;
 import ua.com.fielden.platform.dao.AbstractOpenCompoundMasterDao;
 import ua.com.fielden.platform.dao.IEntityAggregatesOperations;
 import decavun2.objects.VehicleFinDet;
+import decavun2.objects.ui_actions.OpenVehicleMasterAction;
+import decavun2.objects.ui_actions.OpenVehicleMasterActionCo;
 import ua.com.fielden.platform.entity.query.IFilter;
 import ua.com.fielden.platform.entity.annotation.EntityType;
 

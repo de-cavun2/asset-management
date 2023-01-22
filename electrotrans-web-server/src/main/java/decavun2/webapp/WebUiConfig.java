@@ -4,16 +4,31 @@ import static ua.com.fielden.platform.reflection.TitlesDescsGetter.getEntityTitl
 
 import org.apache.commons.lang3.StringUtils;
 
+import decavun2.analysis.Statistics;
+import decavun2.change.Change;
+import decavun2.change.Issue;
+import decavun2.change.Report;
 import decavun2.config.Modules;
 import decavun2.config.personnel.PersonWebUiConfig;
+import decavun2.objects.DriverReport;
+import decavun2.objects.Order;
+import decavun2.objects.Repair;
 import decavun2.objects.Vehicle;
 import decavun2.personnel.Person;
+import decavun2.webapp.config.analysis.StatisticsWebUiConfig;
 import decavun2.personnel.PersonRole;
+import decavun2.webapp.config.change.ChangeWebUiConfig;
+import decavun2.webapp.config.change.IssueWebUiConfig;
+import decavun2.webapp.config.change.ReportWebUiConfig;
+import decavun2.webapp.config.objects.DriverReportWebUiConfig;
+import decavun2.webapp.config.objects.OrderWebUiConfig;
+import decavun2.webapp.config.objects.RepairWebUiConfig;
+import decavun2.webapp.config.objects.TransportConditionWebUiConfig;
 import decavun2.webapp.config.objects.VehicleWebUiConfig;
 import decavun2.webapp.config.personnel.PersonRoleWebUiConfig;
 import decavun2.objects.TransportCondition;
 import decavun2.personnel.Person;
-import decavun2.webapp.config.objects.TransportConditionWebUiConfig;
+//import decavun2.webapp.config.change.TransportConditionWebUiConfig;
 import decavun2.object.Route;
 import decavun2.webapp.config.object.RouteWebUiConfig;
 import ua.com.fielden.platform.basic.config.Workflows;
@@ -88,6 +103,13 @@ public class WebUiConfig extends AbstractWebUiConfig {
         final UserWebUiConfig userWebUiConfig = UserWebUiConfig.register(injector(), builder);
         final UserRoleWebUiConfig userRoleWebUiConfig = UserRoleWebUiConfig.register(injector(), builder);
         final SecurityMatrixWebUiConfig securityConfig = SecurityMatrixWebUiConfig.register(injector(), configApp());
+        final StatisticsWebUiConfig statisticsWebUiConfig = StatisticsWebUiConfig.register(injector(), builder);
+        final RepairWebUiConfig repairWebUiConfig = RepairWebUiConfig.register(injector(), builder);
+        final OrderWebUiConfig orderWebUiConfig = OrderWebUiConfig.register(injector(), builder);
+        final DriverReportWebUiConfig driverReportWebUiConfig = DriverReportWebUiConfig.register(injector(), builder);
+        final IssueWebUiConfig issueWebUiConfig = IssueWebUiConfig.register(injector(), builder);
+        final ReportWebUiConfig reportWebUiConfig = ReportWebUiConfig.register(injector(), configApp());
+        final ChangeWebUiConfig changeWebUiConfig = ChangeWebUiConfig.register(injector(), builder);
 
         // Add user-rated masters and centres to the configuration
         configApp()
@@ -110,6 +132,9 @@ public class WebUiConfig extends AbstractWebUiConfig {
                 .addMenuItem(mkMenuItemTitle(Person.class)).description(mkMenuItemDesc(Person.class)).centre(personWebUiConfig.centre).done()
                 .addMenuItem(mkMenuItemTitle(PersonRole.class)).description(mkMenuItemDesc(PersonRole.class)).centre(personRoleWebUiConfig.centre).done()
                 .addMenuItem(mkMenuItemTitle(Vehicle.class)).description(mkMenuItemDesc(Vehicle.class)).centre(vehicleWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(Repair.class)).description(mkMenuItemDesc(Repair.class)).centre(repairWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(Order.class)).description(mkMenuItemDesc(Order.class)).centre(orderWebUiConfig.centre).done()
+                .addMenuItem(mkMenuItemTitle(DriverReport.class)).description(mkMenuItemDesc(DriverReport.class)).centre(driverReportWebUiConfig.centre).done()
                 .addMenuItem(mkMenuItemTitle(TransportCondition.class)).description(mkMenuItemDesc(TransportCondition.class)).centre(transportConditionWebUiConfig.centre).done()
                 .addMenuItem(mkMenuItemTitle(Route.class)).description(mkMenuItemDesc(Route.class)).centre(routeWebUiConfig.centre).done()
 
@@ -117,10 +142,33 @@ public class WebUiConfig extends AbstractWebUiConfig {
                     .addMenuItem("Users").description("User centre").centre(userWebUiConfig.centre).done()
                     .addMenuItem("User Roles").description("User roles centre").centre(userRoleWebUiConfig.centre).done()
                     .addMenuItem("Security Matrix").description("Security Matrix is used to manage application authorisations for User Roles.").master(securityConfig.master).done()
-                .done()
+                .done()  
             .done().done()
-        .setLayoutFor(Device.DESKTOP, null, "[[[]]]")
-        .setLayoutFor(Device.TABLET, null, "[[[]]]")
+            
+        .addModule(Modules.CHANGE.title)
+            .description(Modules.CHANGE.desc)
+            .icon(Modules.CHANGE.icon)
+            .detailIcon(Modules.CHANGE.icon)
+            .bgColor(Modules.CHANGE.bgColour)
+            .captionBgColor(Modules.CHANGE.captionBgColour)
+            .menu()
+            .addMenuItem(mkMenuItemTitle(Change.class)).description(mkMenuItemDesc(Change.class)).centre(changeWebUiConfig.centre).done()
+            	.addMenuItem(mkMenuItemTitle(Report.class)).description(mkMenuItemDesc(Report.class)).centre(reportWebUiConfig.centre).done()
+            	.addMenuItem(mkMenuItemTitle(Issue.class)).description(mkMenuItemDesc(Issue.class)).centre(issueWebUiConfig.centre).done()
+            .done().done()
+            
+        .addModule(Modules.ANALYSIS.title)
+            .description(Modules.ANALYSIS.desc)
+            .icon(Modules.ANALYSIS.icon)
+            .detailIcon(Modules.ANALYSIS.icon)
+            .bgColor(Modules.ANALYSIS.bgColour)
+            .captionBgColor(Modules.ANALYSIS.captionBgColour)
+            .menu()
+                .addMenuItem(mkMenuItemTitle(Statistics.class)).description(mkMenuItemDesc(Statistics.class)).centre(statisticsWebUiConfig.centre).done()
+                .done()
+            .done()
+        .setLayoutFor(Device.DESKTOP, null, "[[[], [], []]]")
+        .setLayoutFor(Device.TABLET, null, "[[[], []], [[]]]")
         .setLayoutFor(Device.MOBILE, null, "[[[]]]")
         .minCellWidth(100).minCellHeight(148).done();
     }

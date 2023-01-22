@@ -3,8 +3,8 @@ package decavun2.security.tokens.open_simple_master;
 import static java.lang.String.format;
 import static ua.com.fielden.platform.reflection.TitlesDescsGetter.getEntityTitleAndDesc;
 
-import decavun2.security.tokens.UsersAndPersonnelModuleToken;
 import decavun2.personnel.Person;
+import decavun2.security.tokens.ChangeModuleToken;
 import ua.com.fielden.platform.security.tokens.Template;
 
 /**
@@ -12,7 +12,7 @@ import ua.com.fielden.platform.security.tokens.Template;
  *
  * @author Generated
  */
-public class PersonMaster_CanOpen_Token extends UsersAndPersonnelModuleToken {
+public class PersonMaster_CanOpen_Token extends ChangeModuleToken {
 
     private final static String ENTITY_TITLE = getEntityTitleAndDesc(Person.class).getKey() + " Master";
     public final static String TITLE = format(Template.MASTER_OPEN.forTitle(), ENTITY_TITLE);
